@@ -1,0 +1,101 @@
+<ion-header>
+  <app-header></app-header>
+  
+</ion-header>
+
+<ion-content color="light">
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-table class="textoTabla">
+                <ion-row>
+                  <ion-col>Zona</ion-col>
+                  <ion-col>Meta</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Enero</ion-col>
+                  <ion-col><!-- Aquí va el valor correspondiente a Enero --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Febrero</ion-col>
+                  <ion-col><!-- Aquí va el valor correspondiente a Febrero --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Marzo</ion-col>
+                  <ion-col><!-- Aquí va el valor correspondiente a Marzo --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Abril</ion-col>
+                  <ion-col ><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Mayo</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Junio</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Julio</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Agosto</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Septiembre</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Octubre</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Noviembre</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verAgencia()">Diciembre</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+              </ion-table>
+              
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+
+      <ion-col size="6">
+        <!--card correspondientes para la grafica de las zonas -->
+          <apx-chart
+            *ngIf="chartOptionsZonamas.series && chartOptionsZonamas.chart && chartOptionsZonamas.plotOptions && chartOptionsZonamas.labels && chartOptionsZonamas.fill"
+            [series]="chartOptionsZonamas.series"
+            [chart]="chartOptionsZonamas.chart"
+            [plotOptions]="chartOptionsZonamas.plotOptions"
+            [labels]="chartOptionsZonamas.labels"
+            [fill]="chartOptionsZonamas.fill">
+          </apx-chart>
+        
+        <!--card correspondientes para la grafica de las zonas -->
+          <apx-chart
+            *ngIf="chartOptionsZonamenos.series && chartOptionsZonamenos.chart && chartOptionsZonamenos.plotOptions && chartOptionsZonamenos.labels && chartOptionsZonamenos.fill " 
+            [series]="chartOptionsZonamenos.series"
+            [chart]="chartOptionsZonamenos.chart"
+            [plotOptions]="chartOptionsZonamenos.plotOptions"
+            [labels]="chartOptionsZonamenos.labels"
+            [fill]="chartOptionsZonamenos.fill">
+          </apx-chart>
+
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<app-footer></app-footer>

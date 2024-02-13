@@ -1,0 +1,7 @@
+{
+  "name": "dashboard_cfe",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,73 @@
+<ion-header>
+  <app-header></app-header>
+</ion-header>
+
+<ion-content color="light">
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-table class="textoTabla">
+                <ion-row >
+                  <ion-col>Periodo</ion-col>
+                  <ion-col>Ingresos</ion-col>
+                  <!-- Columnas de los dias en la tabla -->
+                </ion-row>
+                <ion-row>
+                  <ion-col >01</ion-col>
+                  <ion-col></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>02</ion-col>
+                  <ion-col></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>03</ion-col>
+                  <ion-col></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>04</ion-col>
+                  <ion-col></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>05</ion-col>
+                  <ion-col></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>06</ion-col>
+                  <ion-col></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>07</ion-col>
+                  <ion-col></ion-col>
+                </ion-row>
+
+              </ion-table>
+              
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+
+
+      <ion-col size="6">
+        <div id="chart">
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [plotOptions]="chartOptions.plotOptions"
+            [xaxis]="chartOptions.xaxis"
+            [fill]="chartOptions.fill"
+          ></apx-chart>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+</ion-content>

@@ -1,0 +1,99 @@
+<ion-header>
+  <app-header></app-header>
+  
+</ion-header>
+
+<ion-content color="light">
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="3">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-table class="textoTabla">
+                <ion-row >
+                  <ion-col>Mes</ion-col>
+                  <ion-col>Total</ion-col>
+                  <!-- Añade más columnas según sea necesario -->
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verIngresosFecha()" >Enero</ion-col>
+                  <ion-col><!-- Aquí va el valor correspondiente a Enero --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verIngresosFecha()">Febrero</ion-col>
+                  <ion-col><!-- Aquí va el valor correspondiente a Febrero --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verIngresosFecha()">Marzo</ion-col>
+                  <ion-col><!-- Aquí va el valor correspondiente a Marzo --></ion-col>
+                </ion-row>
+                <!-- Repite el patrón para los demás meses -->
+                <ion-row>
+                  <ion-col>Abril</ion-col>
+                  <ion-col (click)="verIngresosFecha()"><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verIngresosFecha()">Mayo</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verIngresosFecha()">Junio</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verIngresosFecha()">Julio</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verIngresosFecha()">Agosto</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verIngresosFecha()">Septiembre</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verIngresosFecha()">Octubre</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verIngresosFecha()">Noviembre</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col (click)="verIngresosFecha()">Diciembre</ion-col>
+                  <ion-col><!-- Aquí va el total correspondiente --></ion-col>
+                </ion-row>
+              </ion-table>
+              
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col size="9">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [dataLabels]="chartOptions.dataLabels"
+      [grid]="chartOptions.grid"
+      [stroke]="chartOptions.stroke"
+      [title]="chartOptions.title"
+    ></apx-chart>
+
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Footer</ion-title>
+  </ion-toolbar>
+</ion-footer>

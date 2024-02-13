@@ -1,0 +1,97 @@
+// Estilos comunes
+.contenedorHorizontal {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #fff; /* Fondo blanco */
+}
+
+.imagen {
+  width: auto; /* Ajusta el ancho de la imagen según sea necesario */
+  height: auto; /* Mantiene la proporción de la imagen */
+  margin-right: auto;
+    margin-left: 10px; /* Ajusta según sea necesario */
+}
+
+.etiqueta {
+  margin-left: auto;
+  font-family: 'Helvetica LT Std', 'Helvetica', sans-serif; /* Ajusta la fuente según tus necesidades */
+  flex-grow: 1; /* Permite que la etiqueta ocupe todo el espacio restante */
+  margin: 0; /* Elimina el margen por defecto de la etiqueta */
+  color: #000;
+}
+
+// Pantallas grandes
+@media (min-width: 768px) {
+  .contenedorPrincipal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #008E5A;
+    padding: 2px;
+  }
+  
+  .contenedorBotones {
+    font-family: 'Helvetica LT Std', 'Helvetica', sans-serif; /* Ajusta la fuente según tus necesidades */
+    display: flex;
+    gap: 10px;
+    margin-left: 10px; /* Ajusta según sea necesario */
+  }
+  
+  ion-button {
+    color: #fff;
+    margin: 0;
+  }
+
+  ion-button:hover {
+    color: #9ABE26;
+  }
+
+  ion-button.active{
+    color: #9ABE26;
+  }
+  
+
+  ion-searchbar {
+    width: 30%; /* Ajusta el ancho según sea necesario */
+    height: 10%;
+    border-radius: 15px; /* Redondea los bordes */
+    margin-left: 10px; /* Ajusta según sea necesario */
+  }
+}
+
+// Pantallas pequeñas
+@media (max-width: 767px) {
+  .contenedorPrincipal {
+    background-color: #008E5A;
+    padding: 2px;
+  }
+
+  .contenedorBotones {
+    font-family: 'Helvetica LT Std', 'Helvetica', sans-serif; /* Ajusta la fuente según tus necesidades */
+    display: flex;
+    gap: 10px;
+    margin-left: 10px; /* Ajusta según sea necesario */
+  }
+
+  ion-button {
+    color: #fff;
+    margin: 0;
+  }
+
+  ion-button:hover {
+    color: #9ABE26;
+  }
+
+  ion-button.active {
+    color: #9ABE26;
+  }
+
+  ion-searchbar {
+    font-family: 'Helvetica LT Std', 'Helvetica', sans-serif; /* Ajusta la fuente según tus necesidades */
+    width: 100%; /* Ajusta el ancho según sea necesario */
+    height: 10%;
+    border-radius: 15px; /* Redondea los bordes */
+    margin-left: 10px; /* Ajusta según sea necesario */
+  }
+}
