@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, Input, ViewChild } from "@angular/core";
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -26,6 +26,9 @@ export type RangeBarChartOptions = {
   styleUrls: ['./ingresos-semana.component.scss'],
 })
 export class IngresosSemanaComponent {
+
+  @Input() progress: number = 14;
+
 
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: RangeBarChartOptions;

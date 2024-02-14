@@ -19,22 +19,30 @@
 
                     <ion-row>
                     <ion-col (click)="verIngresosSemana()" >01 - 07</ion-col>
-                    <ion-col><!-- Aquí va el valor correspondiente a Enero --></ion-col>
+                    <ion-col>
+                        <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+                    </ion-col>
                     </ion-row>
                     
                     <ion-row>
                     <ion-col (click)="verIngresosSemana()">08 - 15</ion-col>
-                    <ion-col><!-- Aquí va el valor correspondiente a Febrero --></ion-col>
+                    <ion-col>
+                        <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+                    </ion-col>
                     </ion-row>
 
                     <ion-row>
                     <ion-col (click)="verIngresosSemana()">16 - 23</ion-col>
-                    <ion-col><!-- Aquí va el valor correspondiente a Marzo --></ion-col>
+                    <ion-col>
+                        <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+                    </ion-col>
                     </ion-row>
 
                     <ion-row>
                     <ion-col (click)="verIngresosSemana()">24 - 31</ion-col>
-                    <ion-col ><!-- Aquí va el total correspondiente --></ion-col>
+                    <ion-col >
+                        <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+                    </ion-col>
                     </ion-row>
                 </ion-table>
                 

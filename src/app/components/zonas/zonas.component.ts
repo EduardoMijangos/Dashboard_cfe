@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, Input, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import {
   ApexNonAxisChartSeries,
@@ -22,6 +22,9 @@ export type ChartOptions = {
   styleUrls: ['./zonas.component.scss'],
 })
 export class ZonasComponent{
+
+  @Input() progress: number = 14;
+
 
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptionsZonamas: Partial<ChartOptions>;
