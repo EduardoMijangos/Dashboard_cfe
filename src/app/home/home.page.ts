@@ -98,13 +98,6 @@ export class HomePage {
         }
       },
       xaxis: {
-        categories: [
-          "Category 1",
-          "Category 2",
-          "Category 3",
-          "Category 4",
-          "Category 5"
-        ],
         position: "top",
         labels: {
           offsetY: -18
@@ -184,13 +177,7 @@ export class HomePage {
         }
       },
       xaxis: {
-        categories: [
-          "Category 1",
-          "Category 2",
-          "Category 3",
-          "Category 4",
-          "Category 5"
-        ],
+        
         position: "top",
         labels: {
           offsetY: -18

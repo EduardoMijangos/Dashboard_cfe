@@ -4,8 +4,34 @@
 
   <ion-content color="light" class="content-wrapper">
 
-    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar> 
-      
+    <div class="rectangle33">
+    Meta del dia:
+    <ion-progress-bar  [value]="progress / 100" color="secondary" class="rectangle33"></ion-progress-bar> 
+    </div>
+
+    <app-mapa class="map-container"></app-mapa>
+
+    <ion-card class="hora">
+      <ion-card-header>
+        Ultima actualización
+      </ion-card-header>
+      <ion-card-content>
+        {{ currentDate | date: 'dd/MM/yyyy' }} {{ currentDate | date: 'HH:mm:ss' }}      
+      </ion-card-content>
+    </ion-card>
+
+
+    <apx-chart class="chart-container top-left"
+    *ngIf="chartOptionsmascircular.series && chartOptionsmascircular.chart && chartOptionsmascircular.plotOptions && chartOptionsmascircular.labels && chartOptionsmascircular.fill"
+    [series]="chartOptionsmascircular.series"
+    [chart]="chartOptionsmascircular.chart"
+    [plotOptions]="chartOptionsmascircular.plotOptions"
+    [labels]="chartOptionsmascircular.labels"
+    [height]="chartOptionsmascircular.chart.height"
+    [fill]="chartOptionsmascircular.fill"
+    >
+  </apx-chart>
+
     <ion-card *ngIf="chartOptions" class="chart-container top-right">
     <h3>Zonas con mas Ingresos</h3>
       <apx-chart
@@ -22,6 +48,17 @@
       >
       </apx-chart>
     </ion-card>
+
+    <apx-chart class="chart-container bottom-right"
+    *ngIf="chartOptionsmenoscircular.series && chartOptionsmenoscircular.chart && chartOptionsmenoscircular.plotOptions && chartOptionsmenoscircular.labels && chartOptionsmascircular.fill"
+    [series]="chartOptionsmenoscircular.series"
+    [chart]="chartOptionsmenoscircular.chart"
+    [plotOptions]="chartOptionsmenoscircular.plotOptions"
+    [labels]="chartOptionsmenoscircular.labels"
+    [height]="chartOptionsmenoscircular.chart.height"
+    [fill]="chartOptionsmascircular.fill"
+  >
+  </apx-chart>
 
     <ion-card *ngIf="chartOptionsmenos" class="chart-container bottom-left">
     <h3>Zonas con menos Ingresos</h3>
@@ -40,41 +77,6 @@
       </apx-chart>
     </ion-card>
 
-      
-      <apx-chart class="chart-container top-left"
-      *ngIf="chartOptionsmascircular.series && chartOptionsmascircular.chart && chartOptionsmascircular.plotOptions && chartOptionsmascircular.labels && chartOptionsmascircular.fill"
-      [series]="chartOptionsmascircular.series"
-      [chart]="chartOptionsmascircular.chart"
-      [plotOptions]="chartOptionsmascircular.plotOptions"
-      [labels]="chartOptionsmascircular.labels"
-      [height]="chartOptionsmascircular.chart.height"
-      [fill]="chartOptionsmascircular.fill"
-      >
-    </apx-chart>
-
-      <apx-chart class="chart-container bottom-right"
-        *ngIf="chartOptionsmenoscircular.series && chartOptionsmenoscircular.chart && chartOptionsmenoscircular.plotOptions && chartOptionsmenoscircular.labels && chartOptionsmascircular.fill"
-        [series]="chartOptionsmenoscircular.series"
-        [chart]="chartOptionsmenoscircular.chart"
-        [plotOptions]="chartOptionsmenoscircular.plotOptions"
-        [labels]="chartOptionsmenoscircular.labels"
-        [height]="chartOptionsmenoscircular.chart.height"
-        [fill]="chartOptionsmascircular.fill"
-      >
-      </apx-chart>
-
-      <app-mapa class="map-container"></app-mapa>
-
-      <ion-card class="hora">
-      <ion-card-header>
-        Ultima actualización
-      </ion-card-header>
-      <ion-card-content>
-        {{ currentDate | date: 'dd/MM/yyyy' }} {{ currentDate | date: 'HH:mm:ss' }}      
-      </ion-card-content>
-    </ion-card>
-
   </ion-content>
 
-  <app-footer></app-footer>
-
+<app-footer></app-footer>

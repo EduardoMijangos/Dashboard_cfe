@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   min-height: 100vh;
 }
 
@@ -66,9 +66,17 @@
   height: 25px;
   width: 389px;
   border-radius: 20px;
-  margin: 20px auto; /* Centra horizontalmente y agrega margen superior e inferior */
+  margin: 20px auto;
   margin-bottom: 150px; /* Ajusta según sea necesario */
+  font-family:Helvetica LT Std;
+  text-transform: uppercase;
+
 }
+
+ion-progress-bar.rectangle33 {
+  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+}
+
 
 .side-container {
   flex: 1;
@@ -82,11 +90,49 @@
   transform: translateX(-50%);
   background-color: #CAEDE0; /* Puedes cambiar el color de fondo según tus preferencias */
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Añade una sombra si lo deseas */
-  max-width: 300px; /* Ajusta el ancho máximo según sea necesario */
+  max-width: auto; /* Ajusta el ancho máximo según sea necesario */
   width: auto;
   text-align: center;
-  z-index: 1;
   font-family:Helvetica LT Std;
   text-transform: uppercase;
   margin-top: 20px; /* Ajusta según sea necesario */
+}
+
+/* Estilos para dispositivos más pequeños */
+@media only screen and (max-width: 1400px) {
+ .top-right, .bottom-left, .rectangle33 {
+    width: 100%;
+  }
+
+  .top-right, .bottom-left, .top-left, .bottom-right {
+    position: static;
+  }
+
+  .hora {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+  }
+
+
+  .content-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .map-container {
+    order: 2; /* Mueve el mapa debajo de rectangle33 */
+    margin-top: 20px; /* Ajusta según sea necesario */
+  }
+
+  .chart-container {
+    flex-direction: column; /* Cambia a columna para alternar entre gráficos circulares y de barras */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .chart-container > apx-chart {
+    margin: 10px 0;
+  }
 }
