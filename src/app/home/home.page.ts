@@ -51,6 +51,8 @@ export type ChartOptions = {
 export class HomePage {
 
   @Input() progress: number = 14;
+  currentDate: string;
+
 
 
   @ViewChild("chart") chart!: ChartComponent;
@@ -60,6 +62,9 @@ export class HomePage {
   public chartOptionsmenoscircular: Partial<ChartOptionsCircle>;
   
   constructor() {
+
+    this.currentDate = new Date().toISOString()
+
   
 
     //Manejo de informacion de la grafica de barras de mas ingresos

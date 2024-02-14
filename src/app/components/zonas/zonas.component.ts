@@ -23,7 +23,8 @@ export type ChartOptions = {
 })
 export class ZonasComponent{
 
-  @Input() progress: number = 14;
+  @Input() progress: number = 19;
+
 
 
   @ViewChild("chart") chart!: ChartComponent;
@@ -33,8 +34,9 @@ export class ZonasComponent{
   constructor(
     private router: Router
   ) {
+
     this.chartOptionsZonamas = {
-      series: [70],
+      series: [90],
       chart: {
         dropShadow:{
           enabled:true,
@@ -85,7 +87,7 @@ export class ZonasComponent{
 
     this.chartOptionsZonamenos = {
       labels: ["Zona con menos ingresos"],
-      series: [70],
+      series: [37],
       chart: {
         dropShadow:{
           enabled:true,

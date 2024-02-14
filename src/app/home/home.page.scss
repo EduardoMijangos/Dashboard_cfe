@@ -1,63 +1,39 @@
-#container {
-  text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  color: #8c8c8c;
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-
 .content-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh; /* Ajusta para ocupar toda la altura de la pantalla */
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .map-container {
   width: 100%;
   max-width: 800px;
-  margin: 30%;
-  display: block; /* Añadido para que el mapa sea un elemento flex */
-  align-items: center; /* Centra verticalmente el contenido del mapa */
-  justify-content: center; /* Centra horizontalmente el contenido del mapa */
+  margin: 20px auto; /* Centra horizontalmente y agrega margen superior */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px; /* Ajusta según sea necesario */
 }
 
 .chart-container {
   width: auto;
-  max-width: auto;
-  margin: auto;
-  margin-top: 20px;
-  position: relative;  
   max-width: 800px;
   margin: auto;
-  margin-top: 20px; /* Añadido margen superior */
+  margin-top: 20px;
+  position: relative; /* Corregido el valor de la posición */
+  flex: 2;
 }
 
 .top-right,
-.bottom-left{
+.bottom-left,
+.rectangle33 {
   background-color: #caece0;
-  height: auto; /* Ajustado para que la altura sea automática según el contenido */
-  width: auto; /* Ocupa todo el ancho del contenedor padre */
+  height: auto;
+  width: auto;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  margin: 20px 0; /* Añadido margen para separar las tarjetas */
-  position: static; /* Añadido para controlar la posición de las gráficas */
+  margin: 20px 0;
+  position: relative; /* Cambiado a posición relativa */
 }
 
 .top-right {
@@ -67,7 +43,7 @@
 }
 
 .bottom-left {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   left: 10px;
 }
@@ -80,34 +56,37 @@
 }
 
 .bottom-right {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   right: 10px;
 }
 
-.group3
-{
-width:700px;
-height:29px;
-position:absolute;
-}
-.rectangle32
-{
-background-color:#d9d9d9;
-height:29px;
-width:700px;
-filter:drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
-border-radius:20px;
-}
-.rectangle33
-{
-background-color:#9abe26;
-height:25px;
-width:389px;
-filter:drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
-border-radius:20px;
-left:4px;
-top:2px;
-position:absolute;
+.rectangle33 {
+  background-color: transparent;
+  height: 25px;
+  width: 389px;
+  border-radius: 20px;
+  margin: 20px auto; /* Centra horizontalmente y agrega margen superior e inferior */
+  margin-bottom: 150px; /* Ajusta según sea necesario */
 }
 
+.side-container {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.hora {
+  position: fixed;
+  bottom: 20px; /* Ajusta la distancia desde la parte inferior según sea necesario */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #CAEDE0; /* Puedes cambiar el color de fondo según tus preferencias */
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Añade una sombra si lo deseas */
+  max-width: 300px; /* Ajusta el ancho máximo según sea necesario */
+  width: auto;
+  text-align: center;
+  z-index: 1;
+  font-family:Helvetica LT Std;
+  text-transform: uppercase;
+  margin-top: 20px; /* Ajusta según sea necesario */
+}
