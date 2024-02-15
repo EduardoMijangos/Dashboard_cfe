@@ -11,7 +11,7 @@
 
     <app-mapa class="map-container"></app-mapa>
 
-    <ion-card class="hora">
+    <ion-card class="hora" mode="ios">
       <ion-card-header>
         Ultima actualización
       </ion-card-header>
@@ -32,7 +32,7 @@
     >
   </apx-chart>
 
-    <ion-card *ngIf="chartOptions" class="chart-container top-right">
+    <ion-card *ngIf="chartOptions" class="chart-container top-right" mode="ios">
     <h3>Zonas con mas Ingresos</h3>
       <apx-chart
         *ngIf="chartOptions.series && chartOptions.chart && chartOptions.plotOptions && chartOptions.dataLabels && chartOptions.yaxis && chartOptions.xaxis && chartOptions.fill && chartOptions.title"
@@ -60,7 +60,7 @@
   >
   </apx-chart>
 
-    <ion-card *ngIf="chartOptionsmenos" class="chart-container bottom-left">
+    <ion-card *ngIf="chartOptionsmenos" class="chart-container bottom-left" mode="ios">
     <h3>Zonas con menos Ingresos</h3>
       <apx-chart
         *ngIf="chartOptionsmenos.series && chartOptionsmenos.chart && chartOptionsmenos.plotOptions && chartOptionsmenos.dataLabels && chartOptionsmenos.yaxis && chartOptionsmenos.xaxis && chartOptionsmenos.fill && chartOptionsmenos.title"

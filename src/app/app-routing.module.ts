@@ -33,11 +33,11 @@ const routes: Routes = [
   component:AgenciaComponent
 },
 {
-  path: 'ingresofecha',
-  component: IngresosFechaComponent
+  path: 'ingresos-fecha/:mes',
+    component: IngresosFechaComponent
 },
 {
-  path: 'ingresoSemana',
+  path: 'ingresosemana/:semana',
   component: IngresosSemanaComponent
 }
 ];

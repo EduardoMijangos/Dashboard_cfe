@@ -88,7 +88,10 @@ export class IngresosComponent {
   }
 
 
-  verIngresosFecha(){
-    this.router.navigate(['/ingresofecha'])
-  }
+  verIngresosFecha(month: string) {
+    // Construye la URL del componente 'ingresos-fecha' con el mes como parámetro
+    const url = `/ingresos-fecha/${month.toLowerCase()}`;
+    this.router.navigate([url]);  }
+
+  months: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 }

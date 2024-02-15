@@ -24,3 +24,32 @@ ion-table {
   font-family:Helvetica LT Std;
   text-transform: uppercase;
 }
+
+h1{
+  text-align: center;
+  text-transform: capitalize;
+  font-family:Helvetica LT Std;
+}
+
+/* Estilos para dispositivos más pequeños */
+/* Estilos para dispositivos más pequeños */
+@media only screen and (max-width: 1500px) {
+  ion-col {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  ion-col[size="3"] {
+    order: 2;
+  }
+
+  ion-col[size="9"] {
+    order: 1;
+    margin-top: 20px;
+  }
+
+  #chart {
+    max-width: 100%; /* Ajusta el ancho máximo del gráfico al 100% */
+  }
+}
+

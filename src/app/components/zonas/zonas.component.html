@@ -3,123 +3,117 @@
   
 </ion-header>
 
-<ion-content color="light">
+<ion-content color="light" class="content-wrapper">
 
-  <ion-grid fixed>
+  <ion-grid>
     <ion-row>
-      <ion-col size="6">
-        <ion-grid>
+      <ion-col size="12" size-md="6">
+        <ion-table class="textoTabla">
           <ion-row>
+            <ion-col>Zona</ion-col>
+            <ion-col>Meta</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Enero</ion-col>
             <ion-col>
-              <ion-table class="textoTabla">
-                <ion-row>
-                  <ion-col>Zona</ion-col>
-                  <ion-col>Meta</ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Enero</ion-col>
-                  <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Febrero</ion-col>
-                  <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Marzo</ion-col>
-                  <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Abril</ion-col>
-                  <ion-col >
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Mayo</ion-col>
-                  <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Junio</ion-col>
-                  <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Julio</ion-col>
-                  <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Agosto</ion-col>
-                  <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Septiembre</ion-col>
-                  <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Octubre</ion-col>
-                  <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Noviembre</ion-col>
-                  <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col (click)="verAgencia()">Diciembre</ion-col>
-                  <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
-                  </ion-col>
-                </ion-row>
-              </ion-table>
-              
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
             </ion-col>
           </ion-row>
-        </ion-grid>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Febrero</ion-col>
+            <ion-col>
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Marzo</ion-col>
+            <ion-col>
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Abril</ion-col>
+            <ion-col >
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Mayo</ion-col>
+            <ion-col>
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Junio</ion-col>
+            <ion-col>
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Julio</ion-col>
+            <ion-col>
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Agosto</ion-col>
+            <ion-col>
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Septiembre</ion-col>
+            <ion-col>
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Octubre</ion-col>
+            <ion-col>
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Noviembre</ion-col>
+            <ion-col>
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col (click)="verAgencia()">Diciembre</ion-col>
+            <ion-col>
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+            </ion-col>
+          </ion-row>        </ion-table>
       </ion-col>
 
-      <ion-col size="6">
-        <!--card correspondientes para la grafica de las zonas -->
-          <apx-chart
-            *ngIf="chartOptionsZonamas.series && chartOptionsZonamas.chart && chartOptionsZonamas.plotOptions && chartOptionsZonamas.labels && chartOptionsZonamas.fill"
-            [series]="chartOptionsZonamas.series"
-            [chart]="chartOptionsZonamas.chart"
-            [plotOptions]="chartOptionsZonamas.plotOptions"
-            [labels]="chartOptionsZonamas.labels"
-            [fill]="chartOptionsZonamas.fill">
-          </apx-chart>
-        
-        <!--card correspondientes para la grafica de las zonas -->
-          <apx-chart
-            *ngIf="chartOptionsZonamenos.series && chartOptionsZonamenos.chart && chartOptionsZonamenos.plotOptions && chartOptionsZonamenos.labels && chartOptionsZonamenos.fill " 
-            [series]="chartOptionsZonamenos.series"
-            [chart]="chartOptionsZonamenos.chart"
-            [plotOptions]="chartOptionsZonamenos.plotOptions"
-            [labels]="chartOptionsZonamenos.labels"
-            [fill]="chartOptionsZonamenos.fill">
-          </apx-chart>
+      <ion-col size="12" size-md="6">
+        <!-- Gráfica de más ingresos -->
+        <apx-chart
+          *ngIf="chartOptionsZonamas.series && chartOptionsZonamas.chart && chartOptionsZonamas.plotOptions && chartOptionsZonamas.labels && chartOptionsZonamas.fill"
+          [series]="chartOptionsZonamas.series"
+          [chart]="chartOptionsZonamas.chart"
+          [plotOptions]="chartOptionsZonamas.plotOptions"
+          [labels]="chartOptionsZonamas.labels"
+          [fill]="chartOptionsZonamas.fill">
+        </apx-chart>
 
-        
+        <!-- Espacio entre gráficas -->
+        <div style="margin-top: 20px;"></div>
+
+        <!-- Gráfica de menos ingresos -->
+        <apx-chart
+          *ngIf="chartOptionsZonamenos.series && chartOptionsZonamenos.chart && chartOptionsZonamenos.plotOptions && chartOptionsZonamenos.labels && chartOptionsZonamenos.fill " 
+          [series]="chartOptionsZonamenos.series"
+          [chart]="chartOptionsZonamenos.chart"
+          [plotOptions]="chartOptionsZonamenos.plotOptions"
+          [labels]="chartOptionsZonamenos.labels"
+          [fill]="chartOptionsZonamenos.fill">
+        </apx-chart>
       </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-content>
 
 <app-footer></app-footer>
