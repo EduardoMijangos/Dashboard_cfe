@@ -6,6 +6,7 @@ import {
   ApexChart,
   ApexFill,
   ChartComponent,
+  ApexStroke,
 } from "ng-apexcharts";
 
 export type ChartOptions = {
@@ -14,6 +15,7 @@ export type ChartOptions = {
   labels: string[];
   plotOptions: ApexPlotOptions;
   fill: ApexFill,
+  stroke: ApexStroke
 };
 
 @Component({
@@ -24,6 +26,8 @@ export type ChartOptions = {
 export class ZonasComponent{
 
   @Input() progress: number = 19;
+
+  zonas = ['Villahermosa', 'Tuxtla', 'Oaxaca', 'Chontalpa', 'Tehuantepec', 'Tapachula', 'Huatulco', ' Los Rios', 'San Cristobal', 'Huajuapan']
 
 
 
@@ -65,8 +69,10 @@ export class ZonasComponent{
       },
       plotOptions: {
         radialBar: {
+          startAngle: -135,
+            endAngle: 225,
           hollow: {
-            size: "85%"
+            size: "70%"
           },
           dataLabels:{
             show: true,
@@ -78,6 +84,9 @@ export class ZonasComponent{
         }
       },
       labels: ["Zona con mas ingresos"],
+      stroke: {
+        lineCap: 'round'
+      },
       fill:{
         colors: ["#008E5A"],
       }
@@ -106,8 +115,10 @@ export class ZonasComponent{
       },
       plotOptions: {
         radialBar: {
+          startAngle: -135,
+            endAngle: 225,
           hollow: {
-            size: "85%"
+            size: "70%"
           },
           dataLabels:{
             show: true,
@@ -118,13 +129,17 @@ export class ZonasComponent{
           }
         }
       },
+      stroke: {
+        lineCap: 'round'
+      },
       fill:{
         colors: ["#008E5A"]
       }
     };
   }
 
-  verAgencia(){
-    this.router.navigate(['/agencia'])
+  verAgencia(ag: string){
+    const url = `/agencia/${ag.toLowerCase()}`;
+    this.router.navigate([url]);
   }
 }

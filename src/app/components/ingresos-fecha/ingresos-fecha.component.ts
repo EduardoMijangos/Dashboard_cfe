@@ -33,12 +33,17 @@ export class IngresosFechaComponent implements OnInit {
 
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: RangeBarChartOptions;
-  currentMonth: string = '';  // Asegúrate de inicializar la variable
+  currentMonth: string = '';
+  diasPorMes: number = 0;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute
   ) {
+    const currentDate = new Date();
+    this.currentMonth = this.obtenerNombreMes(currentDate.getMonth() + 1);
+    this.diasPorMes = this.obtenerDiasMes(currentDate.getFullYear(), currentDate.getMonth() + 1);
+
     this.chartOptions = {
       series: [
         {
@@ -46,7 +51,7 @@ export class IngresosFechaComponent implements OnInit {
             { x: "01 - 07 ", y: [new Date("2019-03-02").getTime(), new Date("2019-03-04").getTime()] },
             { x: "08 - 15", y: [new Date("2019-03-04").getTime(), new Date("2019-03-08").getTime()] },
             { x: "16 - 23", y: [new Date("2019-03-08").getTime(), new Date("2019-03-12").getTime()] },
-            { x: "24 -31", y: [new Date("2019-03-12").getTime(), new Date("2019-03-18").getTime()] }
+            { x: "24 - 31", y: [new Date("2019-03-12").getTime(), new Date("2019-03-18").getTime()] }
           ]
         }
       ],
@@ -70,7 +75,6 @@ export class IngresosFechaComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Obtén el mes de los parámetros de la URL
     this.route.params.subscribe((params) => {
       const mesNumero = +params['mes'];
   
@@ -80,23 +84,53 @@ export class IngresosFechaComponent implements OnInit {
         this.currentMonth = params['mes'];
       }
   
-      console.log('Valor de mesNumero:', params['mes']);
+      console.log('Valor de mes:', params['mes']);
     });
   }
 
   verIngresosSemana(semana: number) {
-    // Redirige a la ruta de ingresosemana con el parámetro de semana
     this.router.navigate(['/ingresosemana', semana]);
   }
 
   obtenerNombreMes(numeroMes: number): string {
-    // Implementa tu lógica para obtener el nombre del mes según su número
-    // Puedes usar un array o un switch, por ejemplo
     const meses = [
       'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
       'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
     ];
 
     return meses[numeroMes - 1] || '';
+  }
+
+  obtenerDiasMes(year: number, month: number): number {
+    if (month < 1 || month > 12) {
+      console.error('El mes debe estar entre 1 y 12.');
+      return 0;
+    }
+  
+    const lastDay = new Date(year, month, 0).getDate();
+    return lastDay;
+  }
+  
+  obtenerSemanas(): number[][] {
+    const weeks: number[][] = [];
+    const daysPerPeriod = 8;
+  
+    if (!this.diasPorMes) {
+      return weeks;
+    }
+  
+    let currentDay = 1;
+  
+    while (currentDay <= this.diasPorMes) {
+      const remainingDays = this.diasPorMes - currentDay + 1;
+      const daysInThisPeriod = Math.min(remainingDays, daysPerPeriod);
+  
+      const dayPeriods: number[] = Array.from({ length: daysInThisPeriod }, (_, index) => currentDay + index);
+      weeks.push(dayPeriods);
+  
+      currentDay += daysInThisPeriod;
+    }
+  
+    return weeks;
   }
 }

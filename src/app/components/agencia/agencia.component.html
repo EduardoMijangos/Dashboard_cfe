@@ -4,6 +4,49 @@
 
 <ion-content color="light">
 
+  <h1>Zona: {{currenZona}} </h1>
+
+  <ion-grid fixed class="container">
+    <h2>Agencias:</h2>
+    <ion-row>
+
+      <!--Grafica-->
+      <ion-col size="12" size-md="9" push-md="3" style="margin-bottom: 16px; padding-right: 16px;"> <!-- Añadido margen inferior y padding derecho -->
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [dataLabels]="chartOptions.dataLabels"
+          [grid]="chartOptions.grid"
+          [stroke]="chartOptions.stroke"
+          [title]="chartOptions.title"
+        ></apx-chart>
+      </ion-col>
+
+      <!-- Tabla -->
+      <ion-col size="12" size-md="3" pull-md="10">
+        <ion-grid>
+
+          <ion-table class="textoTabla">
+            <!-- ... (contenido de la tabla) ... -->
+            <ion-row>
+              <ion-col>Zona</ion-col>
+              <ion-col>Meta</ion-col>
+            </ion-row>
+            <ion-row *ngFor="let z of zonas" style="margin-bottom: 8px;"> <!-- Añadido margen inferior -->
+              <ion-col>{{z}}</ion-col>
+              <ion-col>
+                <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+              </ion-col>
+            </ion-row>
+          </ion-table>
+
+        </ion-grid>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
 
 <app-footer></app-footer>

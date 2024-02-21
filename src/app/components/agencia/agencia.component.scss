@@ -1,0 +1,55 @@
+h1{
+    text-align: center;
+    text-transform: capitalize;
+    font-family:Helvetica LT Std;
+  }
+
+  h2{
+    text-align: left;
+    text-transform: capitalize;
+    font-family:Helvetica LT Std;
+  }
+
+  ion-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  ion-col {
+    padding: 8px;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  ion-col {
+    background-color: #CAEDE0;
+  }
+  
+  .textoTabla {
+    color: #000000;
+    font-family: 'Helvetica LT Std', sans-serif; /* Ajustado el formato de la fuente */
+    text-transform: uppercase;
+    width: 100%;
+    height: 50%;
+  }
+  
+
+  .rectangle33 {
+    height: 25px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 20px;
+    left: 4px;
+    top: 2px;
+    position: absolute;
+    padding: auto;
+  }
+  
+  /* Asumí que 'labels' se refiere a elementos <label> */
+  label {
+    color: #000000;
+  }
+  
+.container {
+  padding: auto;
+  border: auto;
+}

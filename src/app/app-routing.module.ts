@@ -29,7 +29,7 @@ const routes: Routes = [
   component: IngresosComponent
 },
 {
-  path: 'agencia',
+  path: 'agencia/:zonaAg',
   component:AgenciaComponent
 },
 {

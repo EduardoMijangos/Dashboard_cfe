@@ -3,22 +3,16 @@
 </ion-header>
 
 <ion-content color="light">
-  <ion-grid fixed>
-    <ion-row>
-      <ion-col size="12" size-md="3">
-        <ion-grid>
-          <ion-row class="textoTabla">
-            <ion-col>Mes</ion-col>
-            <ion-col>Total</ion-col>
-          </ion-row>
-          <ion-row *ngFor="let month of months" (click)="verIngresosFecha(month)" class="textoTabla">
-            <ion-col>{{ month }}</ion-col>
-            <ion-col><!-- Aquí va el total correspondiente --></ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-col>
 
-      <ion-col size="12" size-md="9">
+  <h1><br></h1>
+
+  <ion-grid fixed>
+
+<h2></h2>
+
+    <ion-row>
+      <!-- Gráfica en la parte superior -->
+      <ion-col size="12" size-md="9" push-md="3" style="margin-bottom: 16px; padding-right: 16px;">
         <apx-chart
           [series]="chartOptions.series"
           [chart]="chartOptions.chart"
@@ -29,12 +23,22 @@
           [title]="chartOptions.title"
         ></apx-chart>
       </ion-col>
+
+      <!-- Tabla debajo de la gráfica -->
+      <ion-col size="12" size-md="3" pull-md="10">
+        <ion-grid>
+          <ion-row class="textoTabla">
+            <ion-col>Mes</ion-col>
+            <ion-col>Total</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let month of months" (click)="verIngresosFecha(month)" class="textoTabla">
+            <ion-col>{{ month }}</ion-col>
+            <ion-col> {{month}} </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-title>Footer</ion-title>
-  </ion-toolbar>
-</ion-footer>
+

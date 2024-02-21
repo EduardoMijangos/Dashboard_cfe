@@ -4,7 +4,6 @@ ion-table {
 }
 
 ion-col {
-  border: 1px solid #ddd; /* Añadido 'solid' para especificar el tipo de borde */
   padding: 8px;
   text-align: left;
   cursor: pointer;
@@ -19,6 +18,7 @@ ion-col:first-child {
   font-family: 'Helvetica LT Std', sans-serif; /* Ajustado el formato de la fuente */
   text-transform: uppercase;
   width: 100%;
+  height: 50%;
 }
 
 h2 {
@@ -26,17 +26,13 @@ h2 {
   margin-bottom: 0;
   color: #c0c0c0; /* Cambiado a código hexadecimal para el color */
 }
-
-h1 {
-  font-size: 22px;
-  margin-top: 0;
-  color: #333;
+h1{
+  text-align: center;
+  text-transform: capitalize;
+  font-family:Helvetica LT Std;
 }
-
 .rectangle33 {
-  background-color: #D9D9D9;
   height: 25px;
-  width: 389px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 20px;
   left: 4px;
@@ -47,4 +43,26 @@ h1 {
 /* Asumí que 'labels' se refiere a elementos <label> */
 label {
   color: #000000;
+}
+
+.chart-container {
+  width: auto;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 20px;
+  position: -ms-page; /* Corregido el valor de la posición */
+  flex: 2;
+}
+
+.bottom-right {
+  position:relative;
+  bottom: 10px;
+  right: 10px;
+}
+
+.top-left {
+  background-color: transparent;
+  position:  relative;
+  top: 30px;
+  left: 10px;
 }

@@ -29,6 +29,7 @@
 .bottom-left,
 .rectangle33 {
   background-color: #caece0;
+  border-radius: 10px;
   height: auto;
   width: auto;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -96,6 +97,12 @@ ion-progress-bar.rectangle33 {
   font-family:Helvetica LT Std;
   text-transform: uppercase;
   margin-top: 20px; /* Ajusta según sea necesario */
+}
+
+ion-footer{
+color:#008e5a;
+    height:78px;
+    width:1920px;
 }
 
 /* Estilos para dispositivos más pequeños */

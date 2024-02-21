@@ -9,7 +9,8 @@ import {
   ApexTitleSubtitle,
   ApexXAxis,
   ApexFill,
-  ApexNonAxisChartSeries
+  ApexNonAxisChartSeries,
+  ApexStroke
 } from "ng-apexcharts";
 
 
@@ -26,7 +27,8 @@ export type ChartOptionsCircle = {
   chart: ApexChart;
   labels: string[];
   plotOptions: ApexPlotOptions;
-  fill: ApexFill
+  fill: ApexFill,
+  stroke: ApexStroke
 };
 
 
@@ -230,8 +232,8 @@ export class HomePage {
     this.chartOptionsmascircular = {
       series: [90],
       chart: {
-        dropShadow:{
-          enabled:true,
+        dropShadow: {
+          enabled: true,
           enabledOnSeries: undefined,
           top: 0,
           left: 0,
@@ -245,11 +247,11 @@ export class HomePage {
           enabled: true,
           easing: "easeinout",
           speed: 800,
-          animateGradually:{
+          animateGradually: {
             enabled: true,
             delay: 150
           },
-          dynamicAnimation:{
+          dynamicAnimation: {
             enabled: true,
             speed: 350
           }
@@ -258,22 +260,27 @@ export class HomePage {
       plotOptions: {
         radialBar: {
           hollow: {
-            size: "85%"
+            margin:15,
+            size: "70%"
           },
-          dataLabels:{
+          dataLabels: {
             show: true,
-            name:{
+            name: {
               show: true,
-              color: "000000"
+              color: "000000",            
             }
           }
         }
       },
       labels: ["Zona con mas ingresos"],
-      fill:{
+      stroke: {
+        lineCap: 'round'
+      },
+      fill: {
         colors: ["#008E5A"]
       }
     }
+    
   
 
     //Grafica de Radial de zona con menos ingresos
@@ -307,7 +314,8 @@ export class HomePage {
     },    plotOptions: {
       radialBar: {
         hollow: {
-          size: "85%"
+          margin:15,
+          size: "70%"
         },
         dataLabels:{
           show: true,
@@ -319,6 +327,9 @@ export class HomePage {
       }
     },
     labels: ["Zona con menos ingresos"],
+      stroke: {
+        lineCap: 'round'
+      },
     fill:{
       colors: ["#008E5A"]
     }
