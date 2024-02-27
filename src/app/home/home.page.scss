@@ -1,145 +1,166 @@
-.content-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 100vh;
-}
-
-.map-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 20px auto; /* Centra horizontalmente y agrega margen superior */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px; /* Ajusta según sea necesario */
-}
-
-.chart-container {
-  width: auto;
-  max-width: 800px;
-  margin: auto;
-  margin-top: 20px;
-  position: relative; /* Corregido el valor de la posición */
-  flex: 2;
-}
-
-.top-right,
-.bottom-left,
-.rectangle33 {
-  background-color: #caece0;
-  border-radius: 10px;
-  height: auto;
-  width: auto;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  margin: 20px 0;
-  position: relative; /* Cambiado a posición relativa */
-}
-
-.top-right {
-  position: absolute;
-  top: 50px;
-  right: 10px;
-}
-
-.bottom-left {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-}
-
-.top-left {
-  background-color: transparent;
-  position: absolute;
-  top: 30px;
-  left: 10px;
-}
-
-.bottom-right {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-}
-
-.rectangle33 {
-  background-color: transparent;
-  height: 25px;
-  width: 389px;
-  border-radius: 20px;
-  margin: 20px auto;
-  margin-bottom: 150px; /* Ajusta según sea necesario */
-  font-family:Helvetica LT Std;
-  text-transform: uppercase;
-
-}
-
-ion-progress-bar.rectangle33 {
-  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
-}
-
-
-.side-container {
-  flex: 1;
-  margin-right: 20px;
-}
-
-.hora {
-  position: fixed;
-  bottom: 20px; /* Ajusta la distancia desde la parte inferior según sea necesario */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #CAEDE0; /* Puedes cambiar el color de fondo según tus preferencias */
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Añade una sombra si lo deseas */
-  max-width: auto; /* Ajusta el ancho máximo según sea necesario */
-  width: auto;
-  text-align: center;
-  font-family:Helvetica LT Std;
-  text-transform: uppercase;
-  margin-top: 20px; /* Ajusta según sea necesario */
-}
-
-ion-footer{
-color:#008e5a;
-    height:78px;
-    width:1920px;
-}
-
-/* Estilos para dispositivos más pequeños */
-@media only screen and (max-width: 1400px) {
- .top-right, .bottom-left, .rectangle33 {
-    width: 100%;
-  }
-
-  .top-right, .bottom-left, .top-left, .bottom-right {
-    position: static;
-  }
-
-  .hora {
-    width: 100%;
-    position: relative;
-    display: inline-block;
-  }
-
-
   .content-wrapper {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
   }
 
   .map-container {
-    order: 2; /* Mueve el mapa debajo de rectangle33 */
-    margin-top: 20px; /* Ajusta según sea necesario */
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto; /* Centra horizontalmente y agrega margen superior */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px; /* Ajusta según sea necesario */
   }
 
   .chart-container {
-    flex-direction: column; /* Cambia a columna para alternar entre gráficos circulares y de barras */
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    width: auto;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 20px;
+    position: relative; /* Corregido el valor de la posición */
+    flex: 2;
   }
 
-  .chart-container > apx-chart {
-    margin: 10px 0;
+  .top-right,
+  .bottom-left,
+  .rectangle33 {
+    background-color: #caece0;
+    border-radius: 10px;
+    height: auto;
+    width: auto;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    margin: 20px 0;
+    position: relative; /* Cambiado a posición relativa */
   }
-}
+
+  .top-right {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+  }
+
+  .bottom-left {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .top-left {
+    background-color: transparent;
+    position: absolute;
+    top: 30px;
+    left: 10px;
+  }
+
+  .bottom-right {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .rectangle33 {
+    background-color: transparent;
+    height: 25px;
+    width: 389px;
+    border-radius: 20px;
+    margin: 20px auto;
+    margin-bottom: 150px; /* Ajusta según sea necesario */
+    font-family:Helvetica LT Std;
+    text-transform: uppercase;
+
+  }
+
+  ion-progress-bar.rectangle33 {
+    margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+  }
+
+
+  .side-container {
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  .hora {
+    position: fixed;
+    bottom: 20px; /* Ajusta la distancia desde la parte inferior según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #CAEDE0; /* Puedes cambiar el color de fondo según tus preferencias */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Añade una sombra si lo deseas */
+    max-width: auto; /* Ajusta el ancho máximo según sea necesario */
+    width: auto;
+    text-align: center;
+    font-family:Helvetica LT Std;
+    text-transform: uppercase;
+    margin-top: 20px; /* Ajusta según sea necesario */
+  }
+
+  ion-footer{
+  color:#008e5a;
+      height:78px;
+      width:1920px;
+  }
+
+  h3{
+    text-align: center;
+    font-family: Helvetica LT Std;
+  }
+
+  ion-content{
+    height: 100%;
+    overflow-y: auto !important;
+  }
+
+  /* Estilos para dispositivos más pequeños */
+  @media only screen and (max-width: 1400px) {
+
+    .apx-chart-container {
+      pointer-events: none;
+    }
+
+  .top-right, .bottom-left, .rectangle33 {
+      width: 100%;
+    }
+
+    .top-right, .bottom-left, .top-left, .bottom-right {
+      position: static;
+    }
+
+    .hora {
+      width: 100%;
+      position: relative;
+      display: inline-block;
+    }
+
+
+    .content-wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .map-container {
+      order: 2; /* Mueve el mapa debajo de rectangle33 */
+      margin-top: 20px; /* Ajusta según sea necesario */
+    }
+
+    .chart-container {
+      flex-direction: column; /* Cambia a columna para alternar entre gráficos circulares y de barras */
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .chart-container > apx-chart {
+      margin: 10px 0;
+    }
+
+    ion-content{
+      overflow-y: auto !important;
+      height: 100%;
+      width: auto;
+    }
+  }

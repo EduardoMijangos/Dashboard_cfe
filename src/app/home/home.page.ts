@@ -1,4 +1,5 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -47,10 +48,12 @@ export type ChartOptions = {
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+  encapsulation: ViewEncapsulation.None  // Añade esta línea para desactivar la encapsulación de estilos
+
 })
 
 
-export class HomePage {
+export class HomePage implements AfterViewInit{
 
   @Input() progress: number = 14;
   currentDate: string;
@@ -63,7 +66,11 @@ export class HomePage {
   public chartOptionsmascircular: Partial<ChartOptionsCircle>;
   public chartOptionsmenoscircular: Partial<ChartOptionsCircle>;
   
-  constructor() {
+  constructor( 
+    private el: ElementRef,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
 
     this.currentDate = new Date().toISOString()
 
@@ -335,7 +342,35 @@ export class HomePage {
     }
   }
 }
+
+private chartSectionVisible = false;
+
+  ngAfterViewInit() {
+    this.scrollIntoView();
+  }
+
+  private scrollIntoView() {
+    if (this.chartSectionVisible) {
+      const chartContainer = this.el.nativeElement.querySelector('#chartSection');
+      if (chartContainer) {
+        chartContainer.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+      }
+    }
+  }
+
+  private navigateToChartSection() {
+    this.router.navigate([], {
+      fragment: 'chartSection',
+      queryParamsHandling: 'merge',
+      relativeTo: this.route
+    });
+  }
+
+  // Agrega un método para activar el scroll cuando se muestra la sección del gráfico
+  showChartSection() {
+    this.chartSectionVisible = true;
+    this.navigateToChartSection();
+    this.scrollIntoView();
+  }
+
 }
-
-  
-

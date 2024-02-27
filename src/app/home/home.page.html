@@ -2,7 +2,7 @@
     <app-header></app-header>
   </ion-header>
 
-  <ion-content color="light" class="content-wrapper">
+  <ion-content color="light" class="content-wrapper" scrollY="true">
 
     <div class="rectangle33">
       Meta del día:
@@ -71,29 +71,26 @@
   >
   </apx-chart>
 
-    <ion-card *ngIf="chartOptionsmenos" class="chart-container bottom-left" mode="ios">
+  <ion-card *ngIf="chartOptionsmenos" class="chart-container bottom-left" mode="ios">
     <h3>Zonas con menos Ingresos</h3>
-      <apx-chart
-        *ngIf="chartOptionsmenos.series && chartOptionsmenos.chart && chartOptionsmenos.plotOptions && chartOptionsmenos.dataLabels
-        && chartOptionsmenos.yaxis && chartOptionsmenos.xaxis && chartOptionsmenos.fill && chartOptionsmenos.title && chartOptionsmenoscircular.stroke"
-        [series]="chartOptionsmenos.series"
-        [chart]="chartOptionsmenos.chart"
-        [plotOptions]="chartOptionsmenos.plotOptions"
-        [dataLabels]="chartOptionsmenos.dataLabels"
-        [yaxis]="chartOptionsmenos.yaxis"
-        [xaxis]="chartOptionsmenos.xaxis"
-        [fill]="chartOptionsmenos.fill"
-        [title]="chartOptionsmenos.title"
-        [height]="chartOptionsmenos.chart.height"
-        [stroke]="chartOptionsmenoscircular.stroke"
-      >
-      </apx-chart>
-    </ion-card>
+    <apx-chart id="chartSection"
+      *ngIf="chartOptionsmenos.series && chartOptionsmenos.chart && chartOptionsmenos.plotOptions && chartOptionsmenos.dataLabels
+      && chartOptionsmenos.yaxis && chartOptionsmenos.xaxis && chartOptionsmenos.fill && chartOptionsmenos.title && chartOptionsmenoscircular.stroke"
+      [series]="chartOptionsmenos.series"
+      [chart]="chartOptionsmenos.chart"
+      [plotOptions]="chartOptionsmenos.plotOptions"
+      [dataLabels]="chartOptionsmenos.dataLabels"
+      [yaxis]="chartOptionsmenos.yaxis"
+      [xaxis]="chartOptionsmenos.xaxis"
+      [fill]="chartOptionsmenos.fill"
+      [title]="chartOptionsmenos.title"
+      [height]="chartOptionsmenos.chart.height"
+      [stroke]="chartOptionsmenoscircular.stroke"
+      (animationEnd)="showChartSection()"
+    >
+    </apx-chart>
+  </ion-card>
+  
 
   </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-title>Footer</ion-title>
-  </ion-toolbar>
-</ion-footer>
