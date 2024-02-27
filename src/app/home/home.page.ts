@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   ApexAxisChartSeries,
@@ -13,6 +13,10 @@ import {
   ApexNonAxisChartSeries,
   ApexStroke
 } from "ng-apexcharts";
+
+ //import * as jsPDF from 'jspdf';
+import { jsPDF } from 'jspdf';
+import domtoimage from 'dom-to-image';
 
 
 interface ApexPlotOptionsBar {
@@ -53,7 +57,7 @@ export type ChartOptions = {
 })
 
 
-export class HomePage implements AfterViewInit{
+export class HomePage implements OnInit{
 
   @Input() progress: number = 14;
   currentDate: string;
@@ -342,6 +346,8 @@ export class HomePage implements AfterViewInit{
     }
   }
 }
+  ngOnInit(): void {
+  }
 
 private chartSectionVisible = false;
 
@@ -373,4 +379,23 @@ private chartSectionVisible = false;
     this.scrollIntoView();
   }
 
-}
+  
+  generarPDF(): void {
+    const pdf = new jsPDF();
+
+    const chartElement = document.getElementById('chart');
+
+    if (chartElement) {
+      domtoimage.toPng(chartElement).then((dataUrl: string) => {
+        // Agrega la imagen al PDF
+        pdf.addImage(dataUrl, 'PNG', 10, 10, 180, 100);
+
+        // Guarda o muestra el PDF según tus necesidades
+        pdf.save('nombre-archivo.pdf');
+        // No es necesario llamar a pdf.output('dataurlnewwindow') ya que pdf.save() realiza la acción de guardado
+      }).catch((error) => {
+        // Manejar errores al convertir la imagen
+        console.error('Error al convertir la imagen:', error);
+      });
+    }
+  }}

@@ -5,6 +5,7 @@ import { IngresosComponent } from './components/ingresos/ingresos.component';
 import { AgenciaComponent } from './components/agencia/agencia.component';
 import { IngresosFechaComponent } from './components/ingresos-fecha/ingresos-fecha.component';
 import { IngresosSemanaComponent } from './components/ingresos-semana/ingresos-semana.component';
+import { DescargarComponent } from './components/descargar/descargar.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
 {
   path: 'ingresosemana/:semana',
   component: IngresosSemanaComponent
+},
+{
+  path: 'descargar',
+  component: DescargarComponent
 }
 ];
 

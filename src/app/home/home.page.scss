@@ -110,11 +110,13 @@
     font-family: Helvetica LT Std;
   }
 
-  ion-content{
-    height: 100%;
-    overflow-y: auto !important;
+  .fixed-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 9999999999999999999999999;
   }
-
+  
   /* Estilos para dispositivos más pequeños */
   @media only screen and (max-width: 1400px) {
 

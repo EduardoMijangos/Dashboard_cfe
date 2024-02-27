@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { AgenciaComponent } from './agencia/agencia.component';
 import { IngresosSemanaComponent } from './ingresos-semana/ingresos-semana.component';
+import { DescargarComponent } from './descargar/descargar.component';
 
 
 
@@ -24,7 +25,8 @@ import { IngresosSemanaComponent } from './ingresos-semana/ingresos-semana.compo
     FooterComponent,
     AgenciaComponent,
     IngresosFechaComponent,
-    IngresosSemanaComponent
+    IngresosSemanaComponent,
+    DescargarComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { IngresosSemanaComponent } from './ingresos-semana/ingresos-semana.compo
     FooterComponent,
     AgenciaComponent,
     IngresosFechaComponent,
-    IngresosSemanaComponent
+    IngresosSemanaComponent,
+    DescargarComponent
   ]
 })
 export class ComponentsmoduleModule { }
