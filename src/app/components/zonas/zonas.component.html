@@ -19,9 +19,11 @@
           <ion-row *ngFor="let z of zonas" >
             <ion-col (click)="verAgencia(z)"> {{z}} </ion-col>
             <ion-col>
-              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100"></ion-progress-bar >
+              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100">
+                {{ progress }}%
+              </ion-progress-bar>
             </ion-col>
-          </ion-row>      
+          </ion-row>     
         </ion-table>
       </ion-col>
 

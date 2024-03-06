@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   ApexAxisChartSeries,
@@ -379,23 +379,27 @@ private chartSectionVisible = false;
     this.scrollIntoView();
   }
 
-  
-  generarPDF(): void {
+/*   generarPDF(): void {
     const pdf = new jsPDF();
+    const chartElements = document.querySelectorAll('.chart-container');
 
-    const chartElement = document.getElementById('chart');
+    if (chartElements.length > 0) {
+      chartElements.forEach((chartElement, index) => {
+        domtoimage.toPng(chartElement).then((dataUrl: string) => {
+          // Agrega la imagen al PDF
+          pdf.addImage(dataUrl, 'PNG', 10, (index * 110) + 10, 180, 100);
 
-    if (chartElement) {
-      domtoimage.toPng(chartElement).then((dataUrl: string) => {
-        // Agrega la imagen al PDF
-        pdf.addImage(dataUrl, 'PNG', 10, 10, 180, 100);
-
-        // Guarda o muestra el PDF según tus necesidades
-        pdf.save('nombre-archivo.pdf');
-        // No es necesario llamar a pdf.output('dataurlnewwindow') ya que pdf.save() realiza la acción de guardado
-      }).catch((error) => {
-        // Manejar errores al convertir la imagen
-        console.error('Error al convertir la imagen:', error);
+          // Guarda o muestra el PDF según tus necesidades
+          if (index === chartElements.length - 1) {
+            // Solo guarda el PDF después de agregar todas las imágenes
+            pdf.save('nombre-archivo.pdf');
+          }
+        }).catch((error) => {
+          // Manejar errores al convertir la imagen
+          console.error(`Error al convertir la imagen ${index + 1}:`, error);
+        });
       });
     }
-  }}
+  }
+ */  
+}

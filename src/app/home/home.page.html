@@ -12,9 +12,9 @@
     </ion-progress-bar>
   </div>
 
-  <ion-button (click)="generarPDF()" expand="block" fill="clear" shape="round">
+<!--   <ion-button (click)="generarPDF()" expand="block" fill="clear" shape="round">
     Click me
-  </ion-button>
+  </ion-button> -->
 
   <app-mapa class="map-container"></app-mapa>
 
@@ -27,7 +27,7 @@
     </ion-card-content>
   </ion-card>
 
-  <apx-chart class="chart-container top-left"
+  <apx-chart class="chart-container top-left" id="chart"
     *ngIf="chartOptionsmascircular.series && chartOptionsmascircular.chart && chartOptionsmascircular.plotOptions && chartOptionsmascircular.labels 
     && chartOptionsmascircular.fill && chartOptionsmascircular.stroke"
     [series]="chartOptionsmascircular.series"
@@ -40,7 +40,7 @@
   >
   </apx-chart>
 
-  <ion-card *ngIf="chartOptions" class="chart-container top-right" mode="ios">
+  <ion-card *ngIf="chartOptions" class="chart-container top-right" mode="ios" id="chart">
     <h3>Zonas con más Ingresos</h3>
     <apx-chart
       *ngIf="chartOptions.series && chartOptions.chart && chartOptions.plotOptions && chartOptions.dataLabels && chartOptions.yaxis && chartOptions.xaxis && chartOptions.fill && chartOptions.title"
@@ -57,7 +57,7 @@
     </apx-chart>
   </ion-card>
 
-  <apx-chart class="chart-container bottom-right"
+  <apx-chart class="chart-container bottom-right" id="chart"
     *ngIf="chartOptionsmenoscircular.series && chartOptionsmenoscircular.chart && chartOptionsmenoscircular.plotOptions && chartOptionsmenoscircular.labels 
     && chartOptionsmenoscircular.fill && chartOptionsmenoscircular.stroke"
     [series]="chartOptionsmenoscircular.series"

@@ -1,6 +1,12 @@
+ion-content {
+  overflow-y: auto;
+}
+
+.chart-container {
+  height: 300px; /* Ajusta la altura de las gráficas según tus necesidades */
+  margin-bottom: 20px; /* Ajusta el espacio entre las gráficas según sea necesario */
+}
+
 ion-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  
+  height: auto; /* Ajusta la altura del footer según sea necesario */
+}

@@ -1,8 +1,24 @@
-<app-header></app-header>
 
-<ion-content scrollY="false">
-    <!-- Contenido aquí -->
-  </ion-content>
-      
+<ion-content scrollY="true">
 
-<app-footer></app-footer>
+  <ion-button (click)="generarPDF()" expand="block" fill="clear" shape="round">
+    <ion-icon slot="start" name="download-outline"></ion-icon>
+    Descargar PDF
+  </ion-button>
+  
+  <ion-card *ngFor="let chartData of chartDataArray">
+    <div class="chart-container" #chartContainer>
+      <apx-chart
+        *ngIf="chartData.series && chartData.chart && chartData.plotOptions && chartData.dataLabels 
+        && chartData.xaxis && chartData.fill"
+        [series]="chartData.series"
+        [chart]="chartData.chart"
+        [dataLabels]="chartData.dataLabels"
+        [plotOptions]="chartData.plotOptions"
+        [xaxis]="chartData.xaxis"
+        [fill]="chartData.fill"
+      ></apx-chart>
+    </div>
+  </ion-card>
+</ion-content>
+
