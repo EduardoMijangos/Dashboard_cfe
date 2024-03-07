@@ -38,7 +38,8 @@
   }
 
   .top-right {
-    position: absolute;
+    margin-top: 5rem;
+    position: fixed;
     top: 50px;
     right: 10px;
   }
@@ -50,8 +51,9 @@
   }
 
   .top-left {
+    margin-top: 5rem;
+    position: fixed;
     background-color: transparent;
-    position: absolute;
     top: 30px;
     left: 10px;
   }

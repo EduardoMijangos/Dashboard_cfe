@@ -1,8 +1,7 @@
-<ion-header>
-  <app-header></app-header>
-</ion-header>
 
 <ion-content color="light" class="content-wrapper">
+
+  <app-header></app-header>
 
 <h1>Zonas</h1>
 
@@ -16,14 +15,18 @@
             <ion-col>Zona</ion-col>
             <ion-col>Meta</ion-col>
           </ion-row>
-          <ion-row *ngFor="let z of zonas" >
-            <ion-col (click)="verAgencia(z)"> {{z}} </ion-col>
+          <ion-row *ngFor="let zona of zonas">
+            <ion-col (click)="verAgencia(zona.name)"> {{ zona.name }} </ion-col>
             <ion-col>
-              <ion-progress-bar color="secondary" class="rectangle33" [value]="progress / 100">
-                {{ progress }}%
-              </ion-progress-bar>
+              <ion-progress-bar
+              color="secondary"
+              class="rectangle33"
+              [value]="zona.progress ? zona.progress / 100 : undefined"
+              contentLabel="{{ zona.progress ? zona.progress + '%' : 'Sin progreso'}}"
+            ></ion-progress-bar>
+            
             </ion-col>
-          </ion-row>     
+          </ion-row>
         </ion-table>
       </ion-col>
 
@@ -59,6 +62,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  
 </ion-content>
 
 <app-footer></app-footer>

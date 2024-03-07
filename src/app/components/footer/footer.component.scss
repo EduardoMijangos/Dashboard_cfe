@@ -1,7 +1,5 @@
-
-  ion-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  
+ion-footer {
+  position:absolute; /* Puedes utilizar "fixed" o "relative" según tus necesidades */
+  bottom: 0;
+  width: 100%;
+}

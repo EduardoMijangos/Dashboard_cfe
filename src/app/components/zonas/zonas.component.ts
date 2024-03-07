@@ -25,9 +25,18 @@ export type ChartOptions = {
 })
 export class ZonasComponent{
 
-  @Input() progress: number = 19;
-
-  zonas = ['Villahermosa', 'Tuxtla', 'Oaxaca', 'Chontalpa', 'Tehuantepec', 'Tapachula', 'Huatulco', ' Los Rios', 'San Cristobal', 'Huajuapan']
+  @Input() progress: number | undefined = 0; // Inicializa con un valor predeterminado
+  zonas = [
+    { name: 'Villahermosa', progress: 90 },
+    { name: 'Tuxtla', progress: 75 },
+    {name:'Oaxaca', progress: 10}, 
+    {name:'Chontalpa', progress:19}, 
+    {name:'Tehuantepec', progress:50}, 
+    {name:'Tapachula', progress: 70}, 
+    {name: 'Huatulco', progress:80}, 
+    {name: 'Los Rios', progress:95}, 
+    {name: 'San Cristobal', progress: 60}, 
+    {name: 'Huajuapan', progress: 89}]
 
 
 
@@ -142,4 +151,6 @@ export class ZonasComponent{
     const url = `/agencia/${ag.toLowerCase()}`;
     this.router.navigate([url]);
   }
+
+  
 }

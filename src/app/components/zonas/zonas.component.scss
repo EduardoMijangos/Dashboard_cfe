@@ -1,12 +1,14 @@
 ion-table {
   width: 0%;
   border-collapse: collapse;
+  box-shadow: #000000;
 }
 
 ion-col {
   padding: 8px;
   text-align: left;
   cursor: pointer;
+  box-shadow: #000000;
 }
 
 ion-col:first-child {
@@ -66,3 +68,5 @@ label {
   top: 30px;
   left: 10px;
 }
+
+

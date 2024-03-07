@@ -1,6 +1,6 @@
 /* Estilos para la tabla */
 ion-table {
-  width: 100%;
+  width: 10%;
   border-collapse: collapse;
 }
 
@@ -9,6 +9,7 @@ ion-col {
   padding: 8px;
   text-align: left;
   cursor: pointer;
+  width: auto;
 }
 
 /* Estilo para la primera columna */
@@ -23,3 +24,9 @@ ion-col{
   text-transform: capitalize;
   border-radius: 10px;
 }
+
+ion-content{
+  position: relative;
+}
+
+
