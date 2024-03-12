@@ -1,0 +1,17 @@
+<!-- calendario-modal.component.html -->
+<ion-header>
+  <div class="contenedorHorizontal">
+    <img src="../../../assets/cfe.png" alt="" class="imagen">
+    <label class="etiqueta">Dashboard Ingresos RealTime para CFE Division Sureste</label>
+  
+  </div>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Seleccionar Fecha</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="selectedDate"></ion-datetime>
+  </ion-item>
+
+  <ion-button expand="full" (click)="saveDate()" class="colorTexto">Guardar</ion-button>
+</ion-content>

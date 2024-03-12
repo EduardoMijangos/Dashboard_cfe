@@ -21,11 +21,15 @@
         Zonas
       </ion-button>
     </div>
-  
-    <ion-button class="menu-hamburguesa" (click)="toggleMenu()" *ngIf="!isLargeScreen">
+
+    <ion-button expand="block" fill="clear" class="menu-hamburguesa" (click)="toggleMenu()" *ngIf="!isLargeScreen">
       <ion-icon name="menu"></ion-icon>
     </ion-button>
-  
+
+    <ion-button expand="block" fill="clear" (click)="openDatePickerModal()">
+      {{ selectedDate ? selectedDate.split('T')[0] : 'Seleccionar Fecha' }}
+    </ion-button>
+
   </div>
   
   

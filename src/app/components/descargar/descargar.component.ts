@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import * as ApexCharts from 'apexcharts';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -14,6 +14,7 @@ import {
   ApexPlotOptions,
   ApexFill
 } from "ng-apexcharts";
+import { CalendarioModalComponent } from 'src/app/calendario-modal/calendario-modal.component';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -37,6 +38,8 @@ export class DescargarComponent implements OnInit {
   isBtnInicioActive: boolean = false;
   isBtnIngresosActive: boolean = false;
   isBtnZonasActive: boolean = false;
+  
+  selectedDate: string = '';
 
   menuOpen = false;
 
@@ -235,8 +238,15 @@ export class DescargarComponent implements OnInit {
   
 
   constructor(private renderer: Renderer2,
-    private router: Router, private alertController: AlertController
+    private router: Router, 
+    private alertController: AlertController,
+    private modalController: ModalController
     ) {
+
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1); // Obtener fecha de ayer
+      this.selectedDate = yesterday.toISOString(); // Convertir a formato ISO (YYYY-MM-DDTHH:MM:SS)
+      this.selectedDate = this.selectedDate.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
     this.chartOptions = {
       series: [
         {
@@ -278,6 +288,27 @@ export class DescargarComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  async openDatePickerModal() {
+    const modal = await this.modalController.create({
+      component: CalendarioModalComponent,
+      componentProps: {
+        selectedDate: this.selectedDate // Pasar la fecha seleccionada al modal
+      }
+    });
+
+    modal.onDidDismiss().then((data) => {
+      if (data && data.data) {
+        this.selectedDate = data.data.selectedDate; // Actualizar la fecha seleccionada con la que viene del modal
+      }
+    });
+
+    return await modal.present();
+  }
+
+  logSelectedDate() {
+    console.log('Fecha seleccionada:', this.selectedDate);
+  }
 
   async generarPDF(): Promise<void> {
     console.log("Generando PDF...");

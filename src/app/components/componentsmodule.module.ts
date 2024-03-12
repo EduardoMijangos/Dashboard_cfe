@@ -12,6 +12,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { AgenciaComponent } from './agencia/agencia.component';
 import { IngresosSemanaComponent } from './ingresos-semana/ingresos-semana.component';
 import { DescargarComponent } from './descargar/descargar.component';
+import { CalendarioModalComponent } from '../calendario-modal/calendario-modal.component';
 
 
 
@@ -26,7 +27,8 @@ import { DescargarComponent } from './descargar/descargar.component';
     AgenciaComponent,
     IngresosFechaComponent,
     IngresosSemanaComponent,
-    DescargarComponent
+    DescargarComponent,
+    CalendarioModalComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { DescargarComponent } from './descargar/descargar.component';
     AgenciaComponent,
     IngresosFechaComponent,
     IngresosSemanaComponent,
-    DescargarComponent
+    DescargarComponent,
+    CalendarioModalComponent
   ]
 })
 export class ComponentsmoduleModule { }
