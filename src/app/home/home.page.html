@@ -1,106 +1,95 @@
 <ion-content color="light" class="content-wrapper" scrollY="true">
-
-  <app-header></app-header>
+  <div class="container">
+    <app-header></app-header>
   
-  <div class="rectangle33">
-    Meta del día:
-    <ion-progress-bar [value]="progress / 100" color="secondary" class="rectangle33">
+    <div class="rectangle33">
+      <span>Meta del día:</span>
+      <ion-progress-bar [value]="progress / 100" color="secondary" class="custom-progress-bar"></ion-progress-bar>
       <div *ngIf="progress < 100" class="progress-text">
-        En proceso
+        En proceso - {{ progress }}%
       </div>
-    </ion-progress-bar>
-  </div>
+    </div>  
 
-
-<!--   <ion-button (click)="generarPDF()" expand="block" fill="clear" shape="round">
-    Click me
-  </ion-button> -->
-
-  <app-mapa class="map-container"></app-mapa>
-
+    <app-mapa class="map-container"></app-mapa>
   
-  <ion-grid fixed>
-    <ion-row>
-      <ion-col size="12">
-        <ion-card mode="ios" class="hora">
-          <ion-card-header>
-            Última actualización
-          </ion-card-header>
-          <ion-card-content>
-            <div>{{ currentDate | date: 'EEEE' }}</div> <!-- Muestra el nombre del día -->
-            <div>{{ currentDate | date: 'dd MMM yyyy' }}</div>
-            <div>{{ currentDate | date: 'HH:mm:ss' }}</div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12">
+          <ion-card mode="ios" class="hora">
+            <ion-card-header>
+              Última actualización
+            </ion-card-header>
+            <ion-card-content>
+              <div>{{ currentDate | date: 'EEEE' }}</div> <!-- Muestra el nombre del día -->
+              <div>{{ currentDate | date: 'dd MMM yyyy' }}</div>
+              <div>{{ currentDate | date: 'HH:mm:ss' }}</div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   
-  
-
-  <apx-chart class="chart-container top-left" id="chart"
-    *ngIf="chartOptionsmascircular.series && chartOptionsmascircular.chart && chartOptionsmascircular.plotOptions && chartOptionsmascircular.labels 
-    && chartOptionsmascircular.fill && chartOptionsmascircular.stroke"
-    [series]="chartOptionsmascircular.series"
-    [chart]="chartOptionsmascircular.chart"
-    [plotOptions]="chartOptionsmascircular.plotOptions"
-    [labels]="chartOptionsmascircular.labels"
-    [height]="chartOptionsmascircular.chart.height"
-    [fill]="chartOptionsmascircular.fill"
-    [stroke]="chartOptionsmascircular.stroke"
-  >
-  </apx-chart>
-
-  <ion-card *ngIf="chartOptions" class="chart-container top-right" mode="ios" id="chart">
-    <h3>Zonas con más Ingresos</h3>
-    <apx-chart
-      *ngIf="chartOptions.series && chartOptions.chart && chartOptions.plotOptions && chartOptions.dataLabels && chartOptions.yaxis && chartOptions.xaxis && chartOptions.fill && chartOptions.title"
-      [series]="chartOptions.series"
-      [chart]="chartOptions.chart"
-      [plotOptions]="chartOptions.plotOptions"
-      [dataLabels]="chartOptions.dataLabels"
-      [yaxis]="chartOptions.yaxis"
-      [xaxis]="chartOptions.xaxis"
-      [fill]="chartOptions.fill"
-      [title]="chartOptions.title"
-      [height]="chartOptions.chart.height"
+    <apx-chart class="chart-container top-left" id="chart"
+      *ngIf="chartOptionsmascircular.series && chartOptionsmascircular.chart && chartOptionsmascircular.plotOptions && chartOptionsmascircular.labels 
+      && chartOptionsmascircular.fill && chartOptionsmascircular.stroke"
+      [series]="chartOptionsmascircular.series"
+      [chart]="chartOptionsmascircular.chart"
+      [plotOptions]="chartOptionsmascircular.plotOptions"
+      [labels]="chartOptionsmascircular.labels"
+      [height]="chartOptionsmascircular.chart.height"
+      [fill]="chartOptionsmascircular.fill"
+      [stroke]="chartOptionsmascircular.stroke"
     >
     </apx-chart>
-  </ion-card>
-
-  <apx-chart class="chart-container bottom-right" id="chart"
-    *ngIf="chartOptionsmenoscircular.series && chartOptionsmenoscircular.chart && chartOptionsmenoscircular.plotOptions && chartOptionsmenoscircular.labels 
-    && chartOptionsmenoscircular.fill && chartOptionsmenoscircular.stroke"
-    [series]="chartOptionsmenoscircular.series"
-    [chart]="chartOptionsmenoscircular.chart"
-    [plotOptions]="chartOptionsmenoscircular.plotOptions"
-    [labels]="chartOptionsmenoscircular.labels"
-    [height]="chartOptionsmenoscircular.chart.height"
-    [fill]="chartOptionsmenoscircular.fill"
-    [stroke]="chartOptionsmenoscircular.stroke"
-  >
-  </apx-chart>
-
-  <ion-card *ngIf="chartOptionsmenos" class="chart-container bottom-left" mode="ios" id="chart">
-    <h3>Zonas con menos Ingresos</h3>
-    <apx-chart id="chartSection"
-      *ngIf="chartOptionsmenos.series && chartOptionsmenos.chart && chartOptionsmenos.plotOptions && chartOptionsmenos.dataLabels
-      && chartOptionsmenos.yaxis && chartOptionsmenos.xaxis && chartOptionsmenos.fill && chartOptionsmenos.title && chartOptionsmenoscircular.stroke"
-      [series]="chartOptionsmenos.series"
-      [chart]="chartOptionsmenos.chart"
-      [plotOptions]="chartOptionsmenos.plotOptions"
-      [dataLabels]="chartOptionsmenos.dataLabels"
-      [yaxis]="chartOptionsmenos.yaxis"
-      [xaxis]="chartOptionsmenos.xaxis"
-      [fill]="chartOptionsmenos.fill"
-      [title]="chartOptionsmenos.title"
-      [height]="chartOptionsmenos.chart.height"
+  
+    <ion-card *ngIf="chartOptions" class="chart-container top-right" mode="ios" id="chart">
+      <h3>Zonas con más Ingresos</h3>
+      <apx-chart
+        *ngIf="chartOptions.series && chartOptions.chart && chartOptions.plotOptions && chartOptions.dataLabels && chartOptions.yaxis && chartOptions.xaxis && chartOptions.fill && chartOptions.title"
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [plotOptions]="chartOptions.plotOptions"
+        [dataLabels]="chartOptions.dataLabels"
+        [yaxis]="chartOptions.yaxis"
+        [xaxis]="chartOptions.xaxis"
+        [fill]="chartOptions.fill"
+        [title]="chartOptions.title"
+        [height]="chartOptions.chart.height"
+      >
+      </apx-chart>
+    </ion-card>
+  
+    <apx-chart class="chart-container bottom-right" id="chart"
+      *ngIf="chartOptionsmenoscircular.series && chartOptionsmenoscircular.chart && chartOptionsmenoscircular.plotOptions && chartOptionsmenoscircular.labels 
+      && chartOptionsmenoscircular.fill && chartOptionsmenoscircular.stroke"
+      [series]="chartOptionsmenoscircular.series"
+      [chart]="chartOptionsmenoscircular.chart"
+      [plotOptions]="chartOptionsmenoscircular.plotOptions"
+      [labels]="chartOptionsmenoscircular.labels"
+      [height]="chartOptionsmenoscircular.chart.height"
+      [fill]="chartOptionsmenoscircular.fill"
       [stroke]="chartOptionsmenoscircular.stroke"
-      (animationEnd)="showChartSection()"
     >
     </apx-chart>
-  </ion-card>
-
-
+  
+    <ion-card *ngIf="chartOptionsmenos" class="chart-container bottom-left" mode="ios" id="chart">
+      <h3>Zonas con menos Ingresos</h3>
+      <apx-chart id="chartSection"
+        *ngIf="chartOptionsmenos.series && chartOptionsmenos.chart && chartOptionsmenos.plotOptions && chartOptionsmenos.dataLabels
+        && chartOptionsmenos.yaxis && chartOptionsmenos.xaxis && chartOptionsmenos.fill && chartOptionsmenos.title && chartOptionsmenoscircular.stroke"
+        [series]="chartOptionsmenos.series"
+        [chart]="chartOptionsmenos.chart"
+        [plotOptions]="chartOptionsmenos.plotOptions"
+        [dataLabels]="chartOptionsmenos.dataLabels"
+        [yaxis]="chartOptionsmenos.yaxis"
+        [xaxis]="chartOptionsmenos.xaxis"
+        [fill]="chartOptionsmenos.fill"
+        [title]="chartOptionsmenos.title"
+        [height]="chartOptionsmenos.chart.height"
+        [stroke]="chartOptionsmenoscircular.stroke"
+        (animationEnd)="showChartSection()"
+      >
+      </apx-chart>
+    </ion-card>
+  </div>
 </ion-content>
-
