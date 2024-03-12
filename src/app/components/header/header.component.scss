@@ -2,96 +2,107 @@
 .contenedorHorizontal {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  background-color: #fff; /* Fondo blanco */
+  justify-content: space-between;
+  background-color: #ffffff; /* Color de fondo ajustado para coincidir con la imagen */
+  color: #000000; // Color del texto ajustado para el contraste
+  padding: 0.5rem; // Añadido padding para espacio interior
 }
 
 .imagen {
-  width: auto; /* Ajusta el ancho de la imagen según sea necesario */
+  width: auto; /* Ajusta el ancho de la imagen a un valor fijo para control */
   height: auto; /* Mantiene la proporción de la imagen */
-  margin-right: auto;
-    margin-left: 10px; /* Ajusta según sea necesario */
+  margin:0 10px; /* Ajusta según sea necesario */
 }
 
 .etiqueta {
-  margin-left: auto;
-  font-family: 'Helvetica LT Std', 'Helvetica', sans-serif; /* Ajusta la fuente según tus necesidades */
   flex-grow: 1; /* Permite que la etiqueta ocupe todo el espacio restante */
-  margin: 0; /* Elimina el margen por defecto de la etiqueta */
-  color: #000;
+  text-align: right; /* Alinea el texto a la derecha */
+  margin-right: 10px; /* Añade un margen a la derecha */
+  font-size: 1.2rem; /* Ajusta el tamaño del texto según sea necesario */
 }
 
-// Pantallas grandes
-@media (min-width: 768px) {
-  .contenedorPrincipal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #008E5A;
-    padding: 2px;
-  }
-  
-  .contenedorBotones {
-    font-family: 'Helvetica LT Std', 'Helvetica', sans-serif; /* Ajusta la fuente según tus necesidades */
-    display: flex;
-    gap: 10px;
-    margin-left: 10px; /* Ajusta según sea necesario */
-  }
-  
-  ion-button {
-    color: #fff;
-    margin: 0;
-  }
-
-  ion-button:hover {
-    color: #9ABE26;
-  }
-
-  ion-button.active{
-    color: #9ABE26;
-  }
-  
-
-  ion-searchbar {
-    width: 30%; /* Ajusta el ancho según sea necesario */
-    height: 10%;
-    border-radius: 15px; /* Redondea los bordes */
-    margin-left: 10px; /* Ajusta según sea necesario */
-  }
+.contenedorPrincipal {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  background-color: #008E5A;
+  padding: 2px;
 }
 
-// Pantallas pequeñas
+.menu-hamburguesa {
+  background: transparent;
+  border: none;
+}
+
+.contenedorBotones {
+  display: flex;
+  width: auto;
+  gap: 10px;
+  margin-right: 20px; /* Ajusta según sea necesario para los botones */
+}
+
+.menuOpen .contenedorBotones {
+  display: flex; // Muestra los botones cuando el menú está abierto
+}
+
+ion-button {
+  color: #fff; /* Establece el color del texto del botón */
+  --background: transparent; /* Hace que el fondo del botón sea transparente */
+}
+
+ion-button:hover {
+  color: #9ABE26; /* Establece el color del botón activo */
+}
+
+ion-button.active {
+  color: #9ABE26; /* Establece el color del botón activo */
+}
+
+ion-searchbar {
+  --background: #fff; /* Establece el fondo de la barra de búsqueda */
+  --placeholder-color: #000; /* Establece el color del placeholder */
+  --icon-color: #000; /* Establece el color del icono de la barra de búsqueda */
+  margin-left: 10px; /* Ajusta según sea necesario para la barra de búsqueda */
+  max-width: 300px; /* Limita el ancho máximo de la barra de búsqueda */
+}
+
+
+
 @media (max-width: 767px) {
+
+  .menu-hamburguesa {
+    display: block;
+  }
+
+  .hide-on-mobile {
+    display: none; // Asegura que los botones se oculten en móviles
+  }
+
   .contenedorPrincipal {
-    background-color: #008E5A;
-    padding: 2px;
+    flex-direction: column; /* Elementos en columna */
   }
 
   .contenedorBotones {
-    font-family: 'Helvetica LT Std', 'Helvetica', sans-serif; /* Ajusta la fuente según tus necesidades */
-    display: flex;
-    gap: 10px;
-    margin-left: 10px; /* Ajusta según sea necesario */
+    flex-direction: column;
+    order: 2; /* Los botones después de la barra de búsqueda en pantallas pequeñas */
   }
 
   ion-button {
-    color: #fff;
-    margin: 0;
+    color: #fff; /* Establece el color del texto del botón */
+    --background: transparent; /* Hace que el fondo del botón sea transparente */
   }
-
+  
   ion-button:hover {
-    color: #9ABE26;
+    color: #9ABE26; /* Establece el color del botón activo */
   }
-
+  
   ion-button.active {
-    color: #9ABE26;
+    color: #9ABE26; /* Establece el color del botón activo */
   }
 
   ion-searchbar {
-    font-family: 'Helvetica LT Std', 'Helvetica', sans-serif; /* Ajusta la fuente según tus necesidades */
-    width: 100%; /* Ajusta el ancho según sea necesario */
-    height: 10%;
-    border-radius: 15px; /* Redondea los bordes */
-    margin-left: 10px; /* Ajusta según sea necesario */
+    order: 1; /* Barra de búsqueda en la parte superior en pantallas pequeñas */
+    width: 90%; /* Ajusta el ancho de la barra de búsqueda */
   }
 }

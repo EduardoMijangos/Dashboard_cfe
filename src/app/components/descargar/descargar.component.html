@@ -1,9 +1,36 @@
 
 
 <ion-content scrollY="true">
-  <app-header></app-header>
+  <div class="contenedorHorizontal">
+    <img src="../../../assets/cfe.png" alt="" class="imagen">
+    <label class="etiqueta">Dashboard Ingresos RealTime para CFE Division Sureste</label>
+  
+  </div>
+  
+  <div class="contenedorPrincipal">
+    
+    <div *ngIf="menuOpen || isLargeScreen" class="contenedorBotones">
+      
+    <ion-button (click)="btnInicio()" expand="block" fill="clear" shape="round">
+        Inicio
+      </ion-button>
+      <ion-button (click)="btnIngresos()" expand="block" fill="clear" shape="round">
+        Ingresos
+      </ion-button>
+      <ion-button (click)="btnZonas()" expand="block" fill="clear" shape="round">
+        Zonas
+      </ion-button>
+    </div>
+  
+    <ion-button class="menu-hamburguesa" (click)="toggleMenu()" *ngIf="!isLargeScreen">
+      <ion-icon name="menu"></ion-icon>
+    </ion-button>
+  
+  </div>
+  
+  
 
-  <ion-button (click)="generarPDF()" expand="block" fill="clear" shape="round">
+  <ion-button (click)="generarPDF()" expand="block" fill="clear" shape="round" class="btnDescargarPdf">
     <ion-icon slot="start" name="download-outline"></ion-icon>
     Descargar PDF
   </ion-button>

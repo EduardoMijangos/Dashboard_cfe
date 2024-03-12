@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import * as ApexCharts from 'apexcharts';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -31,6 +33,14 @@ export class DescargarComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   @ViewChild("chartContainer") chartContainer!: ElementRef;
   public chartOptions: Partial<ChartOptions>;
+
+  isBtnInicioActive: boolean = false;
+  isBtnIngresosActive: boolean = false;
+  isBtnZonasActive: boolean = false;
+
+  menuOpen = false;
+
+  paginaActual: string = '';
 
   chartDataArray: any[] = [
     {
@@ -224,7 +234,9 @@ export class DescargarComponent implements OnInit {
   ];
   
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2,
+    private router: Router, private alertController: AlertController
+    ) {
     this.chartOptions = {
       series: [
         {
@@ -307,4 +319,67 @@ export class DescargarComponent implements OnInit {
     // Guardar o mostrar el PDF después de agregar todas las imágenes
     pdf.save('nombre-archivo.pdf');
   }
+
+    // Función para establecer la página actual y mostrar la alerta si corresponde
+    async establecerPaginaActual(pagina: string) {
+      if (this.paginaActual === pagina) {
+        const alert = await this.alertController.create({
+          header: 'Ya estas ahi',
+          message: 'Ya te encuentras en esta opción',
+          buttons: ['OK']
+        });
+        await alert.present();
+      } else {
+        this.paginaActual = pagina;
+        this.redirigirAPagina(pagina);
+      }
+    }
+  
+    redirigirAPagina(pagina: string) {
+      switch (pagina) {
+        case 'Inicio':
+          this.router.navigate(['/home']);
+          break;
+        case 'Ingresos':
+          this.router.navigate(['/ingresos']);
+          break;
+        case 'Zonas':
+          this.router.navigate(['/zonas']);
+          break;
+        default:
+          break;
+      }
+    }
+  
+    btnInicio() {
+      this.establecerPaginaActual('Inicio');
+      this.isBtnInicioActive = !this.isBtnInicioActive;
+    }
+  
+    btnIngresos() {
+      this.establecerPaginaActual('Ingresos');
+      this.isBtnIngresosActive = !this.isBtnIngresosActive;
+    }
+  
+    btnZonas() {
+      this.establecerPaginaActual('Zonas');
+      this.isBtnZonasActive = !this.isBtnZonasActive;
+    }
+  
+    get isLargeScreen() {
+      // Define qué consideras una pantalla grande
+      return window.innerWidth >= 768;
+    }
+  
+    toggleMenu() {
+      this.menuOpen = !this.menuOpen;
+    }
+  
+    checkScreenSize() {
+      // Asegúrate de cerrar el menú de hamburguesa al cambiar el tamaño si es necesario
+      if (this.isLargeScreen && this.menuOpen) {
+        this.toggleMenu();
+      }
+    }
+  
 }

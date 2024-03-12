@@ -1,21 +1,30 @@
+<ion-header>
 <div class="contenedorHorizontal">
   <img src="../../../assets/cfe.png" alt="" class="imagen">
-  <label for="" class="etiqueta" >Dashboard Ingresos RealTime para CFE Division Sureste</label>
+  <label class="etiqueta">Dashboard Ingresos RealTime para CFE Division Sureste</label>
+
 </div>
-
-
 
 <div class="contenedorPrincipal">
-  <div class="contenedorBotones">
-    <ion-button (click)="btnInicio()" expand="block" fill="clear" shape="round" [class.active]="isBtnInicioActive">
+  
+  <div *ngIf="menuOpen || isLargeScreen" class="contenedorBotones">
+    
+  <ion-button (click)="btnInicio()" expand="block" fill="clear" shape="round">
       Inicio
     </ion-button>
-    <ion-button (click)="btnIngresos()" expand="block" fill="clear" shape="round" [class.active]="isBtnIngresosActive">
+    <ion-button (click)="btnIngresos()" expand="block" fill="clear" shape="round">
       Ingresos
     </ion-button>
-    <ion-button (click)="btnZonas()" expand="block" fill="clear" shape="round" [class.active]="isBtnZonasActive">
+    <ion-button (click)="btnZonas()" expand="block" fill="clear" shape="round">
       Zonas
     </ion-button>
-      </div>
-  <ion-searchbar placeholder="¿Estas buscando algo?" class="searchbar"  animated="true" mode="ios" color="light"></ion-searchbar>
+  </div>
+
+  <ion-button class="menu-hamburguesa" (click)="toggleMenu()" *ngIf="!isLargeScreen">
+    <ion-icon name="menu"></ion-icon>
+  </ion-button>
+
+  <ion-searchbar class="searchbar" placeholder="¿Estas buscando algo?" animated="true" mode="ios" color="light"></ion-searchbar>
 </div>
+
+</ion-header>

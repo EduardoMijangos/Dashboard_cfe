@@ -10,3 +10,92 @@ ion-content {
 ion-footer {
   height: auto; /* Ajusta la altura del footer según sea necesario */
 }
+
+.contenedorHorizontal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff; /* Color de fondo ajustado para coincidir con la imagen */
+  color: #000000; // Color del texto ajustado para el contraste
+  padding: 0.5rem; // Añadido padding para espacio interior
+}
+
+.contenedorBotones {
+  display: flex;
+  width: auto;
+  gap: 10px;
+  margin-right: 20px; /* Ajusta según sea necesario para los botones */
+}
+
+.contenedorPrincipal {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  background-color: #008E5A;
+  padding: 2px;
+}
+
+.imagen {
+  width: auto; /* Ajusta el ancho de la imagen a un valor fijo para control */
+  height: auto; /* Mantiene la proporción de la imagen */
+  margin:0 10px; /* Ajusta según sea necesario */
+}
+
+.etiqueta {
+  flex-grow: 1; /* Permite que la etiqueta ocupe todo el espacio restante */
+  text-align: right; /* Alinea el texto a la derecha */
+  margin-right: 10px; /* Añade un margen a la derecha */
+  font-size: 1.2rem; /* Ajusta el tamaño del texto según sea necesario */
+}
+
+.menu-hamburguesa {
+  background: transparent;
+  border: none;
+}
+
+.menuOpen .contenedorBotones {
+  display: flex; // Muestra los botones cuando el menú está abierto
+}
+
+ion-button {
+  color: #fff; /* Establece el color del texto del botón */
+  --background: transparent; /* Hace que el fondo del botón sea transparente */
+}
+
+ion-button:hover {
+  color: #9ABE26; /* Establece el color del botón activo */
+}
+
+ion-button.active {
+  color: #9ABE26; /* Establece el color del botón activo */
+}
+
+.btnDescargarPdf{
+  color: #008E5A;
+}
+
+@media (max-width: 767px) {
+
+  .menu-hamburguesa {
+    display: block;
+  }
+
+  .hide-on-mobile {
+    display: none; // Asegura que los botones se oculten en móviles
+  }
+
+  .contenedorPrincipal {
+    flex-direction: column; /* Elementos en columna */
+  }
+
+  .contenedorBotones {
+    flex-direction: column;
+    order: 2; /* Los botones después de la barra de búsqueda en pantallas pequeñas */
+  }
+
+  ion-searchbar {
+    order: 1; /* Barra de búsqueda en la parte superior en pantallas pequeñas */
+    width: 90%; /* Ajusta el ancho de la barra de búsqueda */
+  }
+}
