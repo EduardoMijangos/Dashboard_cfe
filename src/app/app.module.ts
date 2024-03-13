@@ -11,13 +11,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsmoduleModule } from './components/componentsmodule.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localeEs);
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ComponentsmoduleModule, NgApexchartsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ComponentsmoduleModule, NgApexchartsModule, HttpClientModule],
   providers: [ 
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],

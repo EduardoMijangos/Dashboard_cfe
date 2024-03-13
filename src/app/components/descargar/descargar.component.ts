@@ -15,6 +15,8 @@ import {
   ApexFill
 } from "ng-apexcharts";
 import { CalendarioModalComponent } from 'src/app/calendario-modal/calendario-modal.component';
+import { PressData } from 'src/app/models/press-data.model';
+import { PresentacionesService } from 'src/app/services/presentaciones.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -33,225 +35,48 @@ export type ChartOptions = {
 export class DescargarComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   @ViewChild("chartContainer") chartContainer!: ElementRef;
-  public chartOptions: Partial<ChartOptions>;
 
+  public chartOptionsGeneral1!: Partial<ChartOptions>;
+  public chartOptionsGeneral2!: Partial<ChartOptions>;
+  public chartOptionsAcumulados3!: Partial<ChartOptions>;
+  public chartOptionsGeneral4!: Partial<ChartOptions>;
+  public chartOptionsAcumulados5!: Partial<ChartOptions>;
+  public chartOptionsAcumulados7!: Partial<ChartOptions>;
+  
   isBtnInicioActive: boolean = false;
   isBtnIngresosActive: boolean = false;
   isBtnZonasActive: boolean = false;
   
   selectedDate: string = '';
 
+  pressData: PressData | null = null;
+
   menuOpen = false;
 
   paginaActual: string = '';
 
-  chartDataArray: any[] = [
-    {
-      series: [
-        {
-          name: "Gráfico 1",
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      fill:{
-        colors: ['#008E5A']
-      },
-      xaxis: {
-        categories: [
-          "South Korea",
-          "Canada",
-          "United Kingdom",
-          "Netherlands",
-          "Italy",
-          "France",
-          "Japan",
-          "United States",
-          "China",
-          "Germany"
-        ]
-      }
-    },
-    {
-      series: [
-        {
-          name: "Gráfico 2",
-          data: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true,
-          barHeight: '95%'
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      fill:{
-        colors: ['#FF5733']
-      },
-      xaxis: {
-        categories: [
-          "Item 1",
-          "Item 2",
-          "Item 3",
-          "Item 4",
-          "Item 5",
-          "Item 6",
-          "Item 7",
-          "Item 8",
-          "Item 9",
-          "Item 10"
-        ]
-      }
-    },
-    {
-      series: [
-        {
-          name: "Gráfico 3",
-          data: [50, 120, 180, 250, 300, 400, 500, 600, 700, 800]
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      fill:{
-        colors: ['#3F51B5']
-      },
-      xaxis: {
-        categories: [
-          "Item A",
-          "Item B",
-          "Item C",
-          "Item D",
-          "Item E",
-          "Item F",
-          "Item G",
-          "Item H",
-          "Item I",
-          "Item J"
-        ]
-      }
-    },
-    {
-      series: [
-        {
-          name: "Gráfico 4",
-          data: [800, 750, 700, 650, 600, 550, 500, 450, 400, 350]
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true,
-          barHeight: '95%'
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      fill:{
-        colors: ['#009688']
-      },
-      xaxis: {
-        categories: [
-          "Category 1",
-          "Category 2",
-          "Category 3",
-          "Category 4",
-          "Category 5",
-          "Category 6",
-          "Category 7",
-          "Category 8",
-          "Category 9",
-          "Category 10"
-        ]
-      }
-    },
-    {
-      series: [
-        {
-          name: "Gráfico 5",
-          data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      fill:{
-        colors: ['#FFC107']
-      },
-      xaxis: {
-        categories: [
-          "X1",
-          "X2",
-          "X3",
-          "X4",
-          "X5",
-          "X6",
-          "X7",
-          "X8",
-          "X9",
-          "X10"
-        ]
-      }
-    },
-    // ... Puedes agregar más datos para gráficos adicionales ...
-  ];
-  
-
   constructor(private renderer: Renderer2,
     private router: Router, 
     private alertController: AlertController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private presentacionService: PresentacionesService
     ) {
-
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1); // Obtener fecha de ayer
       this.selectedDate = yesterday.toISOString(); // Convertir a formato ISO (YYYY-MM-DDTHH:MM:SS)
       this.selectedDate = this.selectedDate.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
-    this.chartOptions = {
+  }
+
+  ngOnInit() {
+    this.presentacionService.getPressData().subscribe(data => {
+      this.pressData = data;
+
+       // Preparar datos para pressGeneral1
+    this.chartOptionsGeneral1 = {
       series: [
         {
-          name: "basic",
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+          name: "Total",
+          data: this.pressData.pressGeneral1.map(item => parseFloat(item.total))
         }
       ],
       chart: {
@@ -260,34 +85,190 @@ export class DescargarComponent implements OnInit {
       },
       plotOptions: {
         bar: {
-          horizontal: true,
-          barHeight: '95%'
+          horizontal: true
         }
       },
       dataLabels: {
         enabled: false
       },
+      xaxis: {
+        categories: this.pressData.pressGeneral1.map(item => item.descripcion)
+      },
       fill: {
         colors: ['#008E5A']
-      },
-      xaxis: {
-        categories: [
-          "South Korea",
-          "Canada",
-          "United Kingdom",
-          "Netherlands",
-          "Italy",
-          "France",
-          "Japan",
-          "United States",
-          "China",
-          "Germany"
-        ]
       }
     };
-  }
 
-  ngOnInit(): void {}
+     //General 2
+    this.chartOptionsGeneral2 = {
+      series: [
+        {
+          name: "Total",
+          data: this.pressData.pressGeneral2.map(item => parseFloat(item.total))
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: this.pressData.pressGeneral2.map(item => item.descripcion)
+      },
+      fill: {
+        colors: ['#008E5A']
+      }
+    };
+
+    //Presentacion Acumulados 3
+    this.chartOptionsAcumulados3 = {
+      series: [
+        {
+          name: "Total Uno",
+          data: this.pressData.pressAcumulados3.map(item => parseFloat(item.totaluno))
+        },
+        {
+          name: "Total Dos",
+          data: this.pressData.pressAcumulados3.map(item => parseFloat(item.totaldos))
+        },
+        {
+          name: "Avance",
+          data: this.pressData.pressAcumulados3.map(item => parseFloat(item.avance))
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 350,
+        stacked: true // Opcional: para apilar las barras si es deseado
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: this.pressData.pressAcumulados3.map(item => item.descripcion)
+      },
+      fill: {
+        colors: ['#008E5A', '#00E396', '#FEB019'] // Diferentes colores para cada serie
+      }
+    };
+    
+  //Presentacion General 4
+  this.chartOptionsGeneral4 = {
+    series: [
+      {
+        name: "Total",
+        data: this.pressData.pressGeneral4.map(item => parseFloat(item.total))
+      }
+    ],
+    chart: {
+      type: "bar",
+      height: 350
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    xaxis: {
+      categories: this.pressData.pressGeneral4.map(item => item.descripcion)
+    },
+    fill: {
+      colors: ['#008E5A']
+    }
+  };
+
+  //Presentacion Acumulados 5
+  this.chartOptionsAcumulados5 = {
+    series: [
+      {
+        name: "Total Uno",
+        data: this.pressData.pressAcumulados5.map(item => parseFloat(item.totaluno))
+      },
+      {
+        name: "Total Dos",
+        data: this.pressData.pressAcumulados5.map(item => parseFloat(item.totaldos))
+      },
+      {
+        name: "Avance",
+        data: this.pressData.pressAcumulados5.map(item => parseFloat(item.avance))
+      }
+    ],
+    chart: {
+      type: "bar",
+      height: 350,
+      stacked: true // Opcional: para apilar las barras si es deseado
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    xaxis: {
+      categories: this.pressData.pressAcumulados5.map(item => item.descripcion)
+    },
+    fill: {
+      colors: ['#008E5A', '#00E396', '#FEB019'] // Diferentes colores para cada serie
+    }
+  };
+  
+  //Presentacion Acumulados 7
+  this.chartOptionsAcumulados7 = {
+    series: [
+      {
+        name: "Total Uno",
+        data: this.pressData.pressAcumulados7.map(item => parseFloat(item.totaluno))
+      },
+      {
+        name: "Total Dos",
+        data: this.pressData.pressAcumulados7.map(item => parseFloat(item.totaldos))
+      },
+      {
+        name: "Avance",
+        data: this.pressData.pressAcumulados7.map(item => parseFloat(item.avance))
+      }
+    ],
+    chart: {
+      type: "bar",
+      height: 350,
+      stacked: true // Opcional: para apilar las barras si es deseado
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    xaxis: {
+      categories: this.pressData.pressAcumulados7.map(item => item.descripcion)
+    },
+    fill: {
+      colors: ['#008E5A', '#00E396', '#FEB019'] // Diferentes colores para cada serie
+    }
+  };
+  
+    });
+  
+  }
 
   async openDatePickerModal() {
     const modal = await this.modalController.create({
@@ -306,111 +287,77 @@ export class DescargarComponent implements OnInit {
     return await modal.present();
   }
 
-  logSelectedDate() {
-    console.log('Fecha seleccionada:', this.selectedDate);
-  }
-
   async generarPDF(): Promise<void> {
     console.log("Generando PDF...");
     const pdf = new jsPDF();
-
-    // Iterar sobre cada gráfico en chartDataArray
-    for (let index = 0; index < this.chartDataArray.length; index++) {
-      const chartData = this.chartDataArray[index];
-
-      // Crear una instancia de ApexCharts para cada gráfico
-      const chartContainer = this.renderer.createElement('div');
-      this.renderer.appendChild(document.body, chartContainer);
-
-      const chartInstance = new ApexCharts(chartContainer, {
-        series: chartData.series,
-        chart: chartData.chart,
-        dataLabels: chartData.dataLabels,
-        plotOptions: chartData.plotOptions,
-        xaxis: chartData.xaxis,
-        fill: chartData.fill,
-      });
-
-      // Renderizar el gráfico
-      await chartInstance.render();
-
-      // Capturar la representación de la gráfica como una imagen usando html2canvas
-      const canvas = await html2canvas(chartContainer);
-
-      // Agregar la imagen al PDF
-      if (index !== 0) {
-        pdf.addPage(); // Agregar nueva página para cada gráfico (excepto el primero)
-      }
-      pdf.addImage(canvas.toDataURL(), 'PNG', 10, 10, 180, 100);
-
-      // Limpiar el contenedor después de agregar el gráfico al PDF
-      this.renderer.removeChild(document.body, chartContainer);
-    }
-
-    // Guardar o mostrar el PDF después de agregar todas las imágenes
+  
+    // Capturar la representación de la gráfica como una imagen usando html2canvas
+    const canvas = await html2canvas(this.chartContainer.nativeElement);
+  
+    // Agregar la imagen al PDF
+    pdf.addImage(canvas.toDataURL(), 'PNG', 10, 10, 180, 100);
+  
+    // Guardar o mostrar el PDF después de agregar la imagen
     pdf.save('nombre-archivo.pdf');
   }
 
-    // Función para establecer la página actual y mostrar la alerta si corresponde
-    async establecerPaginaActual(pagina: string) {
-      if (this.paginaActual === pagina) {
-        const alert = await this.alertController.create({
-          header: 'Ya estas ahi',
-          message: 'Ya te encuentras en esta opción',
-          buttons: ['OK']
-        });
-        await alert.present();
-      } else {
-        this.paginaActual = pagina;
-        this.redirigirAPagina(pagina);
-      }
+  async establecerPaginaActual(pagina: string) {
+    if (this.paginaActual === pagina) {
+      const alert = await this.alertController.create({
+        header: 'Ya estás aquí',
+        message: 'Ya te encuentras en esta opción',
+        buttons: ['OK']
+      });
+      await alert.present();
+    } else {
+      this.paginaActual = pagina;
+      this.redirigirAPagina(pagina);
     }
-  
-    redirigirAPagina(pagina: string) {
-      switch (pagina) {
-        case 'Inicio':
-          this.router.navigate(['/home']);
-          break;
-        case 'Ingresos':
-          this.router.navigate(['/ingresos']);
-          break;
-        case 'Zonas':
-          this.router.navigate(['/zonas']);
-          break;
-        default:
-          break;
-      }
+  }
+
+  redirigirAPagina(pagina: string) {
+    switch (pagina) {
+      case 'Inicio':
+        this.router.navigate(['/home']);
+        break;
+      case 'Ingresos':
+        this.router.navigate(['/ingresos']);
+        break;
+      case 'Zonas':
+        this.router.navigate(['/zonas']);
+        break;
+      default:
+        break;
     }
-  
-    btnInicio() {
-      this.establecerPaginaActual('Inicio');
-      this.isBtnInicioActive = !this.isBtnInicioActive;
+  }
+
+  btnInicio() {
+    this.establecerPaginaActual('Inicio');
+    this.isBtnInicioActive = !this.isBtnInicioActive;
+  }
+
+  btnIngresos() {
+    this.establecerPaginaActual('Ingresos');
+    this.isBtnIngresosActive = !this.isBtnIngresosActive;
+  }
+
+  btnZonas() {
+    this.establecerPaginaActual('Zonas');
+    this.isBtnZonasActive = !this.isBtnZonasActive;
+  }
+
+  get isLargeScreen() {
+    return window.innerWidth >= 768; // Define qué consideras una pantalla grande
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen; // Cambiar el estado del menú entre abierto y cerrado
+  }
+
+  checkScreenSize() {
+    // Asegúrate de cerrar el menú de hamburguesa al cambiar el tamaño si es necesario
+    if (this.isLargeScreen && this.menuOpen) {
+      this.toggleMenu();
     }
-  
-    btnIngresos() {
-      this.establecerPaginaActual('Ingresos');
-      this.isBtnIngresosActive = !this.isBtnIngresosActive;
-    }
-  
-    btnZonas() {
-      this.establecerPaginaActual('Zonas');
-      this.isBtnZonasActive = !this.isBtnZonasActive;
-    }
-  
-    get isLargeScreen() {
-      // Define qué consideras una pantalla grande
-      return window.innerWidth >= 768;
-    }
-  
-    toggleMenu() {
-      this.menuOpen = !this.menuOpen;
-    }
-  
-    checkScreenSize() {
-      // Asegúrate de cerrar el menú de hamburguesa al cambiar el tamaño si es necesario
-      if (this.isLargeScreen && this.menuOpen) {
-        this.toggleMenu();
-      }
-    }
-  
+  }
 }

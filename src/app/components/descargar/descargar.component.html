@@ -1,17 +1,12 @@
-
-
 <ion-content scrollY="true">
   <div class="contenedorHorizontal">
     <img src="../../../assets/cfe.png" alt="" class="imagen">
     <label class="etiqueta">Dashboard Ingresos RealTime para CFE Division Sureste</label>
-  
   </div>
   
   <div class="contenedorPrincipal">
-    
     <div *ngIf="menuOpen || isLargeScreen" class="contenedorBotones">
-      
-    <ion-button (click)="btnInicio()" expand="block" fill="clear" shape="round">
+      <ion-button (click)="btnInicio()" expand="block" fill="clear" shape="round">
         Inicio
       </ion-button>
       <ion-button (click)="btnIngresos()" expand="block" fill="clear" shape="round">
@@ -29,30 +24,172 @@
     <ion-button expand="block" fill="clear" (click)="openDatePickerModal()">
       {{ selectedDate ? selectedDate.split('T')[0] : 'Seleccionar Fecha' }}
     </ion-button>
-
   </div>
-  
-  
 
   <ion-button (click)="generarPDF()" expand="block" fill="clear" shape="round" class="btnDescargarPdf">
     <ion-icon slot="start" name="download-outline"></ion-icon>
     Descargar PDF
   </ion-button>
-  
-  <ion-card *ngFor="let chartData of chartDataArray">
-    <div class="chart-container" #chartContainer>
-      <apx-chart
-        *ngIf="chartData.series && chartData.chart && chartData.plotOptions && chartData.dataLabels 
-        && chartData.xaxis && chartData.fill"
-        [series]="chartData.series"
-        [chart]="chartData.chart"
-        [dataLabels]="chartData.dataLabels"
-        [plotOptions]="chartData.plotOptions"
-        [xaxis]="chartData.xaxis"
-        [fill]="chartData.fill"
-      ></apx-chart>
+
+  <!--Grafica para general 1-->
+  <div *ngIf="
+  chartOptionsGeneral1.series && 
+  chartOptionsGeneral1.chart && 
+  chartOptionsGeneral1.xaxis && 
+  chartOptionsGeneral1.dataLabels && 
+  chartOptionsGeneral1.plotOptions && 
+  chartOptionsGeneral1.fill">
+    <apx-chart [series]="chartOptionsGeneral1.series" 
+    [chart]="chartOptionsGeneral1.chart" 
+    [xaxis]="chartOptionsGeneral1.xaxis" 
+    [dataLabels]="chartOptionsGeneral1.dataLabels" 
+    [plotOptions]="chartOptionsGeneral1.plotOptions" 
+    [fill]="chartOptionsGeneral1.fill"></apx-chart>
+  </div>
+
+    <!--Grafica para general 2-->
+    <div *ngIf="
+    chartOptionsGeneral2.series && 
+    chartOptionsGeneral2.chart && 
+    chartOptionsGeneral2.xaxis && 
+    chartOptionsGeneral2.dataLabels && 
+    chartOptionsGeneral2.plotOptions && 
+    chartOptionsGeneral2.fill">
+      <apx-chart [series]="chartOptionsGeneral2.series" 
+      [chart]="chartOptionsGeneral2.chart" 
+      [xaxis]="chartOptionsGeneral2.xaxis" 
+      [dataLabels]="chartOptionsGeneral2.dataLabels" 
+      [plotOptions]="chartOptionsGeneral2.plotOptions" 
+      [fill]="chartOptionsGeneral2.fill"></apx-chart>
     </div>
-  </ion-card>
+  
+    <!-- Gráfica para pressAcumulados3 -->
+<div *ngIf="
+chartOptionsAcumulados3.series && 
+    chartOptionsAcumulados3.chart && 
+    chartOptionsAcumulados3.xaxis && 
+    chartOptionsAcumulados3.dataLabels && 
+    chartOptionsAcumulados3.plotOptions && 
+    chartOptionsAcumulados3.fill">
+">
+  <h2>Press Acumulados 3</h2>
+  <apx-chart [series]="chartOptionsAcumulados3.series"
+            [chart]="chartOptionsAcumulados3.chart"
+            [xaxis]="chartOptionsAcumulados3.xaxis"
+            [dataLabels]="chartOptionsAcumulados3.dataLabels"
+            [plotOptions]="chartOptionsAcumulados3.plotOptions"
+            [fill]="chartOptionsAcumulados3.fill"></apx-chart>
+</div>
 
+<!--Grafica para general 4-->
+  <div *ngIf="
+  chartOptionsGeneral4.series && 
+  chartOptionsGeneral4.chart && 
+  chartOptionsGeneral4.xaxis && 
+  chartOptionsGeneral4.dataLabels && 
+  chartOptionsGeneral4.plotOptions && 
+  chartOptionsGeneral4.fill">
+    <apx-chart [series]="chartOptionsGeneral4.series" 
+    [chart]="chartOptionsGeneral4.chart" 
+    [xaxis]="chartOptionsGeneral4.xaxis" 
+    [dataLabels]="chartOptionsGeneral4.dataLabels" 
+    [plotOptions]="chartOptionsGeneral4.plotOptions" 
+    [fill]="chartOptionsGeneral4.fill"></apx-chart>
+  </div>
+
+<!-- Gráfica para pressAcumulados5 -->
+<div *ngIf="
+    chartOptionsAcumulados5.series && 
+    chartOptionsAcumulados5.chart && 
+    chartOptionsAcumulados5.xaxis && 
+    chartOptionsAcumulados5.dataLabels && 
+    chartOptionsAcumulados5.plotOptions && 
+    chartOptionsAcumulados5.fill">
+  <h2>Press Acumulados 5</h2>
+  <apx-chart [series]="chartOptionsAcumulados5.series"
+            [chart]="chartOptionsAcumulados5.chart"
+            [xaxis]="chartOptionsAcumulados5.xaxis"
+            [dataLabels]="chartOptionsAcumulados5.dataLabels"
+            [plotOptions]="chartOptionsAcumulados5.plotOptions"
+            [fill]="chartOptionsAcumulados5.fill"></apx-chart>
+</div>
+
+<!-- Gráfica para pressAcumulados7 -->
+<div *ngIf="
+    chartOptionsAcumulados7.series && 
+    chartOptionsAcumulados7.chart && 
+    chartOptionsAcumulados7.xaxis && 
+    chartOptionsAcumulados7.dataLabels && 
+    chartOptionsAcumulados7.plotOptions && 
+    chartOptionsAcumulados7.fill">
+  <h2>Press Acumulados 7</h2>
+  <apx-chart [series]="chartOptionsAcumulados7.series"
+            [chart]="chartOptionsAcumulados7.chart"
+            [xaxis]="chartOptionsAcumulados7.xaxis"
+            [dataLabels]="chartOptionsAcumulados7.dataLabels"
+            [plotOptions]="chartOptionsAcumulados7.plotOptions"
+            [fill]="chartOptionsAcumulados7.fill"></apx-chart>
+</div>
+
+
+  <div *ngIf="pressData">
+    <section *ngIf="pressData.pressGeneral1">
+      <h2>Press General 1</h2>
+      <ul>
+        <li *ngFor="let item of pressData.pressGeneral1">
+          Descripción: {{ item.descripcion }}, Total: {{ item.total }}
+        </li>
+      </ul>
+    </section>
+  
+    <section *ngIf="pressData.pressGeneral2">
+      <h2>Press General 2</h2>
+      <ul>
+        <li *ngFor="let item of pressData.pressGeneral2">
+          Descripción: {{ item.descripcion }}, Total: {{ item.total }}
+        </li>
+      </ul>
+    </section>
+  
+  
+    <section *ngIf="pressData.pressAcumulados3">
+      <h2>Press Acumulados 3</h2>
+      <ul>
+        <li *ngFor="let item of pressData.pressAcumulados3">
+          Descripción: {{ item.descripcion }}, Total Uno: {{ item.totaluno }}, Total Dos: {{ item.totaldos }}, Avance: {{ item.avance }}
+        </li>
+      </ul>
+    </section>
+
+    <section *ngIf="pressData.pressGeneral4">
+      <h2>Press General 4</h2>
+      <ul>
+        <li *ngFor="let item of pressData.pressGeneral4">
+          Descripción: {{ item.descripcion }}, Total: {{ item.total }}
+        </li>
+      </ul>
+    </section>
+  
+    <!-- Similar para pressAcumulados5 -->
+    <section *ngIf="pressData.pressAcumulados5">
+      <h2>Press Acumulados 5</h2>
+      <ul>
+        <li *ngFor="let item of pressData.pressAcumulados5">
+          Descripción: {{ item.descripcion }}, Total Uno: {{ item.totaluno }}, Total Dos: {{ item.totaldos }}, Avance: {{ item.avance }}
+        </li>
+      </ul>
+    </section>
+  
+    <!-- Y así sucesivamente para cada categoría, como pressAcumulados7 -->
+    <section *ngIf="pressData.pressAcumulados7">
+      <h2>Press Acumulados 7</h2>
+      <ul>
+        <li *ngFor="let item of pressData.pressAcumulados7">
+          Descripción: {{ item.descripcion }}, Total Uno: {{ item.totaluno }}, Total Dos: {{ item.totaldos }}, Avance: {{ item.avance }}
+        </li>
+      </ul>
+    </section>
+  
+  </div>
+  
 </ion-content>
-

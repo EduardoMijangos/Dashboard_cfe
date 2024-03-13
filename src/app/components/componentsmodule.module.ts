@@ -35,7 +35,7 @@ import { CalendarioModalComponent } from '../calendario-modal/calendario-modal.c
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
   ],
   exports:[
     HeaderComponent,
