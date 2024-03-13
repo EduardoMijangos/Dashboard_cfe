@@ -36,12 +36,36 @@ export class DescargarComponent implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   @ViewChild("chartContainer") chartContainer!: ElementRef;
 
-  public chartOptionsGeneral1!: Partial<ChartOptions>;
-  public chartOptionsGeneral2!: Partial<ChartOptions>;
-  public chartOptionsAcumulados3!: Partial<ChartOptions>;
-  public chartOptionsGeneral4!: Partial<ChartOptions>;
-  public chartOptionsAcumulados5!: Partial<ChartOptions>;
-  public chartOptionsAcumulados7!: Partial<ChartOptions>;
+  public chartOptionsGeneral1: Partial<ChartOptions> = this.initEmptyChartOptions();
+  public chartOptionsGeneral2: Partial<ChartOptions> = this.initEmptyChartOptions();
+  public chartOptionsAcumulados3: Partial<ChartOptions> = this.initEmptyChartOptions();
+  public chartOptionsGeneral4: Partial<ChartOptions> = this.initEmptyChartOptions();
+  public chartOptionsAcumulados5: Partial<ChartOptions> = this.initEmptyChartOptions();
+  public chartOptionsAcumulados7: Partial<ChartOptions> = this.initEmptyChartOptions();
+
+  private initEmptyChartOptions(): Partial<ChartOptions> {
+    return {
+      series: [],
+      chart: {
+        type: "bar",
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: []
+      },
+      fill: {
+        colors: ['#008E5A']
+      }
+    };
+  }
   
   isBtnInicioActive: boolean = false;
   isBtnIngresosActive: boolean = false;
@@ -290,17 +314,34 @@ export class DescargarComponent implements OnInit {
   async generarPDF(): Promise<void> {
     console.log("Generando PDF...");
     const pdf = new jsPDF();
+    const chartIds = ['chartGeneral1', 'chartGeneral2', 'chartAcumulados3', 'chartGeneral4', 'chartAcumulados5', 'chartAcumulados7'];
+    let currentHeight = 0; // Posición vertical para la siguiente gráfica
   
-    // Capturar la representación de la gráfica como una imagen usando html2canvas
-    const canvas = await html2canvas(this.chartContainer.nativeElement);
+    for (const chartId of chartIds) {
+      const chartElement = document.getElementById(chartId);
+      if (chartElement) {
+        const canvas = await html2canvas(chartElement);
+        const imageData = canvas.toDataURL('image/png');
   
-    // Agregar la imagen al PDF
-    pdf.addImage(canvas.toDataURL(), 'PNG', 10, 10, 180, 100);
+        // Calcular la proporción de la imagen para el escalado
+        const imgProps = pdf.getImageProperties(imageData);
+        const pdfWidth = pdf.internal.pageSize.getWidth() - 20; // Ancho del PDF menos márgenes
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
   
-    // Guardar o mostrar el PDF después de agregar la imagen
-    pdf.save('nombre-archivo.pdf');
+        if (currentHeight + pdfHeight > pdf.internal.pageSize.getHeight()) {
+          pdf.addPage();
+          currentHeight = 0; // Restablecer la altura para la nueva página
+        }
+  
+        // Agregar la imagen al PDF ajustando su escala
+        pdf.addImage(imageData, 'PNG', 10, currentHeight + 10, pdfWidth, pdfHeight);
+        currentHeight += pdfHeight + 10; // Añadir un margen entre las gráficas
+      }
+    }
+  
+    pdf.save('graficas.pdf');
   }
-
+  
   async establecerPaginaActual(pagina: string) {
     if (this.paginaActual === pagina) {
       const alert = await this.alertController.create({

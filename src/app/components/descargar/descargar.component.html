@@ -32,13 +32,15 @@
   </ion-button>
 
   <!--Grafica para general 1-->
-  <div *ngIf="
+  <div id="chartGeneral1"
+  *ngIf="
   chartOptionsGeneral1.series && 
   chartOptionsGeneral1.chart && 
   chartOptionsGeneral1.xaxis && 
   chartOptionsGeneral1.dataLabels && 
   chartOptionsGeneral1.plotOptions && 
   chartOptionsGeneral1.fill">
+    <h2>Press General 1</h2>
     <apx-chart [series]="chartOptionsGeneral1.series" 
     [chart]="chartOptionsGeneral1.chart" 
     [xaxis]="chartOptionsGeneral1.xaxis" 
@@ -48,13 +50,15 @@
   </div>
 
     <!--Grafica para general 2-->
-    <div *ngIf="
+    <div id="chartGeneral2"
+    *ngIf="
     chartOptionsGeneral2.series && 
     chartOptionsGeneral2.chart && 
     chartOptionsGeneral2.xaxis && 
     chartOptionsGeneral2.dataLabels && 
     chartOptionsGeneral2.plotOptions && 
     chartOptionsGeneral2.fill">
+      <h2>Press General 2</h2>
       <apx-chart [series]="chartOptionsGeneral2.series" 
       [chart]="chartOptionsGeneral2.chart" 
       [xaxis]="chartOptionsGeneral2.xaxis" 
@@ -64,14 +68,14 @@
     </div>
   
     <!-- Gráfica para pressAcumulados3 -->
-<div *ngIf="
+<div id="chartAcumulados3" 
+*ngIf="
 chartOptionsAcumulados3.series && 
     chartOptionsAcumulados3.chart && 
     chartOptionsAcumulados3.xaxis && 
     chartOptionsAcumulados3.dataLabels && 
     chartOptionsAcumulados3.plotOptions && 
     chartOptionsAcumulados3.fill">
-">
   <h2>Press Acumulados 3</h2>
   <apx-chart [series]="chartOptionsAcumulados3.series"
             [chart]="chartOptionsAcumulados3.chart"
@@ -82,13 +86,15 @@ chartOptionsAcumulados3.series &&
 </div>
 
 <!--Grafica para general 4-->
-  <div *ngIf="
+  <div id="chartGeneral4"
+  *ngIf="
   chartOptionsGeneral4.series && 
   chartOptionsGeneral4.chart && 
   chartOptionsGeneral4.xaxis && 
   chartOptionsGeneral4.dataLabels && 
   chartOptionsGeneral4.plotOptions && 
   chartOptionsGeneral4.fill">
+    <h2>Press General 4</h2>
     <apx-chart [series]="chartOptionsGeneral4.series" 
     [chart]="chartOptionsGeneral4.chart" 
     [xaxis]="chartOptionsGeneral4.xaxis" 
@@ -98,7 +104,8 @@ chartOptionsAcumulados3.series &&
   </div>
 
 <!-- Gráfica para pressAcumulados5 -->
-<div *ngIf="
+<div id="chartAcumulados5" 
+*ngIf="
     chartOptionsAcumulados5.series && 
     chartOptionsAcumulados5.chart && 
     chartOptionsAcumulados5.xaxis && 
@@ -115,7 +122,8 @@ chartOptionsAcumulados3.series &&
 </div>
 
 <!-- Gráfica para pressAcumulados7 -->
-<div *ngIf="
+<div id="chartAcumulados7" 
+*ngIf="
     chartOptionsAcumulados7.series && 
     chartOptionsAcumulados7.chart && 
     chartOptionsAcumulados7.xaxis && 
