@@ -23,4 +23,13 @@ export interface PressGeneralItem {
       avance: string;
     }>;
   }
+
+  export interface PressItem {
+    total: string; // asumiendo que total es una cadena que representa un número
+  }
+  export interface PressItemAcumulado {
+    totaluno: string;
+    totaldos: string;
+  }
+  
   

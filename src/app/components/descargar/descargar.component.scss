@@ -1,14 +1,8 @@
-ion-content {
-  overflow-y: auto;
-}
+
 
 .chart-container {
   height: 300px; /* Ajusta la altura de las gráficas según tus necesidades */
   margin-bottom: 20px; /* Ajusta el espacio entre las gráficas según sea necesario */
-}
-
-ion-footer {
-  height: auto; /* Ajusta la altura del footer según sea necesario */
 }
 
 .contenedorHorizontal {
@@ -16,6 +10,14 @@ ion-footer {
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff; /* Color de fondo ajustado para coincidir con la imagen */
+  color: #000000; // Color del texto ajustado para el contraste
+  padding: 0.5rem; // Añadido padding para espacio interior
+}
+
+.contenedorCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #000000; // Color del texto ajustado para el contraste
   padding: 0.5rem; // Añadido padding para espacio interior
 }
@@ -78,6 +80,33 @@ ion-button.active {
 ion-datetime-button{
   color: #008E5A;
 }
+
+h3{
+  color: #008E5A;
+  text-align: center;
+  font-size: 1.9rem;
+  font-family: Helvetica LT Std;
+}
+
+h4{
+  color: #000000;
+  text-align: center;
+  font-family: Helvetica LT Std;
+  font-size: 1.6rem;
+}
+
+.chart-title {
+  text-align: center;
+  color: #000000;
+  font-family: 'Helvetica LT Std';
+  font-size: 1.4rem;
+}
+
+ion-card {
+  border: 0.3rem solid #008E5A; /* Define un borde sólido de 1rem de ancho y color negro */
+  border-radius: 1rem; /* Define el radio de las esquinas para hacerlas redondeadas */
+}
+
 
 @media (max-width: 767px) {
 
