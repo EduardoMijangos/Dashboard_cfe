@@ -13,6 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lodash"
+           ],
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -32,8 +35,7 @@
               }
             ],
             "styles": ["src/theme/variables.scss", 
-            "src/global.scss", 
-            "node_modules/@swimlane/ngx-charts/release/index.css"],
+            "src/global.scss"],
             "scripts": []
           },
           "configurations": {

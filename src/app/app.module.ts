@@ -1,11 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
@@ -26,9 +23,7 @@ registerLocaleData(localeEs);
     AppRoutingModule, 
     ComponentsmoduleModule, 
     NgApexchartsModule, 
-    HttpClientModule,  
-    NgxChartsModule,
-    BrowserAnimationsModule],
+    HttpClientModule],
   providers: [ 
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
