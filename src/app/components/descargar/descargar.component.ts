@@ -147,7 +147,7 @@ export class DescargarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.presentacionService.getPressData('2024-03-18').subscribe({
+    this.presentacionService.getPressData(this.selectedDate).subscribe({
       next: (data) =>{
         console.log(data);
       this.pressData = data;

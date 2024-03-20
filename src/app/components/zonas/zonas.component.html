@@ -18,16 +18,18 @@
           <ion-row *ngFor="let zona of zonas">
             <ion-col (click)="verAgencia(zona.name)"> {{ zona.name }} </ion-col>
             <ion-col>
-              <div></div>
+
+              <div class="rectangle33">
               <ion-progress-bar
               color="secondary"
               class="custom-progess-bar"
               [value]="zona.progress ? zona.progress / 100 : undefined"
               contentLabel="{{ zona.progress ? zona.progress + '%' : 'Sin progreso'}}"
             ></ion-progress-bar>
+          </div>
             <div *ngIf="zona.progress < 100" class="progress-text">
               En proceso - {{ progress }}%
-            </div>
+          </div>
             </ion-col>
           </ion-row>
         </ion-table>
