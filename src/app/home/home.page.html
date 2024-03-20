@@ -4,7 +4,10 @@
   
     <div class="rectangle33">
       <span>Meta del día:</span>
-      <ion-progress-bar [value]="progress / 100" color="secondary" class="custom-progress-bar"></ion-progress-bar>
+      <ion-progress-bar 
+      [value]="progress / 100" 
+      color="secondary" 
+      class="custom-progress-bar"></ion-progress-bar>
       <div *ngIf="progress < 100" class="progress-text">
         En proceso - {{ progress }}%
       </div>
@@ -87,7 +90,6 @@
         [title]="chartOptionsmenos.title"
         [height]="chartOptionsmenos.chart.height"
         [stroke]="chartOptionsmenoscircular.stroke"
-        (animationEnd)="showChartSection()"
       >
       </apx-chart>
     </ion-card>

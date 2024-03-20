@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
 import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import html2canvas from 'html2canvas';
-import { color } from 'html2canvas/dist/types/css/types/color';
 import jsPDF from 'jspdf';
 
 import {
@@ -148,7 +147,9 @@ export class DescargarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.presentacionService.getPressData().subscribe(data => {
+    this.presentacionService.getPressData('2024-03-18').subscribe({
+      next: (data) =>{
+        console.log(data);
       this.pressData = data;
 
       this.totalGeneral1 = this.sumarTotales(this.pressData.pressGeneral1);
@@ -168,6 +169,7 @@ export class DescargarComponent implements OnInit {
 
       this.totalesAcumulados7 = this.sumarTotalesSeparados(this.pressData.pressAcumulados7);
         console.log('Totales Acumulados 7:', this.totalesAcumulados7);
+
 
        // Preparar datos para pressGeneral1
        this.chartOptionsGeneral1 = {
@@ -632,10 +634,14 @@ export class DescargarComponent implements OnInit {
         height:35,
         fillColors: ['#4CAF50', '#9ABE26', '#008E5A'],
       }
-    }
+    },
   };
   
-    });
+    },error: (error) => {
+      console.error('Hubo un error al recuperar los datos de la API', error);
+    }
+  }
+    );
   
     this.adjustChartOptionsForScreenSize();
     this.resizeListener = () => this.adjustChartOptionsForScreenSize();
@@ -688,12 +694,55 @@ export class DescargarComponent implements OnInit {
 
     modal.onDidDismiss().then((data) => {
       if (data && data.data) {
-        this.selectedDate = data.data.selectedDate; // Actualizar la fecha seleccionada con la que viene del modal
+        this.selectedDate = data.data.selectedDate; 
+        this.updateChartData(this.selectedDate);
       }
     });
 
     return await modal.present();
   }
+
+  updateChartData(date: string) {
+    this.presentacionService.getPressData(date).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.pressData = data;
+        
+        this.chartOptionsGeneral1.series = [{
+          name: "Total General 1",
+          data: this.pressData.pressGeneral1.map(item => parseFloat(item.total))
+        }];
+
+        this.chartOptionsGeneral1.xaxis ??= {};
+        this.chartOptionsGeneral1.xaxis.categories = this.pressData.pressGeneral1.map(item => item.descripcion);
+        this.totalGeneral1 = this.sumarTotales(this.pressData.pressGeneral1);
+  
+        this.chartOptionsGeneral2.xaxis ??= {};
+        this.chartOptionsGeneral2.xaxis.categories = this.pressData.pressGeneral2.map(item => item.descripcion);
+        this.totalGeneral2 = this.sumarTotales(this.pressData.pressGeneral2);
+  
+        this.chartOptionsAcumulados3.xaxis ??= {};
+        this.chartOptionsAcumulados3.xaxis.categories = this.pressData.pressAcumulados3.map(item => item.descripcion);
+        this.totalesAcumulados3 = this.sumarTotalesSeparados(this.pressData.pressAcumulados3);
+  
+        this.chartOptionsGeneral4.xaxis ??= {};
+        this.chartOptionsGeneral4.xaxis.categories = this.pressData.pressGeneral4.map(item => item.descripcion);
+        this.totalGeneral4 = this.sumarTotales(this.pressData.pressGeneral4);
+  
+        this.chartOptionsAcumulados5.xaxis ??= {};
+        this.chartOptionsAcumulados5.xaxis.categories = this.pressData.pressAcumulados5.map(item => item.descripcion);
+        this.totalesAcumulados5 = this.sumarTotalesSeparados(this.pressData.pressAcumulados5);
+  
+        this.chartOptionsAcumulados7.xaxis ??= {};
+        this.chartOptionsAcumulados7.xaxis.categories = this.pressData.pressAcumulados7.map(item => item.descripcion);
+        this.totalesAcumulados7 = this.sumarTotalesSeparados(this.pressData.pressAcumulados7);
+      },
+      error: (error) => {
+        console.error('Hubo un error al recuperar los datos de la API', error);
+      }
+    });
+  }
+    
 
   async generarPDF(): Promise<void> {
     // Crear una alerta para confirmar la descarga del PDF

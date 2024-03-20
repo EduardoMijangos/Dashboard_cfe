@@ -25,7 +25,7 @@ export type ChartOptions = {
 })
 export class ZonasComponent{
 
-  @Input() progress: number | undefined = 0; // Inicializa con un valor predeterminado
+  @Input() progress: number | undefined = 0; 
   zonas = [
     { name: 'Villahermosa', progress: 90 },
     { name: 'Tuxtla', progress: 75 },

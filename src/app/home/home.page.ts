@@ -52,8 +52,6 @@ export type ChartOptions = {
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  encapsulation: ViewEncapsulation.None  // Añade esta línea para desactivar la encapsulación de estilos
-
 })
 
 
@@ -66,7 +64,7 @@ export class HomePage implements OnInit{
 
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  public chartOptionsmenos: Partial<ChartOptions>; // Nueva opción para zonas con menos 
+  public chartOptionsmenos: Partial<ChartOptions>;
   public chartOptionsmascircular: Partial<ChartOptionsCircle>;
   public chartOptionsmenoscircular: Partial<ChartOptionsCircle>;
   
@@ -351,33 +349,7 @@ export class HomePage implements OnInit{
 
 private chartSectionVisible = false;
 
-  ngAfterViewInit() {
-    this.scrollIntoView();
-  }
 
-  private scrollIntoView() {
-    if (this.chartSectionVisible) {
-      const chartContainer = this.el.nativeElement.querySelector('#chartSection');
-      if (chartContainer) {
-        chartContainer.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-      }
-    }
-  }
-
-  private navigateToChartSection() {
-    this.router.navigate([], {
-      fragment: 'chartSection',
-      queryParamsHandling: 'merge',
-      relativeTo: this.route
-    });
-  }
-
-  // Agrega un método para activar el scroll cuando se muestra la sección del gráfico
-  showChartSection() {
-    this.chartSectionVisible = true;
-    this.navigateToChartSection();
-    this.scrollIntoView();
-  }
 
 /*   generarPDF(): void {
     const pdf = new jsPDF();

@@ -6,6 +6,7 @@
   
   <div class="contenedorPrincipal">
     <div *ngIf="menuOpen || isLargeScreen" class="contenedorBotones">
+      
       <ion-button (click)="btnInicio()" expand="block" fill="clear" shape="round">
         Inicio
       </ion-button>
@@ -27,8 +28,10 @@
   </div>
 
   <ion-button (click)="generarPDF()" expand="block" fill="clear" shape="round" class="btnDescargarPdf">
-    <ion-icon slot="start" name="download-outline"></ion-icon>
-    Descargar PDF
+    <span class="btnDescargarPdfcontent">
+      <ion-icon slot="start" name="download-outline"></ion-icon>
+      Descargar PDF </span>
+
   </ion-button>
 
   <!--progreso de descarga-->

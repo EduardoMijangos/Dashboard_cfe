@@ -7,12 +7,12 @@ import { PressData } from '../models/press-data.model';
   providedIn: 'root'
 })
 export class PresentacionesService {
-
-  private apiUrl = 'assets/info/responsePressData.json'; 
+  private apiUrl = 'http://192.168.110.4:3000/press-data';
 
   constructor(private http: HttpClient) { }
 
-  getPressData(): Observable<PressData> {
-    return this.http.get<PressData>(this.apiUrl);
+  getPressData(date: string): Observable<PressData> {
+    const url = `${this.apiUrl}?date=${date}`;
+    return this.http.get<PressData>(url);
   }
 }
