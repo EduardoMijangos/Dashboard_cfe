@@ -10,11 +10,13 @@
 .map-container {
   width: 100%;
   max-width: 800px;
-  margin: 20px auto; /* Centra horizontalmente y agrega margen superior */
+  margin: 20px auto;
+  /* Centra horizontalmente y agrega margen superior */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px; /* Ajusta según sea necesario */
+  margin-bottom: 20px;
+  /* Ajusta según sea necesario */
 }
 
 .chart-container {
@@ -22,7 +24,7 @@
   max-width: 800px;
   margin: auto;
   margin-top: 20px;
-  position: relative; /* Corregido el valor de la posición */
+  position: absolute;
   flex: 2;
 }
 
@@ -33,49 +35,49 @@
   border-radius: 10px;
   height: auto;
   width: auto;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   margin: 20px 0;
 }
 
 .top-right {
-  margin-top: 5rem;
-  position: absolute;
+  margin-top: 6.5rem;
   top: 50px;
   right: 10px;
 }
 
 .bottom-left {
-  position: absolute;
   bottom: 10px;
   left: 10px;
 }
 
 .top-left {
-  margin-top: 5rem;
-  position: absolute;
+  margin-top: 6.5rem;
   background-color: transparent;
   top: 30px;
   left: 10px;
 }
 
 .bottom-right {
-  position: absolute;
   bottom: 10px;
   right: 10px;
 }
 
 .rectangle33 {
   background-color: transparent;
-  max-width: 500px; /* Ancho máximo para evitar que la barra se estire demasiado en pantallas grandes */
-  width: 90%; /* Ancho del contenedor en porcentaje */
+  max-width: 500px;
+  /* Ancho máximo para evitar que la barra se estire demasiado en pantallas grandes */
+  width: 90%;
+  /* Ancho del contenedor en porcentaje */
   border-radius: 20px;
   margin: 20px auto;
   margin-bottom: 150px;
   font-family: Helvetica LT Std;
   text-transform: uppercase;
-  display: flex; /* Utilizamos flexbox para centrar verticalmente */
-  flex-direction: column; /* Alineamos los elementos en columna */
-  align-items: center; /* Centramos los elementos horizontalmente */
+  display: flex;
+  /* Utilizamos flexbox para centrar verticalmente */
+  flex-direction: column;
+  /* Alineamos los elementos en columna */
+  align-items: center;
+  /* Centramos los elementos horizontalmente */
 }
 
 .rectangle33 .progress-text {
@@ -94,21 +96,21 @@
 .hora {
   background-color: #CAEDE0;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  max-width: auto;
   width: auto;
   text-align: center;
+  align-items: center;
   font-family: Helvetica LT Std;
   text-transform: uppercase;
   margin-top: 20px;
 }
 
-ion-footer{
-  color:#008e5a;
-  height:78px;
-  width:1920px;
+ion-footer {
+  color: #008e5a;
+  height: 78px;
+  width: 1920px;
 }
 
-h3{
+h3 {
   text-align: center;
   font-family: Helvetica LT Std;
 }
@@ -120,9 +122,11 @@ h3{
   z-index: 9999999999999999999999999;
 }
 
-span{
+span {
   text-align: center;
 }
+
+
 
 /* Estilos para pantallas de máximo 1600px */
 @media only screen and (max-width: 1600px) {
@@ -135,7 +139,11 @@ span{
     margin-top: 20px;
   }
 
-  .top-right, .bottom-left, .rectangle33, .top-left, .bottom-right {
+  .top-right,
+  .bottom-left,
+  .rectangle33,
+  .top-left,
+  .bottom-right {
     width: auto;
     position: relative;
     display: flex;

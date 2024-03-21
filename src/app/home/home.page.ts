@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+  ViewEncapsulation,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   ApexAxisChartSeries,
@@ -11,13 +18,19 @@ import {
   ApexXAxis,
   ApexFill,
   ApexNonAxisChartSeries,
-  ApexStroke
-} from "ng-apexcharts";
+  ApexStroke,
+} from 'ng-apexcharts';
 
- //import * as jsPDF from 'jspdf';
+//import * as jsPDF from 'jspdf';
 import { jsPDF } from 'jspdf';
 import domtoimage from 'dom-to-image';
-
+import { PresentacionesService } from '../services/presentaciones.service';
+import {
+  PressAcumuladosItem,
+  PressData,
+  PressItem,
+  PressItemAcumulado,
+} from 'src/app/models/press-data.model';
 
 interface ApexPlotOptionsBar {
   bar: {
@@ -32,10 +45,9 @@ export type ChartOptionsCircle = {
   chart: ApexChart;
   labels: string[];
   plotOptions: ApexPlotOptions;
-  fill: ApexFill,
-  stroke: ApexStroke
+  fill: ApexFill;
+  stroke: ApexStroke;
 };
-
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -53,188 +65,169 @@ export type ChartOptions = {
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-
-
-export class HomePage implements OnInit{
-
+export class HomePage implements OnInit {
   @Input() progress: number = 14;
   currentDate: string;
 
+  selectedDate: string;
 
+  pressData: PressData | null = null;
 
-  @ViewChild("chart") chart!: ChartComponent;
+  @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   public chartOptionsmenos: Partial<ChartOptions>;
   public chartOptionsmascircular: Partial<ChartOptionsCircle>;
   public chartOptionsmenoscircular: Partial<ChartOptionsCircle>;
-  
-  constructor( 
+
+  constructor(
     private el: ElementRef,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private presentacionesService: PresentacionesService
   ) {
-
-    this.currentDate = new Date().toISOString()
-
-  
+    this.currentDate = new Date().toISOString();
 
     //Manejo de informacion de la grafica de barras de mas ingresos
     this.chartOptions = {
       series: [
         {
-          name: "Mas Ingresos",
-          data: [2.3, 3.1, 4.0, 10.1, 4.0]
-        }
+          name: 'Mas Ingresos',
+          data: [2.3, 3.1, 4.0, 10.1, 4.0],
+        },
       ],
       chart: {
         height: 350,
-        type: "bar"
+        width: 380,
+        type: 'bar',
       },
       plotOptions: {
         bar: {
           dataLabels: {
-            position: "top"
-          }
-        }
+            position: 'top',
+          },
+        },
       } as ApexPlotOptionsBar,
       dataLabels: {
         enabled: true,
-        formatter: function(val) {
-          return val + "%";
+        formatter: function (val) {
+          return '$' + val;
         },
         offsetY: -20,
         style: {
-          fontSize: "12px",
-          colors: ["#304758"]
-        }
+          fontSize: '12px',
+          colors: ['#304758'],
+        },
       },
       xaxis: {
-        position: "top",
+        position: 'top',
         labels: {
-          offsetY: -18
+          rotate: -45,
+          offsetY: -18,
         },
         axisBorder: {
-          show: false
+          show: false,
         },
         axisTicks: {
-          show: false
+          show: false,
         },
         crosshairs: {
           fill: {
-            type: "lineal",
-          }
+            type: 'lineal',
+          },
         },
         tooltip: {
           enabled: true,
-          offsetY: -35
-        }
+          offsetY: -35,
+        },
       },
       fill: {
-        colors: ['#9ABE26']
+        colors: ['#9ABE26'],
       },
       yaxis: {
         axisBorder: {
-          show: false
+          show: false,
         },
         axisTicks: {
-          show: false
+          show: false,
         },
         labels: {
           show: false,
-          formatter: function(val) {
-            return val + "%";
-          }
-        }
+          formatter: function (val) {
+            return '$' + val;
+          },
+        },
       },
-      title: {
-        text: "Zonas con mas Ingresos",
-        floating: true,
-        offsetY: 320,
-        align: "center",
-        style: {
-          color: "#000000"
-        }
-      }
     };
 
     //Manejo de informacion de la grafica de barras de menos ingresos
     this.chartOptionsmenos = {
       series: [
         {
-          name: "Menos Ingresos",
-          data: [1.0, 2.5, 3.5, 6.2, 2.5]
-        }
+          name: 'Menos Ingresos',
+          data: [1.0, 2.5, 3.5, 6.2, 2.5],
+        },
       ],
       chart: {
         height: 350,
-        type: "bar"
+        width: 380,
+        type: 'bar',
       },
       plotOptions: {
         bar: {
           dataLabels: {
-            position: "top"
-          }
-        }
+            position: 'top',
+          },
+        },
       } as ApexPlotOptionsBar,
       dataLabels: {
         enabled: true,
-        formatter: function(val) {
-          return val + "%";
+        formatter: function (val) {
+          return '$' + val;
         },
         offsetY: -20,
         style: {
-          fontSize: "12px",
-          colors: ["#304758"]
-        }
+          fontSize: '12px',
+          colors: ['#304758'],
+        },
       },
       xaxis: {
-        
-        position: "top",
+        position: 'top',
         labels: {
-          offsetY: -18
+          offsetY: -18,
         },
         axisBorder: {
-          show: false
+          show: false,
         },
         axisTicks: {
-          show: false
+          show: false,
         },
         crosshairs: {
           fill: {
-            type: "lineal",
-          }
+            type: 'lineal',
+          },
         },
         tooltip: {
           enabled: true,
-          offsetY: -35
-        }
+          offsetY: -35,
+        },
       },
       fill: {
-        colors: ['#9ABE26'] 
+        colors: ['#9ABE26'],
       },
       yaxis: {
         axisBorder: {
-          show: false
+          show: false,
         },
         axisTicks: {
-          show: false
+          show: false,
         },
         labels: {
           show: false,
-          formatter: function(val) {
-            return val + "%";
-          }
-        }
+          formatter: function (val) {
+            return val.toString();
+          },
+        },
       },
-      title: {
-        text: "Zonas con menos Ingresos",
-        floating: true,
-        offsetY: 320,
-        align: "center",
-        style: {
-          color: "#000000"
-        }
-      }
     };
 
     //Grafica de Radial de zona con mas ingresos
@@ -248,110 +241,177 @@ export class HomePage implements OnInit{
           left: 0,
           blur: 3,
           color: '#000',
-          opacity: 0.35
+          opacity: 0.35,
         },
         height: 350,
-        type: "radialBar",
+        type: 'radialBar',
         animations: {
           enabled: true,
-          easing: "easeinout",
+          easing: 'easeinout',
           speed: 800,
           animateGradually: {
             enabled: true,
-            delay: 150
+            delay: 150,
           },
           dynamicAnimation: {
             enabled: true,
-            speed: 350
-          }
-        }
+            speed: 350,
+          },
+        },
       },
       plotOptions: {
         radialBar: {
           hollow: {
-            margin:15,
-            size: "70%"
+            margin: 15,
+            size: '70%',
           },
           dataLabels: {
             show: true,
+            value: {
+              formatter: function (val) {
+                return '$' + val;
+              },
+            },
             name: {
               show: true,
-              color: "000000",            
-            }
-          }
-        }
+              color: '000000',
+            },
+          },
+        },
       },
-      labels: ["Zona con mas ingresos"],
+      labels: ['Zona con mas ingresos'],
       stroke: {
-        lineCap: 'round'
+        lineCap: 'round',
       },
       fill: {
-        colors: ["#008E5A"]
-      }
-    }
-    
-  
+        colors: ['#008E5A'],
+      },
+    };
 
     //Grafica de Radial de zona con menos ingresos
-  this.chartOptionsmenoscircular = {
-    series: [10],
-    chart: {
-      dropShadow:{
-        enabled:true,
-        enabledOnSeries: undefined,
-        top: 0,
-        left: 0,
-        blur: 3,
-        color: '#000',
-        opacity: 0.35
+    this.chartOptionsmenoscircular = {
+      series: [10],
+      chart: {
+        dropShadow: {
+          enabled: true,
+          enabledOnSeries: undefined,
+          top: 0,
+          left: 0,
+          blur: 3,
+          color: '#000',
+          opacity: 0.35,
+        },
+        height: 350,
+        type: 'radialBar',
+        animations: {
+          enabled: true,
+          easing: 'easeinout',
+          speed: 800,
+          animateGradually: {
+            enabled: true,
+            delay: 150,
+          },
+          dynamicAnimation: {
+            enabled: true,
+            speed: 350,
+          },
+        },
       },
-      height: 350,
-      type: "radialBar",
-      animations: {
-        enabled: true,
-        easing: "easeinout",
-        speed: 800,
-        animateGradually:{
-          enabled: true,
-          delay: 150
-        },
-        dynamicAnimation:{
-          enabled: true,
-          speed: 350
-        }
-      }
-    },    plotOptions: {
-      radialBar: {
-        hollow: {
-          margin:15,
-          size: "70%"
-        },
-        dataLabels:{
-          show: true,
-          name:{
+      plotOptions: {
+        radialBar: {
+          hollow: {
+            margin: 15,
+            size: '70%',
+          },
+          dataLabels: {
             show: true,
-            color: "000000"
-          }
-        }
-      }
-    },
-    labels: ["Zona con menos ingresos"],
-      stroke: {
-        lineCap: 'round'
+            value: {
+              formatter: function (val) {
+                return '$' + val;
+              },
+            },
+            name: {
+              show: true,
+              color: '000000',
+            },
+          },
+        },
       },
-    fill:{
-      colors: ["#008E5A"]
-    }
+      labels: ['Zona con menos ingresos'],
+      stroke: {
+        lineCap: 'round',
+      },
+      fill: {
+        colors: ['#008E5A'],
+      },
+    };
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1); // Obtener fecha de ayer
+    this.selectedDate = yesterday.toISOString(); // Convertir a formato ISO (YYYY-MM-DDTHH:MM:SS)
+    this.selectedDate = this.selectedDate.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
   }
-}
-  ngOnInit(): void {
+  ngOnInit() {
+    this.presentacionesService.getPressData(this.selectedDate).subscribe({
+      next: (data) => {
+        console.log('datos recibidos', data);
+        this.pressData = data;
+
+        if (this.pressData && this.pressData.pressGeneral2.length > 0) {
+          // Ordenar y tomar las 5 zonas con más y menos ingresos
+          const sorted = [...this.pressData.pressGeneral2].sort(
+            (a, b) => parseFloat(b.total) - parseFloat(a.total)
+          );
+          const top5 = sorted.slice(0, 5);
+          const bottom5 = sorted.slice(-5);
+          const maxIncome = sorted[0];
+          const minIncome = sorted[sorted.length - 1];
+
+          (this.chartOptions.series = [
+            {
+              name: 'Más ingresos',
+              data: top5.map((item) => parseFloat(item.total)),
+            },
+          ]),
+            (this.chartOptions.xaxis = {
+              categories: top5.map((item) => item.descripcion),
+            }),
+            this.chartOptions.dataLabels;
+
+          (this.chartOptionsmenos.series = [
+            {
+              name: 'Menos ingresos',
+              data: bottom5.map((item) => parseFloat(item.total)),
+            },
+          ]),
+            (this.chartOptionsmenos.xaxis = {
+              categories: bottom5.map((item) => item.descripcion),
+            }),
+            (this.chartOptionsmascircular.series = [
+              parseFloat(maxIncome.total),
+            ]);
+          this.chartOptionsmascircular.labels = [maxIncome.descripcion];
+
+          // Actualiza la gráfica circular de la zona con menos ingresos
+          this.chartOptionsmenoscircular.series = [parseFloat(minIncome.total)];
+          this.chartOptionsmenoscircular.labels = [minIncome.descripcion];
+          error: (error: any) => {
+            console.error(
+              'Hubo un error al recuperar los datos de la API',
+              error
+            );
+          };
+
+          console.log('mas ingresos', top5);
+          console.log('menos ingresos', bottom5);
+        }
+      },
+    });
   }
 
-private chartSectionVisible = false;
+  private chartSectionVisible = false;
 
-
-
-/*   generarPDF(): void {
+  /*   generarPDF(): void {
     const pdf = new jsPDF();
     const chartElements = document.querySelectorAll('.chart-container');
 
@@ -373,5 +433,5 @@ private chartSectionVisible = false;
       });
     }
   }
- */  
+ */
 }

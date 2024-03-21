@@ -1,14 +1,17 @@
 <ion-content color="light">
-
   <app-header></app-header>
 
   <h1></h1>
 
   <ion-grid fixed>
     <ion-row>
-
       <!--Grafica-->
-      <ion-col size="12" size-md="9" push-md="3" style="margin-bottom: 16px; padding-right: 16px;">
+      <ion-col
+        size="12"
+        size-md="9"
+        push-md="3"
+        style="margin-bottom: 16px; padding-right: 16px"
+      >
         <div id="chart">
           <apx-chart
             [series]="chartOptions.series"
@@ -20,71 +23,87 @@
         </div>
       </ion-col>
 
-
       <!--Tabla-->
       <ion-col size="12" size-md="3" pull-md="10">
         <ion-grid>
           <ion-row>
             <ion-col>
               <ion-table class="textoTabla">
-                <ion-row >
+                <ion-row>
                   <ion-col>Periodo</ion-col>
                   <ion-col>Ingresos</ion-col>
                   <!-- Columnas de los dias en la tabla -->
                 </ion-row>
                 <ion-row>
-                  <ion-col >01</ion-col>
+                  <ion-col>01</ion-col>
                   <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+                    <ion-progress-bar
+                      class="rectangle33"
+                      [value]="progress / 100"
+                    ></ion-progress-bar>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>02</ion-col>
                   <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+                    <ion-progress-bar
+                      class="rectangle33"
+                      [value]="progress / 100"
+                    ></ion-progress-bar>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>03</ion-col>
                   <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+                    <ion-progress-bar
+                      class="rectangle33"
+                      [value]="progress / 100"
+                    ></ion-progress-bar>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>04</ion-col>
                   <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+                    <ion-progress-bar
+                      class="rectangle33"
+                      [value]="progress / 100"
+                    ></ion-progress-bar>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>05</ion-col>
                   <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+                    <ion-progress-bar
+                      class="rectangle33"
+                      [value]="progress / 100"
+                    ></ion-progress-bar>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>06</ion-col>
                   <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+                    <ion-progress-bar
+                      class="rectangle33"
+                      [value]="progress / 100"
+                    ></ion-progress-bar>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>07</ion-col>
                   <ion-col>
-                    <ion-progress-bar class="rectangle33" [value]="progress / 100"></ion-progress-bar>
+                    <ion-progress-bar
+                      class="rectangle33"
+                      [value]="progress / 100"
+                    ></ion-progress-bar>
                   </ion-col>
                 </ion-row>
-
               </ion-table>
-              
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-col>
-
     </ion-row>
   </ion-grid>
-
 </ion-content>
-  
+
 <app-footer></app-footer>

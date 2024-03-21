@@ -1,9 +1,7 @@
-
 <ion-content color="light" class="content-wrapper">
-
   <app-header></app-header>
 
-<h1>Zonas</h1>
+  <h1>Zonas</h1>
 
   <ion-grid fixed>
     <ion-row>
@@ -18,18 +16,16 @@
           <ion-row *ngFor="let zona of zonas">
             <ion-col (click)="verAgencia(zona.name)"> {{ zona.name }} </ion-col>
             <ion-col>
-
-              <div class="rectangle33">
-              <ion-progress-bar
-              color="secondary"
-              class="custom-progess-bar"
-              [value]="zona.progress ? zona.progress / 100 : undefined"
-              contentLabel="{{ zona.progress ? zona.progress + '%' : 'Sin progreso'}}"
-            ></ion-progress-bar>
-          </div>
-            <div *ngIf="zona.progress < 100" class="progress-text">
-              En proceso - {{ progress }}%
-          </div>
+              <div class="progress-container">
+                <ion-progress-bar
+                  color="secondary"
+                  class="custom-progress-bar"
+                  [value]="zona.progress ? zona.progress / 100 : undefined"
+                ></ion-progress-bar>
+                <div *ngIf="zona.progress < 100" class="progress-text">
+                  En proceso - {{ zona.progress }}%
+                </div>
+              </div>
             </ion-col>
           </ion-row>
         </ion-table>
@@ -38,25 +34,39 @@
       <!-- Gráficas -->
       <ion-col size="12" size-md="6">
         <!-- Gráfica de más ingresos -->
-        <apx-chart class="chart-container bottom-right"
-          *ngIf="chartOptionsZonamas.series && chartOptionsZonamas.chart && chartOptionsZonamas.plotOptions && chartOptionsZonamas.labels 
-          && chartOptionsZonamas.fill && chartOptionsZonamas.stroke"
+        <apx-chart
+          class="chart-container bottom-right"
+          *ngIf="
+            chartOptionsZonamas.series &&
+            chartOptionsZonamas.chart &&
+            chartOptionsZonamas.plotOptions &&
+            chartOptionsZonamas.labels &&
+            chartOptionsZonamas.fill &&
+            chartOptionsZonamas.stroke
+          "
           [series]="chartOptionsZonamas.series"
           [chart]="chartOptionsZonamas.chart"
           [plotOptions]="chartOptionsZonamas.plotOptions"
           [labels]="chartOptionsZonamas.labels"
           [fill]="chartOptionsZonamas.fill"
           [stroke]="chartOptionsZonamas.stroke"
-          style="width: 80%; margin-left: 10%;"
+          style="width: 80%; margin-left: 10%"
         ></apx-chart>
 
         <!-- Espacio entre gráficas -->
-        <div style="margin-top: 20px;"></div>
+        <div style="margin-top: 20px"></div>
 
         <!-- Gráfica de menos ingresos -->
-        <apx-chart class="chart-container top-left"
-          *ngIf="chartOptionsZonamenos.series && chartOptionsZonamenos.chart && chartOptionsZonamenos.plotOptions && chartOptionsZonamenos.labels 
-          && chartOptionsZonamenos.fill && chartOptionsZonamenos.stroke"
+        <apx-chart
+          class="chart-container top-left"
+          *ngIf="
+            chartOptionsZonamenos.series &&
+            chartOptionsZonamenos.chart &&
+            chartOptionsZonamenos.plotOptions &&
+            chartOptionsZonamenos.labels &&
+            chartOptionsZonamenos.fill &&
+            chartOptionsZonamenos.stroke
+          "
           [series]="chartOptionsZonamenos.series"
           [chart]="chartOptionsZonamenos.chart"
           [plotOptions]="chartOptionsZonamenos.plotOptions"
@@ -67,8 +77,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  
 </ion-content>
 
 <app-footer></app-footer>

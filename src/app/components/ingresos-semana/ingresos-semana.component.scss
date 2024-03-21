@@ -1,26 +1,26 @@
 ion-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  ion-col {
-    padding: 8px;
-    text-align: left;
-    cursor: pointer;
-  }
-  
-  ion-col{
-    background-color: #CAEDE0
+  width: 100%;
+  border-collapse: collapse;
 }
-  
+
+ion-col {
+  padding: 8px;
+  text-align: left;
+  cursor: pointer;
+}
+
+ion-col {
+  background-color: #CAEDE0
+}
+
 #chart {
   max-width: 650px;
   margin: 35px auto;
 }
 
-.textoTabla{
-  color:#000000;
-  font-family:Helvetica LT Std;
+.textoTabla {
+  color: #000000;
+  font-family: Helvetica LT Std;
   text-transform: uppercase;
 }
 

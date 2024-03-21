@@ -1,333 +1,424 @@
 <ion-content scrollY="true">
   <div class="contenedorHorizontal">
-    <img src="../../../assets/cfe.png" alt="" class="imagen">
-    <label class="etiqueta">Dashboard Ingresos RealTime para CFE Division Sureste</label>
+    <img src="../../../assets/cfe.png" alt="" class="imagen" />
+    <label class="etiqueta"
+      >Dashboard Ingresos RealTime para CFE Division Sureste</label
+    >
   </div>
-  
+
   <div class="contenedorPrincipal">
     <div *ngIf="menuOpen || isLargeScreen" class="contenedorBotones">
-      
-      <ion-button (click)="btnInicio()" expand="block" fill="clear" shape="round">
+      <ion-button
+        (click)="btnInicio()"
+        expand="block"
+        fill="clear"
+        shape="round"
+      >
         Inicio
       </ion-button>
-      <ion-button (click)="btnIngresos()" expand="block" fill="clear" shape="round">
+      <ion-button
+        (click)="btnIngresos()"
+        expand="block"
+        fill="clear"
+        shape="round"
+      >
         Ingresos
       </ion-button>
-      <ion-button (click)="btnZonas()" expand="block" fill="clear" shape="round">
+      <ion-button
+        (click)="btnZonas()"
+        expand="block"
+        fill="clear"
+        shape="round"
+      >
         Zonas
       </ion-button>
     </div>
 
-    <ion-button expand="block" fill="clear" class="menu-hamburguesa" (click)="toggleMenu()" *ngIf="!isLargeScreen">
+    <ion-button
+      expand="block"
+      fill="clear"
+      class="menu-hamburguesa"
+      (click)="toggleMenu()"
+      *ngIf="!isLargeScreen"
+    >
       <ion-icon name="menu"></ion-icon>
     </ion-button>
 
     <ion-button expand="block" fill="clear" (click)="openDatePickerModal()">
-      {{ selectedDate ? selectedDate.split('T')[0] : 'Seleccionar Fecha' }}
+      {{ selectedDate ? selectedDate.split("T")[0] : "Seleccionar Fecha" }}
     </ion-button>
   </div>
 
-  <ion-button (click)="generarPDF()" expand="block" fill="clear" shape="round" class="btnDescargarPdf">
+  <ion-button
+    (click)="generarPDF()"
+    expand="block"
+    fill="clear"
+    shape="round"
+    class="btnDescargarPdf"
+  >
     <span class="btnDescargarPdfcontent">
       <ion-icon slot="start" name="download-outline"></ion-icon>
-      Descargar PDF </span>
-
+      Descargar PDF
+    </span>
   </ion-button>
 
   <!--progreso de descarga-->
-  <div *ngIf="generandoPDF" style="text-align: center;">
+  <div *ngIf="generandoPDF" style="text-align: center">
     <h3>Generando PDF: {{ porcentajeDescarga.toFixed(0) }}%</h3>
-    <div style="width: 80%; height: 30px; background-color: #e0e0e0; border-radius: 15px; margin: auto; overflow: hidden;">
-      <div [style.width]="porcentajeDescarga + '%'" style="height: 30px; background-color: #008E5A; border-radius: 15px 0 0 15px; transition: width 0.5s;"></div>
+    <div
+      style="
+        width: 80%;
+        height: 30px;
+        background-color: #e0e0e0;
+        border-radius: 15px;
+        margin: auto;
+        overflow: hidden;
+      "
+    >
+      <div
+        [style.width]="porcentajeDescarga + '%'"
+        style="
+          height: 30px;
+          background-color: #008e5a;
+          border-radius: 15px 0 0 15px;
+          transition: width 0.5s;
+        "
+      ></div>
     </div>
   </div>
-  
-  
-  
-<!--Graficas-->
+
+  <!--Graficas-->
   <!--Grafica para general 1-->
-  <ion-card id="chartGeneral1" class="ion-card-custom" mode="ios" 
-  *ngIf="
-  chartOptionsGeneral1.series && 
-  chartOptionsGeneral1.chart && 
-  chartOptionsGeneral1.xaxis && 
-  chartOptionsGeneral1.yaxis && 
-  chartOptionsGeneral1.grid &&
-  chartOptionsGeneral1.title &&
-  chartOptionsGeneral1.tooltip && 
-  chartOptionsGeneral1.legend && 
-  chartOptionsGeneral1.dataLabels && 
-  chartOptionsGeneral1.plotOptions && 
-  chartOptionsGeneral1.fill">
+  <ion-card
+    id="chartGeneral1"
+    class="ion-card-custom"
+    mode="ios"
+    *ngIf="
+      chartOptionsGeneral1.series &&
+      chartOptionsGeneral1.chart &&
+      chartOptionsGeneral1.xaxis &&
+      chartOptionsGeneral1.yaxis &&
+      chartOptionsGeneral1.grid &&
+      chartOptionsGeneral1.title &&
+      chartOptionsGeneral1.tooltip &&
+      chartOptionsGeneral1.legend &&
+      chartOptionsGeneral1.dataLabels &&
+      chartOptionsGeneral1.plotOptions &&
+      chartOptionsGeneral1.fill
+    "
+  >
     <ion-card-header>
       <div class="contenedorCard">
-        <img src="../../../assets/imgtocard.png" alt="" class="imagen">
+        <img src="../../../assets/imgtocard.png" alt="" class="imagen" />
       </div>
     </ion-card-header>
-    
+
     <ion-card-content>
       <div class="chart-title">
-        <h3>Ingreso Nacional <br> App CFEContigo</h3>
-        <h4>01 de enero al <br> 18 de febrero 2024</h4>
+        <h3>
+          Ingreso Nacional <br />
+          App CFEContigo
+        </h3>
+        <h4>
+          01 de enero al <br />
+          18 de febrero 2024
+        </h4>
         <div class="total-display">
-          Total: {{totalGeneral1.total.toLocaleString()}}
+          Total: {{ totalGeneral1.total.toLocaleString() }}
         </div>
       </div>
-  
-      <apx-chart [series]="chartOptionsGeneral1.series" 
-        [chart]="chartOptionsGeneral1.chart" 
-        [xaxis]="chartOptionsGeneral1.xaxis" 
-        [dataLabels]="chartOptionsGeneral1.dataLabels" 
-        [plotOptions]="chartOptionsGeneral1.plotOptions" 
+
+      <apx-chart
+        [series]="chartOptionsGeneral1.series"
+        [chart]="chartOptionsGeneral1.chart"
+        [xaxis]="chartOptionsGeneral1.xaxis"
+        [dataLabels]="chartOptionsGeneral1.dataLabels"
+        [plotOptions]="chartOptionsGeneral1.plotOptions"
         [fill]="chartOptionsGeneral1.fill"
-        [yaxis]="chartOptionsGeneral1.yaxis" 
-        [title]="chartOptionsGeneral1.title" 
+        [yaxis]="chartOptionsGeneral1.yaxis"
+        [title]="chartOptionsGeneral1.title"
         [tooltip]="chartOptionsGeneral1.tooltip"
         [legend]="chartOptionsGeneral1.legend"
-        [grid]="chartOptionsGeneral1.grid">
+        [grid]="chartOptionsGeneral1.grid"
+      >
       </apx-chart>
     </ion-card-content>
   </ion-card>
-  
 
-    <!--Grafica para general 2-->
-    <ion-card id="chartGeneral2" class="ion-card-custom" mode="ios" 
+  <!--Grafica para general 2-->
+  <ion-card
+    id="chartGeneral2"
+    class="ion-card-custom"
+    mode="ios"
     *ngIf="
-  chartOptionsGeneral2.series && 
-  chartOptionsGeneral2.chart && 
-  chartOptionsGeneral2.xaxis && 
-  chartOptionsGeneral2.yaxis && 
-  chartOptionsGeneral2.stroke &&
-  chartOptionsGeneral2.title &&
-  chartOptionsGeneral2.tooltip && 
-  chartOptionsGeneral2.legend && 
-  chartOptionsGeneral2.dataLabels && 
-  chartOptionsGeneral2.plotOptions && 
-  chartOptionsGeneral2.fill">
-
-<ion-card-header>
-  <div class="contenedorCard">
-    <img src="../../../assets/imgtocard.png" alt="" class="imagen">
-  </div>
-</ion-card-header>
-  <h3>Ingreso Sureste <br>
-    App CFEContigo</h3>
-
-    <h4>01 de enero al <br>
-      18 de febrero 2024</h4>
-
-      <div class="chart-title">
-        Total: {{totalGeneral2.total.toLocaleString()}}<br>
+      chartOptionsGeneral2.series &&
+      chartOptionsGeneral2.chart &&
+      chartOptionsGeneral2.xaxis &&
+      chartOptionsGeneral2.yaxis &&
+      chartOptionsGeneral2.stroke &&
+      chartOptionsGeneral2.title &&
+      chartOptionsGeneral2.tooltip &&
+      chartOptionsGeneral2.legend &&
+      chartOptionsGeneral2.dataLabels &&
+      chartOptionsGeneral2.plotOptions &&
+      chartOptionsGeneral2.fill
+    "
+  >
+    <ion-card-header>
+      <div class="contenedorCard">
+        <img src="../../../assets/imgtocard.png" alt="" class="imagen" />
       </div>
-      <br>
-      <apx-chart 
-      [series]="chartOptionsGeneral2.series" 
-      [chart]="chartOptionsGeneral2.chart" 
-      [xaxis]="chartOptionsGeneral2.xaxis" 
-      [dataLabels]="chartOptionsGeneral2.dataLabels" 
-      [plotOptions]="chartOptionsGeneral2.plotOptions" 
+    </ion-card-header>
+    <h3>
+      Ingreso Sureste <br />
+      App CFEContigo
+    </h3>
+
+    <h4>
+      01 de enero al <br />
+      18 de febrero 2024
+    </h4>
+
+    <div class="chart-title">
+      Total: {{ totalGeneral2.total.toLocaleString() }}<br />
+    </div>
+    <br />
+    <apx-chart
+      [series]="chartOptionsGeneral2.series"
+      [chart]="chartOptionsGeneral2.chart"
+      [xaxis]="chartOptionsGeneral2.xaxis"
+      [dataLabels]="chartOptionsGeneral2.dataLabels"
+      [plotOptions]="chartOptionsGeneral2.plotOptions"
       [fill]="chartOptionsGeneral2.fill"
-      [yaxis]="chartOptionsGeneral2.yaxis" 
-      [title]="chartOptionsGeneral2.title" 
+      [yaxis]="chartOptionsGeneral2.yaxis"
+      [title]="chartOptionsGeneral2.title"
       [tooltip]="chartOptionsGeneral2.tooltip"
       [legend]="chartOptionsGeneral2.legend"
-      [stroke]="chartOptionsGeneral2.stroke">
+      [stroke]="chartOptionsGeneral2.stroke"
+    >
     </apx-chart>
-    </ion-card>
-  
-    <!-- Gráfica para pressAcumulados3 -->
-    <ion-card id="chartAcumulados3" class="ion-card-custom" mode="ios" 
-    *ngIf="
-  chartOptionsAcumulados3.series && 
-  chartOptionsAcumulados3.chart && 
-  chartOptionsAcumulados3.xaxis && 
-  chartOptionsAcumulados3.yaxis && 
-  chartOptionsAcumulados3.stroke &&
-  chartOptionsAcumulados3.title &&
-  chartOptionsAcumulados3.tooltip && 
-  chartOptionsAcumulados3.legend && 
-  chartOptionsAcumulados3.dataLabels && 
-  chartOptionsAcumulados3.plotOptions && 
-  chartOptionsAcumulados3.fill">
-
-<ion-card-header>
-  <div class="contenedorCard">
-    <img src="../../../assets/imgtocard.png" alt="" class="imagen">
-  </div>
-</ion-card-header>
-
-  <h3>Ingreso Sureste <br>
-    App CFEContigo</h3>
-
-    <h4>01 de enero al <br>
-      18 de febrero 2024
-      </h4>
-
-      <div class="chart-title">
-        Total, Recuperado APP: {{totalesAcumulados3.total1.toLocaleString()}}<br>
-        Total, Facturado: {{totalesAcumulados3.total2.toLocaleString()}}
-      </div>
-      <br>
-
-  <apx-chart
-  [series]="chartOptionsAcumulados3.series" 
-  [chart]="chartOptionsAcumulados3.chart" 
-  [xaxis]="chartOptionsAcumulados3.xaxis" 
-  [dataLabels]="chartOptionsAcumulados3.dataLabels" 
-  [plotOptions]="chartOptionsAcumulados3.plotOptions" 
-  [fill]="chartOptionsAcumulados3.fill"
-  [yaxis]="chartOptionsAcumulados3.yaxis" 
-  [title]="chartOptionsAcumulados3.title" 
-  [tooltip]="chartOptionsAcumulados3.tooltip"
-  [legend]="chartOptionsAcumulados3.legend"
-  [stroke]="chartOptionsAcumulados3.stroke">
-</apx-chart>
-</ion-card>
-
-<!--Grafica para general 4-->
-<ion-card id="chartGeneral4" class="ion-card-custom" mode="ios" 
-*ngIf="
-  chartOptionsGeneral4.series && 
-  chartOptionsGeneral4.chart && 
-  chartOptionsGeneral4.xaxis && 
-  chartOptionsGeneral4.yaxis && 
-  chartOptionsGeneral4.stroke &&
-  chartOptionsGeneral4.title &&
-  chartOptionsGeneral4.tooltip && 
-  chartOptionsGeneral4.legend && 
-  chartOptionsGeneral4.dataLabels && 
-  chartOptionsGeneral4.plotOptions && 
-  chartOptionsGeneral4.fill">
-
-<ion-card-header>
-  <div class="contenedorCard">
-    <img src="../../../assets/imgtocard.png" alt="" class="imagen">
-  </div>
-</ion-card-header>
-
-  <h3>Ingreso Mensual
-    Sureste <br>
-    App CFEContigo</h3>
-
-    <h4>01 al 18 Febrero 2024</h4>
-
-    <div class="chart-title">
-      Total: {{totalGeneral4.total.toLocaleString()}}<br>
-    </div>
-    <br>
-
-    <apx-chart [series]="chartOptionsGeneral4.series" 
-    [chart]="chartOptionsGeneral4.chart" 
-    [xaxis]="chartOptionsGeneral4.xaxis" 
-    [dataLabels]="chartOptionsGeneral4.dataLabels" 
-    [plotOptions]="chartOptionsGeneral4.plotOptions" 
-    [fill]="chartOptionsGeneral4.fill"
-    [yaxis]="chartOptionsGeneral4.yaxis" 
-    [title]="chartOptionsGeneral4.title" 
-    [tooltip]="chartOptionsGeneral4.tooltip"
-    [legend]="chartOptionsGeneral4.legend"
-    [stroke]="chartOptionsGeneral4.stroke">
-  </apx-chart>
   </ion-card>
 
-<!-- Gráfica para pressAcumulados5 -->
-<ion-card id="chartAcumulados5" class="ion-card-custom" mode="ios" 
-*ngIf="
-  chartOptionsAcumulados5.series && 
-  chartOptionsAcumulados5.chart && 
-  chartOptionsAcumulados5.xaxis && 
-  chartOptionsAcumulados5.yaxis && 
-  chartOptionsAcumulados5.stroke &&
-  chartOptionsAcumulados5.title &&
-  chartOptionsAcumulados5.tooltip && 
-  chartOptionsAcumulados5.legend && 
-  chartOptionsAcumulados5.dataLabels && 
-  chartOptionsAcumulados5.plotOptions && 
-  chartOptionsAcumulados5.fill">
+  <!-- Gráfica para pressAcumulados3 -->
+  <ion-card
+    id="chartAcumulados3"
+    class="ion-card-custom"
+    mode="ios"
+    *ngIf="
+      chartOptionsAcumulados3.series &&
+      chartOptionsAcumulados3.chart &&
+      chartOptionsAcumulados3.xaxis &&
+      chartOptionsAcumulados3.yaxis &&
+      chartOptionsAcumulados3.stroke &&
+      chartOptionsAcumulados3.title &&
+      chartOptionsAcumulados3.tooltip &&
+      chartOptionsAcumulados3.legend &&
+      chartOptionsAcumulados3.dataLabels &&
+      chartOptionsAcumulados3.plotOptions &&
+      chartOptionsAcumulados3.fill
+    "
+  >
+    <ion-card-header>
+      <div class="contenedorCard">
+        <img src="../../../assets/imgtocard.png" alt="" class="imagen" />
+      </div>
+    </ion-card-header>
 
-<ion-card-header  class="contenedorCard">
-    <img src="../../../assets/imgtocard.png" alt="" class="imagen">
-</ion-card-header>
+    <h3>
+      Ingreso Sureste <br />
+      App CFEContigo
+    </h3>
 
+    <h4>
+      01 de enero al <br />
+      18 de febrero 2024
+    </h4>
 
-  <h3>Ingreso Mensual
-    Sureste <br>
-    App CFEContigo
+    <div class="chart-title">
+      Total, Recuperado APP: {{ totalesAcumulados3.total1.toLocaleString()
+      }}<br />
+      Total, Facturado: {{ totalesAcumulados3.total2.toLocaleString() }}
+    </div>
+    <br />
+
+    <apx-chart
+      [series]="chartOptionsAcumulados3.series"
+      [chart]="chartOptionsAcumulados3.chart"
+      [xaxis]="chartOptionsAcumulados3.xaxis"
+      [dataLabels]="chartOptionsAcumulados3.dataLabels"
+      [plotOptions]="chartOptionsAcumulados3.plotOptions"
+      [fill]="chartOptionsAcumulados3.fill"
+      [yaxis]="chartOptionsAcumulados3.yaxis"
+      [title]="chartOptionsAcumulados3.title"
+      [tooltip]="chartOptionsAcumulados3.tooltip"
+      [legend]="chartOptionsAcumulados3.legend"
+      [stroke]="chartOptionsAcumulados3.stroke"
+    >
+    </apx-chart>
+  </ion-card>
+
+  <!--Grafica para general 4-->
+  <ion-card
+    id="chartGeneral4"
+    class="ion-card-custom"
+    mode="ios"
+    *ngIf="
+      chartOptionsGeneral4.series &&
+      chartOptionsGeneral4.chart &&
+      chartOptionsGeneral4.xaxis &&
+      chartOptionsGeneral4.yaxis &&
+      chartOptionsGeneral4.stroke &&
+      chartOptionsGeneral4.title &&
+      chartOptionsGeneral4.tooltip &&
+      chartOptionsGeneral4.legend &&
+      chartOptionsGeneral4.dataLabels &&
+      chartOptionsGeneral4.plotOptions &&
+      chartOptionsGeneral4.fill
+    "
+  >
+    <ion-card-header>
+      <div class="contenedorCard">
+        <img src="../../../assets/imgtocard.png" alt="" class="imagen" />
+      </div>
+    </ion-card-header>
+
+    <h3>
+      Ingreso Mensual Sureste <br />
+      App CFEContigo
     </h3>
 
     <h4>01 al 18 Febrero 2024</h4>
-  
+
     <div class="chart-title">
-      Total, Recuperado APP: {{totalesAcumulados5.total1.toLocaleString()}}<br>
-      Total, Facturado: {{totalesAcumulados5.total2.toLocaleString()}}
+      Total: {{ totalGeneral4.total.toLocaleString() }}<br />
     </div>
-    <br>
-  <apx-chart
-  [series]="chartOptionsAcumulados5.series" 
-  [chart]="chartOptionsAcumulados5.chart" 
-  [xaxis]="chartOptionsAcumulados5.xaxis" 
-  [dataLabels]="chartOptionsAcumulados5.dataLabels" 
-  [plotOptions]="chartOptionsAcumulados5.plotOptions" 
-  [fill]="chartOptionsAcumulados5.fill"
-  [yaxis]="chartOptionsAcumulados5.yaxis" 
-  [title]="chartOptionsAcumulados5.title" 
-  [tooltip]="chartOptionsAcumulados5.tooltip"
-  [legend]="chartOptionsAcumulados5.legend"
-  [stroke]="chartOptionsAcumulados5.stroke">
-</apx-chart>
-</ion-card>
+    <br />
 
-<!-- Gráfica para pressAcumulados7 -->
-<ion-card id="chartAcumulados7" class="ion-card-custom" mode="ios" 
-*ngIf="
-  chartOptionsAcumulados7.series && 
-  chartOptionsAcumulados7.chart && 
-  chartOptionsAcumulados7.xaxis && 
-  chartOptionsAcumulados7.yaxis && 
-  chartOptionsAcumulados7.stroke &&
-  chartOptionsAcumulados7.title &&
-  chartOptionsAcumulados7.tooltip && 
-  chartOptionsAcumulados7.legend && 
-  chartOptionsAcumulados7.dataLabels && 
-  chartOptionsAcumulados7.plotOptions && 
-  chartOptionsAcumulados7.fill">
+    <apx-chart
+      [series]="chartOptionsGeneral4.series"
+      [chart]="chartOptionsGeneral4.chart"
+      [xaxis]="chartOptionsGeneral4.xaxis"
+      [dataLabels]="chartOptionsGeneral4.dataLabels"
+      [plotOptions]="chartOptionsGeneral4.plotOptions"
+      [fill]="chartOptionsGeneral4.fill"
+      [yaxis]="chartOptionsGeneral4.yaxis"
+      [title]="chartOptionsGeneral4.title"
+      [tooltip]="chartOptionsGeneral4.tooltip"
+      [legend]="chartOptionsGeneral4.legend"
+      [stroke]="chartOptionsGeneral4.stroke"
+    >
+    </apx-chart>
+  </ion-card>
 
-  <ion-card-header>
-    <div class="contenedorCard">
-      <img src="../../../assets/imgtocard.png" alt="" class="imagen">
-    </div>
-  </ion-card-header>
+  <!-- Gráfica para pressAcumulados5 -->
+  <ion-card
+    id="chartAcumulados5"
+    class="ion-card-custom"
+    mode="ios"
+    *ngIf="
+      chartOptionsAcumulados5.series &&
+      chartOptionsAcumulados5.chart &&
+      chartOptionsAcumulados5.xaxis &&
+      chartOptionsAcumulados5.yaxis &&
+      chartOptionsAcumulados5.stroke &&
+      chartOptionsAcumulados5.title &&
+      chartOptionsAcumulados5.tooltip &&
+      chartOptionsAcumulados5.legend &&
+      chartOptionsAcumulados5.dataLabels &&
+      chartOptionsAcumulados5.plotOptions &&
+      chartOptionsAcumulados5.fill
+    "
+  >
+    <ion-card-header class="contenedorCard">
+      <img src="../../../assets/imgtocard.png" alt="" class="imagen" />
+    </ion-card-header>
 
-
-  <h3>Servicios con
-    cultura de pago <br>
-    vs Usuarios
-    activos en la <br>
-    Div. Sureste
+    <h3>
+      Ingreso Mensual Sureste <br />
+      App CFEContigo
     </h3>
 
-    <h4>18 de febrero 2023 <br> al 18
-      de febrero 2024</h4>
+    <h4>01 al 18 Febrero 2024</h4>
 
-      <div class="chart-title">
-        Total, Recuperado APP: {{totalesAcumulados7.total1.toLocaleString()}}<br>
-        Total, Facturado: {{totalesAcumulados7.total2.toLocaleString()}}
+    <div class="chart-title">
+      Total, Recuperado APP: {{ totalesAcumulados5.total1.toLocaleString()
+      }}<br />
+      Total, Facturado: {{ totalesAcumulados5.total2.toLocaleString() }}
+    </div>
+    <br />
+    <apx-chart
+      [series]="chartOptionsAcumulados5.series"
+      [chart]="chartOptionsAcumulados5.chart"
+      [xaxis]="chartOptionsAcumulados5.xaxis"
+      [dataLabels]="chartOptionsAcumulados5.dataLabels"
+      [plotOptions]="chartOptionsAcumulados5.plotOptions"
+      [fill]="chartOptionsAcumulados5.fill"
+      [yaxis]="chartOptionsAcumulados5.yaxis"
+      [title]="chartOptionsAcumulados5.title"
+      [tooltip]="chartOptionsAcumulados5.tooltip"
+      [legend]="chartOptionsAcumulados5.legend"
+      [stroke]="chartOptionsAcumulados5.stroke"
+    >
+    </apx-chart>
+  </ion-card>
+
+  <!-- Gráfica para pressAcumulados7 -->
+  <ion-card
+    id="chartAcumulados7"
+    class="ion-card-custom"
+    mode="ios"
+    *ngIf="
+      chartOptionsAcumulados7.series &&
+      chartOptionsAcumulados7.chart &&
+      chartOptionsAcumulados7.xaxis &&
+      chartOptionsAcumulados7.yaxis &&
+      chartOptionsAcumulados7.stroke &&
+      chartOptionsAcumulados7.title &&
+      chartOptionsAcumulados7.tooltip &&
+      chartOptionsAcumulados7.legend &&
+      chartOptionsAcumulados7.dataLabels &&
+      chartOptionsAcumulados7.plotOptions &&
+      chartOptionsAcumulados7.fill
+    "
+  >
+    <ion-card-header>
+      <div class="contenedorCard">
+        <img src="../../../assets/imgtocard.png" alt="" class="imagen" />
       </div>
-      <br>
-  <apx-chart
-  [series]="chartOptionsAcumulados7.series" 
-  [chart]="chartOptionsAcumulados7.chart" 
-  [xaxis]="chartOptionsAcumulados7.xaxis" 
-  [dataLabels]="chartOptionsAcumulados7.dataLabels" 
-  [plotOptions]="chartOptionsAcumulados7.plotOptions" 
-  [fill]="chartOptionsAcumulados7.fill"
-  [yaxis]="chartOptionsAcumulados7.yaxis" 
-  [title]="chartOptionsAcumulados7.title" 
-  [tooltip]="chartOptionsAcumulados7.tooltip"
-  [legend]="chartOptionsAcumulados7.legend"
-  [stroke]="chartOptionsAcumulados7.stroke">
-</apx-chart></ion-card>
+    </ion-card-header>
 
+    <h3>
+      Servicios con cultura de pago <br />
+      vs Usuarios activos en la <br />
+      Div. Sureste
+    </h3>
+
+    <h4>
+      18 de febrero 2023 <br />
+      al 18 de febrero 2024
+    </h4>
+
+    <div class="chart-title">
+      Total, Recuperado APP: {{ totalesAcumulados7.total1.toLocaleString()
+      }}<br />
+      Total, Facturado: {{ totalesAcumulados7.total2.toLocaleString() }}
+    </div>
+    <br />
+    <apx-chart
+      [series]="chartOptionsAcumulados7.series"
+      [chart]="chartOptionsAcumulados7.chart"
+      [xaxis]="chartOptionsAcumulados7.xaxis"
+      [dataLabels]="chartOptionsAcumulados7.dataLabels"
+      [plotOptions]="chartOptionsAcumulados7.plotOptions"
+      [fill]="chartOptionsAcumulados7.fill"
+      [yaxis]="chartOptionsAcumulados7.yaxis"
+      [title]="chartOptionsAcumulados7.title"
+      [tooltip]="chartOptionsAcumulados7.tooltip"
+      [legend]="chartOptionsAcumulados7.legend"
+      [stroke]="chartOptionsAcumulados7.stroke"
+    >
+    </apx-chart
+  ></ion-card>
 
   <!-- Informacion en texto
      <div *ngIf="pressData">
@@ -387,7 +478,4 @@
     </section>
   
   </div> --->
-
-  
-  
 </ion-content>

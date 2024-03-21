@@ -1,15 +1,17 @@
 <ion-content color="light">
-  
   <app-header></app-header>
 
-
   <ion-grid fixed>
-
-<h2></h2>
+    <h2></h2>
 
     <ion-row>
       <!-- Gráfica en la parte superior -->
-      <ion-col size="12" size-md="9" push-md="3" style="margin-bottom: 16px; padding-right: 16px;">
+      <ion-col
+        size="12"
+        size-md="9"
+        push-md="3"
+        style="margin-bottom: 16px; padding-right: 16px"
+      >
         <apx-chart
           [series]="chartOptions.series"
           [chart]="chartOptions.chart"
@@ -28,17 +30,16 @@
             <ion-col>Mes</ion-col>
             <ion-col>Total</ion-col>
           </ion-row>
-          <ion-row *ngFor="let month of months" (click)="verIngresosFecha(month)" class="textoTabla">
+          <ion-row
+            *ngFor="let month of months"
+            (click)="verIngresosFecha(month)"
+            class="textoTabla"
+          >
             <ion-col>{{ month }}</ion-col>
-            <ion-col> {{month}} </ion-col>
+            <ion-col> {{ month }} </ion-col>
           </ion-row>
         </ion-grid>
       </ion-col>
     </ion-row>
   </ion-grid>
-  
 </ion-content>
-
-
-
-  

@@ -10,47 +10,51 @@ import { DescargarComponent } from './components/descargar/descargar.component';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () =>
+      import('./home/home.module').then((m) => m.HomePageModule),
   },
   {
     path: 'components',
-    loadChildren: () => import('./components/componentsmodule.module').then( m => m.ComponentsmoduleModule)
+    loadChildren: () =>
+      import('./components/componentsmodule.module').then(
+        (m) => m.ComponentsmoduleModule
+      ),
   },
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
-{
-  path: 'zonas',
-  component: ZonasComponent
-},
-{
-  path: 'ingresos',
-  component: IngresosComponent
-},
-{
-  path: 'agencia/:zonaAg',
-  component:AgenciaComponent
-},
-{
-  path: 'ingresos-fecha/:mes',
-    component: IngresosFechaComponent
-},
-{
-  path: 'ingresosemana/:semana',
-  component: IngresosSemanaComponent
-},
-{
-  path: 'descargar',
-  component: DescargarComponent
-}
+  {
+    path: 'zonas',
+    component: ZonasComponent,
+  },
+  {
+    path: 'ingresos',
+    component: IngresosComponent,
+  },
+  {
+    path: 'agencia/:zonaAg',
+    component: AgenciaComponent,
+  },
+  {
+    path: 'ingresos-fecha/:mes',
+    component: IngresosFechaComponent,
+  },
+  {
+    path: 'ingresosemana/:semana',
+    component: IngresosSemanaComponent,
+  },
+  {
+    path: 'descargar',
+    component: DescargarComponent,
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

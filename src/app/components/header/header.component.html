@@ -1,30 +1,53 @@
 <ion-header mode="ios">
-<div class="contenedorHorizontal">
-  <img src="../../../assets/cfe.png" alt="" class="imagen">
-  <label class="etiqueta">Dashboard Ingresos RealTime para CFE Division Sureste</label>
-
-</div>
-
-<div class="contenedorPrincipal">
-  
-  <div *ngIf="menuOpen || isLargeScreen" class="contenedorBotones">
-    
-  <ion-button (click)="btnInicio()" expand="block" fill="clear" shape="round">
-      Inicio
-    </ion-button>
-    <ion-button (click)="btnIngresos()" expand="block" fill="clear" shape="round">
-      Ingresos
-    </ion-button>
-    <ion-button (click)="btnZonas()" expand="block" fill="clear" shape="round">
-      Zonas
-    </ion-button>
+  <div class="contenedorHorizontal">
+    <img src="../../../assets/cfe.png" alt="" class="imagen" />
+    <label class="etiqueta"
+      >Dashboard Ingresos RealTime para CFE Division Sureste</label
+    >
   </div>
 
-  <ion-button class="menu-hamburguesa" (click)="toggleMenu()" *ngIf="!isLargeScreen">
-    <ion-icon name="menu"></ion-icon>
-  </ion-button>
+  <div class="contenedorPrincipal">
+    <div *ngIf="menuOpen || isLargeScreen" class="contenedorBotones">
+      <ion-button
+        (click)="btnInicio()"
+        expand="block"
+        fill="clear"
+        shape="round"
+      >
+        Inicio
+      </ion-button>
+      <ion-button
+        (click)="btnIngresos()"
+        expand="block"
+        fill="clear"
+        shape="round"
+      >
+        Ingresos
+      </ion-button>
+      <ion-button
+        (click)="btnZonas()"
+        expand="block"
+        fill="clear"
+        shape="round"
+      >
+        Zonas
+      </ion-button>
+    </div>
 
-  <ion-searchbar class="searchbar" placeholder="¿Estas buscando algo?" animated="true" mode="ios" color="light"></ion-searchbar>
-</div>
+    <ion-button
+      class="menu-hamburguesa"
+      (click)="toggleMenu()"
+      *ngIf="!isLargeScreen"
+    >
+      <ion-icon name="menu"></ion-icon>
+    </ion-button>
 
+    <ion-searchbar
+      class="searchbar"
+      placeholder="¿Estas buscando algo?"
+      animated="true"
+      mode="ios"
+      color="light"
+    ></ion-searchbar>
+  </div>
 </ion-header>

@@ -1,50 +1,55 @@
 <ion-content color="light">
+  <app-header></app-header>
 
-    <app-header></app-header>
+  <h1>Mes:{{ currentMonth }}</h1>
 
-    <h1> Mes:{{currentMonth}}</h1>
-  
-    <ion-grid fixed>
-      <ion-row>
+  <ion-grid fixed>
+    <ion-row>
+      <!--Grafica-->
+      <ion-col
+        size="12"
+        size-md="9"
+        push-md="3"
+        style="margin-bottom: 16px; padding-right: 16px"
+      >
+        <div id="chart">
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [plotOptions]="chartOptions.plotOptions"
+            [xaxis]="chartOptions.xaxis"
+            [fill]="chartOptions.fill"
+          ></apx-chart>
+        </div>
+      </ion-col>
 
-        <!--Grafica-->
-        <ion-col size="12" size-md="9" push-md="3" style="margin-bottom: 16px; padding-right: 16px;">
-          <div id="chart">
-            <apx-chart
-              [series]="chartOptions.series"
-              [chart]="chartOptions.chart"
-              [plotOptions]="chartOptions.plotOptions"
-              [xaxis]="chartOptions.xaxis"
-              [fill]="chartOptions.fill"
-            ></apx-chart>
-          </div>
-        </ion-col>
+      <!--Tabla-->
+      <ion-col size="12" size-md="3" pull-md="10">
+        <ion-grid>
+          <ion-row *ngFor="let week of obtenerSemanas()">
+            <ion-col>
+              <ion-table class="textoTabla">
+                <ion-row>
+                  <ion-col>Periodo</ion-col>
+                  <ion-col>Ingresos</ion-col>
+                </ion-row>
 
-        <!--Tabla-->
-        <ion-col size="12" size-md="3" pull-md="10">
-          <ion-grid>
-            <ion-row *ngFor="let week of obtenerSemanas()">
-              <ion-col>
-                <ion-table class="textoTabla">
-                  <ion-row>
-                    <ion-col>Periodo</ion-col>
-                    <ion-col>Ingresos</ion-col>
-                  </ion-row>
-            
-                  <ion-row (click)="verIngresosSemana(week[0])">
-                    <ion-col>{{ week[0] }} - {{ week[week.length - 1] }}</ion-col>
-                    <ion-col>
-                      <ion-progress-bar class="rectangle33" [value]="progress"></ion-progress-bar>
-                    </ion-col>
-                  </ion-row>
-                </ion-table>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    
-  </ion-content>
-  
-  <app-footer></app-footer>
+                <ion-row (click)="verIngresosSemana(week[0])">
+                  <ion-col>{{ week[0] }} - {{ week[week.length - 1] }}</ion-col>
+                  <ion-col>
+                    <ion-progress-bar
+                      class="rectangle33"
+                      [value]="progress"
+                    ></ion-progress-bar>
+                  </ion-col>
+                </ion-row>
+              </ion-table>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<app-footer></app-footer>

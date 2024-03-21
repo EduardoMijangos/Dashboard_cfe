@@ -16,9 +16,12 @@ export class HeaderComponent implements OnInit {
 
   paginaActual: string = '';
 
-  constructor(private router: Router, private alertController: AlertController) {
+  constructor(
+    private router: Router,
+    private alertController: AlertController
+  ) {
     this.checkScreenSize();
-    window.addEventListener('resize', () => this.checkScreenSize());  
+    window.addEventListener('resize', () => this.checkScreenSize());
   }
 
   ngOnInit() {}
@@ -29,7 +32,7 @@ export class HeaderComponent implements OnInit {
       const alert = await this.alertController.create({
         header: 'Ya estas ahi',
         message: 'Ya te encuentras en esta opción',
-        buttons: ['OK']
+        buttons: ['OK'],
       });
       await alert.present();
     } else {
@@ -70,7 +73,6 @@ export class HeaderComponent implements OnInit {
   }
 
   get isLargeScreen() {
-    // Define qué consideras una pantalla grande
     return window.innerWidth >= 768;
   }
 
@@ -79,7 +81,6 @@ export class HeaderComponent implements OnInit {
   }
 
   checkScreenSize() {
-    // Asegúrate de cerrar el menú de hamburguesa al cambiar el tamaño si es necesario
     if (this.isLargeScreen && this.menuOpen) {
       this.toggleMenu();
     }

@@ -3,22 +3,30 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ffffff; /* Color de fondo ajustado para coincidir con la imagen */
+  background-color: #ffffff;
+  /* Color de fondo ajustado para coincidir con la imagen */
   color: #000000; // Color del texto ajustado para el contraste
   padding: 0.5rem; // Añadido padding para espacio interior
 }
 
 .imagen {
-  width: auto; /* Ajusta el ancho de la imagen a un valor fijo para control */
-  height: auto; /* Mantiene la proporción de la imagen */
-  margin:0 10px; /* Ajusta según sea necesario */
+  width: auto;
+  /* Ajusta el ancho de la imagen a un valor fijo para control */
+  height: auto;
+  /* Mantiene la proporción de la imagen */
+  margin: 0 10px;
+  /* Ajusta según sea necesario */
 }
 
 .etiqueta {
-  flex-grow: 1; /* Permite que la etiqueta ocupe todo el espacio restante */
-  text-align: right; /* Alinea el texto a la derecha */
-  margin-right: 10px; /* Añade un margen a la derecha */
-  font-size: 1.2rem; /* Ajusta el tamaño del texto según sea necesario */
+  flex-grow: 1;
+  /* Permite que la etiqueta ocupe todo el espacio restante */
+  text-align: right;
+  /* Alinea el texto a la derecha */
+  margin-right: 10px;
+  /* Añade un margen a la derecha */
+  font-size: 1.2rem;
+  /* Ajusta el tamaño del texto según sea necesario */
 }
 
 .contenedorPrincipal {
@@ -39,7 +47,8 @@
   display: flex;
   width: auto;
   gap: 10px;
-  margin-right: 20px; /* Ajusta según sea necesario para los botones */
+  margin-right: 20px;
+  /* Ajusta según sea necesario para los botones */
 }
 
 .menuOpen .contenedorBotones {
@@ -47,24 +56,33 @@
 }
 
 ion-button {
-  color: #fff; /* Establece el color del texto del botón */
-  --background: transparent; /* Hace que el fondo del botón sea transparente */
+  color: #fff;
+  /* Establece el color del texto del botón */
+  --background: transparent;
+  /* Hace que el fondo del botón sea transparente */
 }
 
 ion-button:hover {
-  color: #9ABE26; /* Establece el color del botón activo */
+  color: #9ABE26;
+  /* Establece el color del botón activo */
 }
 
 ion-button.active {
-  color: #9ABE26; /* Establece el color del botón activo */
+  color: #9ABE26;
+  /* Establece el color del botón activo */
 }
 
 ion-searchbar {
-  --background: #fff; /* Establece el fondo de la barra de búsqueda */
-  --placeholder-color: #000; /* Establece el color del placeholder */
-  --icon-color: #000; /* Establece el color del icono de la barra de búsqueda */
-  margin-left: 10px; /* Ajusta según sea necesario para la barra de búsqueda */
-  max-width: 300px; /* Limita el ancho máximo de la barra de búsqueda */
+  --background: #fff;
+  /* Establece el fondo de la barra de búsqueda */
+  --placeholder-color: #000;
+  /* Establece el color del placeholder */
+  --icon-color: #000;
+  /* Establece el color del icono de la barra de búsqueda */
+  margin-left: 10px;
+  /* Ajusta según sea necesario para la barra de búsqueda */
+  max-width: 300px;
+  /* Limita el ancho máximo de la barra de búsqueda */
 }
 
 
@@ -80,29 +98,37 @@ ion-searchbar {
   }
 
   .contenedorPrincipal {
-    flex-direction: column; /* Elementos en columna */
+    flex-direction: column;
+    /* Elementos en columna */
   }
 
   .contenedorBotones {
     flex-direction: column;
-    order: 2; /* Los botones después de la barra de búsqueda en pantallas pequeñas */
+    order: 2;
+    /* Los botones después de la barra de búsqueda en pantallas pequeñas */
   }
 
   ion-button {
-    color: #fff; /* Establece el color del texto del botón */
-    --background: transparent; /* Hace que el fondo del botón sea transparente */
+    color: #fff;
+    /* Establece el color del texto del botón */
+    --background: transparent;
+    /* Hace que el fondo del botón sea transparente */
   }
-  
+
   ion-button:hover {
-    color: #9ABE26; /* Establece el color del botón activo */
+    color: #9ABE26;
+    /* Establece el color del botón activo */
   }
-  
+
   ion-button.active {
-    color: #9ABE26; /* Establece el color del botón activo */
+    color: #9ABE26;
+    /* Establece el color del botón activo */
   }
 
   ion-searchbar {
-    order: 1; /* Barra de búsqueda en la parte superior en pantallas pequeñas */
-    width: 90%; /* Ajusta el ancho de la barra de búsqueda */
+    order: 1;
+    /* Barra de búsqueda en la parte superior en pantallas pequeñas */
+    width: 90%;
+    /* Ajusta el ancho de la barra de búsqueda */
   }
 }

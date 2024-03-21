@@ -77,10 +77,20 @@ export type ChartOptions = {
   
     };  
 
-    currenZona: string ='';
-    zonas = ['Villahermosa', 'Tuxtla', 'Oaxaca', 'Chontalpa', 'Tehuantepec', 'Tapachula', 'Huatulco', ' Los Rios', 'San Cristobal', 'Huajuapan']
-    @Input() progress: number = 19;
-
+    currentZona: string ='';
+    @Input() progress: number | undefined = 0; 
+    zonas = [
+      { name: 'Villahermosa', progress: 90 },
+      { name: 'Tuxtla', progress: 75 },
+      {name:'Oaxaca', progress: 10}, 
+      {name:'Chontalpa', progress:19}, 
+      {name:'Tehuantepec', progress:50}, 
+      {name:'Tapachula', progress: 70}, 
+      {name: 'Huatulco', progress:80}, 
+      {name: 'Los Rios', progress:95}, 
+      {name: 'San Cristobal', progress: 60}, 
+      {name: 'Huajuapan', progress: 89}]
+  
 
 
     constructor(
@@ -99,9 +109,9 @@ export type ChartOptions = {
         const zone =params['zonaAg'];
 
         if(!isNaN(zone) && zone >= 1 && zone <= 10){
-          this.currenZona = this.obtenerNombreZona(zone);
+          this.currentZona = this.obtenerNombreZona(zone);
         } else {
-          this.currenZona = params['zonaAg'];
+          this.currentZona = params['zonaAg'];
         }
 
         console.log('Zona vista:', params['zonaAg']);

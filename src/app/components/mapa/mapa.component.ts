@@ -1,4 +1,3 @@
-// mapa.component.ts
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 
@@ -24,7 +23,10 @@ export class MapaComponent implements OnInit {
   loadMap() {
     // Verifica que mapContainer esté definido
     if (this.mapContainer) {
-      this.map = L.map(this.mapContainer.nativeElement).setView([17.0732, -96.7266], 6);
+      this.map = L.map(this.mapContainer.nativeElement).setView(
+        [17.0732, -96.7266],
+        6
+      );
 
       // Añade capa de OpenStreetMap
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
