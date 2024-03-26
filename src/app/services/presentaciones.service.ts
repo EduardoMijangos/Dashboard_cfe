@@ -12,7 +12,7 @@ export class PresentacionesService {
 
   constructor(private http: HttpClient) { }
 
-  getPressData(date: string): Observable<PressData> {
+  obtenerInfo(date: string): Observable<PressData> {
     const url = `${this.apiUrl}?date=${date}`;
     return this.http.get<PressData>(url);
   }

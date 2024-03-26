@@ -65,11 +65,14 @@ export type ChartOptions = {
 })
 export class HomePage implements OnInit {
   @Input() progress: number = 14;
-  currentDate: string;
+  fcehaActual: string;
 
-  selectedDate: string;
+  fechaSeleccionada: string;
 
   pressData: PressData | null = null;
+
+  totalGeneral2: { total: number } = { total: 0 };
+
 
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
@@ -83,7 +86,7 @@ export class HomePage implements OnInit {
     private route: ActivatedRoute,
     private presentacionesService: PresentacionesService
   ) {
-    this.currentDate = new Date().toISOString();
+    this.fcehaActual = new Date().toISOString();
 
     //Manejo de informacion de la grafica de barras de mas ingresos
     this.chartOptions = {
@@ -346,55 +349,63 @@ export class HomePage implements OnInit {
       },
     };
 
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1); // Obtener fecha de ayer
-    this.selectedDate = yesterday.toISOString(); // Convertir a formato ISO (YYYY-MM-DDTHH:MM:SS)
-    this.selectedDate = this.selectedDate.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
+    const ayer = new Date();
+    ayer.setDate(ayer.getDate() - 1); 
+    this.fechaSeleccionada = ayer.toISOString(); // Convertir formato de fecha(YYYY-MM-DDTHH:MM:SS)
+    this.fechaSeleccionada = this.fechaSeleccionada.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
   }
   ngOnInit() {
-    this.presentacionesService.getPressData(this.selectedDate).subscribe({
+    this.presentacionesService.obtenerInfo(this.fechaSeleccionada).subscribe({
       next: (data) => {
         console.log('datos recibidos', data);
         this.pressData = data;
+
+        this.totalGeneral2 = this.sumarTotales(this.pressData.pressGeneral2);
+        console.log('Total General 2:', this.totalGeneral2);
+
+        const metaTotal = 1000;
+      this.totalGeneral2 = this.sumarTotales(data.pressGeneral2);
+      // Convertir el total actual en un porcentaje de la meta total
+      this.progress = (this.totalGeneral2.total / metaTotal) * 100;
 
         if (this.pressData && this.pressData.pressGeneral2.length > 0) {
           // Ordenar y tomar las 5 zonas con más y menos ingresos
           const sorted = [...this.pressData.pressGeneral2].sort(
             (a, b) => parseFloat(b.total) - parseFloat(a.total)
           );
-          const top5 = sorted.slice(0, 5);
-          const bottom5 = sorted.slice(-5);
-          const maxIncome = sorted[0];
-          const minIncome = sorted[sorted.length - 1];
+          const mayores = sorted.slice(0, 5);
+          const menores = sorted.slice(-5);
+          const maximo = sorted[0];
+          const minimo = sorted[sorted.length - 1];
 
           (this.chartOptions.series = [
             {
               name: 'Más ingresos',
-              data: top5.map((item) => parseFloat(item.total)),
+              data: mayores.map((item) => parseFloat(item.total)),
             },
           ]),
             (this.chartOptions.xaxis = {
-              categories: top5.map((item) => item.descripcion),
+              categories: mayores.map((item) => item.descripcion),
             }),
             this.chartOptions.dataLabels;
 
           (this.chartOptionsmenos.series = [
             {
               name: 'Menos ingresos',
-              data: bottom5.map((item) => parseFloat(item.total)),
+              data: menores.map((item) => parseFloat(item.total)),
             },
           ]),
             (this.chartOptionsmenos.xaxis = {
-              categories: bottom5.map((item) => item.descripcion),
+              categories: menores.map((item) => item.descripcion),
             }),
             (this.chartOptionsmascircular.series = [
-              parseFloat(maxIncome.total),
+              parseFloat(maximo.total),
             ]);
-          this.chartOptionsmascircular.labels = [maxIncome.descripcion];
+          this.chartOptionsmascircular.labels = [maximo.descripcion];
 
           // Actualiza la gráfica circular de la zona con menos ingresos
-          this.chartOptionsmenoscircular.series = [parseFloat(minIncome.total)];
-          this.chartOptionsmenoscircular.labels = [minIncome.descripcion];
+          this.chartOptionsmenoscircular.series = [parseFloat(minimo.total)];
+          this.chartOptionsmenoscircular.labels = [minimo.descripcion];
           error: (error: any) => {
             console.error(
               'Hubo un error al recuperar los datos de la API',
@@ -402,16 +413,26 @@ export class HomePage implements OnInit {
             );
           };
 
-          console.log('mas ingresos', top5);
-          console.log('menos ingresos', bottom5);
-          console.log('unica mas', maxIncome);
-          console.log('unica menos', minIncome);
+          console.log('mas ingresos', mayores);
+          console.log('menos ingresos', menores);
+          console.log('unica mas', maximo);
+          console.log('unica menos', minimo);
           
         }
       },
     });
   }
 
+
+  sumarTotales(datos: PressItem[]): { total: number } {
+    return datos.reduce(
+      (acumulado, item) => {
+        acumulado.total += parseFloat(item.total);
+        return acumulado;
+      },
+      { total: 0 }
+    );
+  }
   private chartSectionVisible = false;
 
   /*   generarPDF(): void {

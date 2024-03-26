@@ -22,8 +22,8 @@
                   class="custom-progress-bar"
                   [value]="zona.progress ? zona.progress / 100 : undefined"
                 ></ion-progress-bar>
-                <div *ngIf="zona.progress < 100" class="progress-text">
-                  En proceso - {{ zona.progress }}
+                <div *ngIf="zona.progress" class="progress-text">
+                  En proceso - $ {{ zona.progress }}
                 </div>
               </div>
             </ion-col>

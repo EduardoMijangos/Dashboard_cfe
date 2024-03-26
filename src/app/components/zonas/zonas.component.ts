@@ -88,11 +88,12 @@ export class ZonasComponent implements OnInit {
           },
           dataLabels: {
             show: true,
-            name: {
-              show: true,
-              color: '000000',
-            },
-          },
+            value: {
+              formatter: function (val) {
+                return '$' + val;
+              }
+            }
+            }
         },
       },
       labels: ['Zona con mas ingresos'],
@@ -132,11 +133,12 @@ export class ZonasComponent implements OnInit {
           },
           dataLabels: {
             show: true,
-            name: {
-              show: true,
-              color: '000000',
+            value: {
+              formatter: function (val) {
+                return '$' + val;
+              },
             },
-          },
+          }
         },
       },
       stroke: {
@@ -154,9 +156,19 @@ export class ZonasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.presentacionesService.getPressData(this.selectedDate).subscribe({
+    this.presentacionesService.obtenerInfo(this.selectedDate).subscribe({
       next: (data) => {
         this.pressData = data;
+        
+        if (this.pressData && this.pressData.pressGeneral2.length > 0) {
+          // Actualiza la lista de zonas con los datos ordenados
+          this.zonas = this.pressData.pressGeneral2
+            .sort((a, b) => parseFloat(b.total) - parseFloat(a.total))
+            .map(zona => ({
+              name: zona.descripcion,
+              progress: parseFloat(zona.total),
+            }));
+        }
 
       console.log(this.pressData.pressGeneral2);
 

@@ -57,7 +57,7 @@ export type ChartOptions = {
 export class DescargarComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
 
-  resizeListener!: () => void;
+  ajustarSize!: () => void;
 
   public chartOptionsGeneral1: Partial<ChartOptions> =
     this.initEmptyChartOptions();
@@ -75,7 +75,7 @@ export class DescargarComponent implements OnInit {
   generandoPDF: boolean = false;
   porcentajeDescarga: number = 0;
 
-  selectedDate: string;
+  fechaSeleccionada: string;
 
   totalGeneral1: { total: number } = { total: 0 };
   totalGeneral2: { total: number } = { total: 0 };
@@ -160,30 +160,50 @@ export class DescargarComponent implements OnInit {
   paginaActual: string = '';
 
   constructor(
-    private renderer: Renderer2,
     private router: Router,
     private alertController: AlertController,
     private modalController: ModalController,
     private presentacionService: PresentacionesService
   ) {
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1); // Obtener fecha de ayer
-    this.selectedDate = yesterday.toISOString(); // Convertir a formato ISO (YYYY-MM-DDTHH:MM:SS)
-    this.selectedDate = this.selectedDate.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
+    const ayer = new Date();
+    ayer.setDate(ayer.getDate() - 1); // Obtener fecha de ayer
+    this.fechaSeleccionada = ayer.toISOString(); // Convertir a formato ISO (YYYY-MM-DDTHH:MM:SS)
+    this.fechaSeleccionada = this.fechaSeleccionada.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
   }
 
   ngOnInit() {
-    this.presentacionService.getPressData(this.selectedDate).subscribe({
+    this.presentacionService.obtenerInfo(this.fechaSeleccionada).subscribe({
       next: (data) => {
         console.log(data);
         this.pressData = data;
 
-        this.updateChartSeries(this.chartOptionsGeneral1, this.pressData.pressGeneral1);
-      this.updateChartSeries(this.chartOptionsGeneral2, this.pressData.pressGeneral2);
-      this.updateChartSeries(this.chartOptionsAcumulados3, this.pressData.pressAcumulados3, true); // Si es acumulado, pasamos true
-      this.updateChartSeries(this.chartOptionsGeneral4, this.pressData.pressGeneral4);
-      this.updateChartSeries(this.chartOptionsAcumulados5, this.pressData.pressAcumulados5, true); // Si es acumulado, pasamos true
-      this.updateChartSeries(this.chartOptionsAcumulados7, this.pressData.pressAcumulados7, true); // Si es acumulado, pasamos true
+        this.actualizarGraficas(
+          this.chartOptionsGeneral1,
+          this.pressData.pressGeneral1
+        );
+        this.actualizarGraficas(
+          this.chartOptionsGeneral2,
+          this.pressData.pressGeneral2
+        );
+        this.actualizarGraficas(
+          this.chartOptionsAcumulados3,
+          this.pressData.pressAcumulados3,
+          true
+        ); // Si es acumulado, pasamos true
+        this.actualizarGraficas(
+          this.chartOptionsGeneral4,
+          this.pressData.pressGeneral4
+        );
+        this.actualizarGraficas(
+          this.chartOptionsAcumulados5,
+          this.pressData.pressAcumulados5,
+          true
+        ); // Si es acumulado, pasamos true
+        this.actualizarGraficas(
+          this.chartOptionsAcumulados7,
+          this.pressData.pressAcumulados7,
+          true
+        ); // Si es acumulado, pasamos true
 
         this.totalGeneral1 = this.sumarTotales(this.pressData.pressGeneral1);
         console.log('Total General 1:', this.totalGeneral1);
@@ -714,24 +734,36 @@ export class DescargarComponent implements OnInit {
       },
     });
 
-    this.adjustChartOptionsForScreenSize();
-    this.resizeListener = () => this.adjustChartOptionsForScreenSize();
-    window.addEventListener('resize', this.resizeListener);
+    this.ajustarGrafica();
+    this.ajustarSize = () => this.ajustarGrafica();
+    window.addEventListener('resize', this.ajustarSize);
   }
 
-  updateChartSeries(chartOptions: Partial<ChartOptions>, data: PressItem[] | PressAcumuladosItem[], isAccumulated = false) {
+  actualizarGraficas(
+    chartOptions: Partial<ChartOptions>,
+    data: PressItem[] | PressAcumuladosItem[],
+    esAcumulado = false
+  ) {
     let sortedData: (PressItem | PressAcumuladosItem)[];
-    
-    if (isAccumulated) {
+
+    if (esAcumulado) {
       sortedData = (data as PressAcumuladosItem[]).sort((a, b) => {
-        return (parseFloat(b.totaluno) + parseFloat(b.totaldos)) - (parseFloat(a.totaluno) + parseFloat(a.totaldos));
+        return (
+          parseFloat(b.totaluno) +
+          parseFloat(b.totaldos) -
+          (parseFloat(a.totaluno) + parseFloat(a.totaldos))
+        );
       });
     } else {
-      sortedData = (data as PressItem[]).sort((a, b) => parseFloat(b.total) - parseFloat(a.total));
+      sortedData = (data as PressItem[]).sort(
+        (a, b) => parseFloat(b.total) - parseFloat(a.total)
+      );
     }
-    
-    const categories = sortedData.map(item => 'descripcion' in item ? item.descripcion : '');
-    const seriesData = sortedData.map(item => {
+
+    const categories = sortedData.map((item) =>
+      'descripcion' in item ? item.descripcion : ''
+    );
+    const seriesData = sortedData.map((item) => {
       if ('totaluno' in item && 'totaldos' in item) {
         return parseFloat(item.totaluno) + parseFloat(item.totaldos);
       } else if ('total' in item) {
@@ -740,19 +772,16 @@ export class DescargarComponent implements OnInit {
         return 0; // O manejar el caso de que no sea ninguno de los tipos esperados
       }
     });
-    
+
     chartOptions.series = [{ name: 'Total', data: seriesData }];
     chartOptions.xaxis = { ...chartOptions.xaxis, categories: categories };
   }
-  
-
-  
 
   ngOnDestroy() {
-    window.removeEventListener('resize', this.resizeListener);
+    window.removeEventListener('resize', this.ajustarSize);
   }
 
-  adjustChartOptionsForScreenSize() {
+  ajustarGrafica() {
     const isMobile = window.innerWidth < 768;
 
     // Suponiendo que tienes una referencia a las opciones de la gráfica en 'this.chartOptions...'
@@ -794,22 +823,54 @@ export class DescargarComponent implements OnInit {
     const modal = await this.modalController.create({
       component: CalendarioModalComponent,
       componentProps: {
-        selectedDate: this.selectedDate, // Pasar la fecha seleccionada al modal
+        fechaSeleccionada: this.fechaSeleccionada,
       },
     });
 
     modal.onDidDismiss().then((data) => {
-      if (data && data.data) {
-        this.selectedDate = data.data.selectedDate;
-        this.updateChartData(this.selectedDate);
+      if (data.data?.fechaSeleccionada) {
+        this.fechaSeleccionada = data.data.fechaSeleccionada;
+        this.presentacionService.obtenerInfo(this.fechaSeleccionada).subscribe({
+          next: (data) => {
+            console.log(data);
+            this.pressData = data;
+            this.actualizarGraficas(
+              this.chartOptionsGeneral1,
+              this.pressData.pressGeneral1
+            );
+            this.actualizarGraficas(
+              this.chartOptionsGeneral2,
+              this.pressData.pressGeneral2
+            );
+            this.actualizarGraficas(
+              this.chartOptionsAcumulados3,
+              this.pressData.pressAcumulados3,
+              true
+            );
+            this.actualizarGraficas(
+              this.chartOptionsGeneral4,
+              this.pressData.pressGeneral4
+            );
+            this.actualizarGraficas(
+              this.chartOptionsAcumulados5,
+              this.pressData.pressAcumulados5,
+              true
+            );
+            this.actualizarGraficas(
+              this.chartOptionsAcumulados7,
+              this.pressData.pressAcumulados7,
+              true
+            );
+          },
+        });
       }
     });
 
-    return await modal.present();
+    await modal.present();
   }
 
-  updateChartData(date: string) {
-    this.presentacionService.getPressData(date).subscribe({
+  private updateChartData(data: string) {
+    this.presentacionService.obtenerInfo(data).subscribe({
       next: (data) => {
         console.log(data);
         this.pressData = data;
@@ -864,7 +925,6 @@ export class DescargarComponent implements OnInit {
       },
     });
   }
-
 
   async generarPDF(): Promise<void> {
     // Crear una alerta para confirmar la descarga del PDF
@@ -1011,8 +1071,8 @@ export class DescargarComponent implements OnInit {
     }
   }
 
-  logSelectedDate() {
-    console.log('Fecha seleccionada:', this.selectedDate);
+  logfechaSeleccionada() {
+    console.log('Fecha seleccionada:', this.fechaSeleccionada);
   }
 
   sumarTotales(datos: PressItem[]): { total: number } {

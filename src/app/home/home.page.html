@@ -1,18 +1,23 @@
 <ion-content color="light" class="content-wrapper" scrollY="true">
   <app-header></app-header>
 
-  <!--Barra de progreso de meta del dia-->
-  <div class="rectangle33">
-    <span>Meta del día:</span>
-    <ion-progress-bar
-      [value]="progress / 100"
-      color="secondary"
-      class="custom-progress-bar"
-    ></ion-progress-bar>
-    <div *ngIf="progress < 100" class="progress-text">
-      En proceso - {{ progress }}%
-    </div>
+<!--Barra de progreso de meta del día-->
+<div class="rectangle33">
+  <span>Meta del día:</span>
+  <ion-progress-bar
+    [value]="progress / 100"
+    color="secondary"
+    class="custom-progress-bar"
+  ></ion-progress-bar>
+  <div *ngIf="progress < 100" class="progress-text">
+    En proceso - ${{ totalGeneral2.total.toLocaleString() }}
   </div>
+  <!-- Si ya se alcanzó la meta, puedes mostrar un mensaje diferente -->
+  <div *ngIf="progress >= 100" class="progress-text">
+    Meta alcanzada - ${{ totalGeneral2.total.toLocaleString() }}
+  </div>
+</div>
+
 
   <!--Componente del mapa-->
   <app-mapa class="map-container"></app-mapa>
@@ -24,8 +29,8 @@
         <ion-card mode="ios" class="hora">
           <ion-card-header> Última actualización </ion-card-header>
           <ion-card-content>
-            <div>{{ selectedDate | date: 'EEEE' }}</div>
-            <div>{{ selectedDate | date: 'dd MMM yyyy' }}</div>
+            <div>{{ fechaSeleccionada | date: 'EEEE' }}</div>
+            <div>{{ fechaSeleccionada | date: 'dd MMM yyyy' }}</div>
           </ion-card-content>
         </ion-card>
       </ion-col>
