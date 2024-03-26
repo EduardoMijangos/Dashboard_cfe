@@ -178,6 +178,13 @@ export class DescargarComponent implements OnInit {
         console.log(data);
         this.pressData = data;
 
+        this.updateChartSeries(this.chartOptionsGeneral1, this.pressData.pressGeneral1);
+      this.updateChartSeries(this.chartOptionsGeneral2, this.pressData.pressGeneral2);
+      this.updateChartSeries(this.chartOptionsAcumulados3, this.pressData.pressAcumulados3, true); // Si es acumulado, pasamos true
+      this.updateChartSeries(this.chartOptionsGeneral4, this.pressData.pressGeneral4);
+      this.updateChartSeries(this.chartOptionsAcumulados5, this.pressData.pressAcumulados5, true); // Si es acumulado, pasamos true
+      this.updateChartSeries(this.chartOptionsAcumulados7, this.pressData.pressAcumulados7, true); // Si es acumulado, pasamos true
+
         this.totalGeneral1 = this.sumarTotales(this.pressData.pressGeneral1);
         console.log('Total General 1:', this.totalGeneral1);
 
@@ -234,11 +241,6 @@ export class DescargarComponent implements OnInit {
           },
           dataLabels: {
             enabled: true,
-            textAnchor: 'start',
-            formatter: function (val, opt) {
-              return opt.w.globals.labels[opt.dataPointIndex] + ':  ' + val;
-            },
-            offsetX: 0,
           },
           xaxis: {
             categories: this.pressData.pressGeneral1.map(
@@ -717,6 +719,35 @@ export class DescargarComponent implements OnInit {
     window.addEventListener('resize', this.resizeListener);
   }
 
+  updateChartSeries(chartOptions: Partial<ChartOptions>, data: PressItem[] | PressAcumuladosItem[], isAccumulated = false) {
+    let sortedData: (PressItem | PressAcumuladosItem)[];
+    
+    if (isAccumulated) {
+      sortedData = (data as PressAcumuladosItem[]).sort((a, b) => {
+        return (parseFloat(b.totaluno) + parseFloat(b.totaldos)) - (parseFloat(a.totaluno) + parseFloat(a.totaldos));
+      });
+    } else {
+      sortedData = (data as PressItem[]).sort((a, b) => parseFloat(b.total) - parseFloat(a.total));
+    }
+    
+    const categories = sortedData.map(item => 'descripcion' in item ? item.descripcion : '');
+    const seriesData = sortedData.map(item => {
+      if ('totaluno' in item && 'totaldos' in item) {
+        return parseFloat(item.totaluno) + parseFloat(item.totaldos);
+      } else if ('total' in item) {
+        return parseFloat(item.total);
+      } else {
+        return 0; // O manejar el caso de que no sea ninguno de los tipos esperados
+      }
+    });
+    
+    chartOptions.series = [{ name: 'Total', data: seriesData }];
+    chartOptions.xaxis = { ...chartOptions.xaxis, categories: categories };
+  }
+  
+
+  
+
   ngOnDestroy() {
     window.removeEventListener('resize', this.resizeListener);
   }
@@ -833,6 +864,7 @@ export class DescargarComponent implements OnInit {
       },
     });
   }
+
 
   async generarPDF(): Promise<void> {
     // Crear una alerta para confirmar la descarga del PDF

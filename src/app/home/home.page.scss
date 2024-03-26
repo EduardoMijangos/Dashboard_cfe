@@ -1,22 +1,20 @@
-/* Estilos para pantallas grandes */
 .content-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   min-height: 100vh;
+  padding: 20px 0;
 }
 
 .map-container {
   width: 100%;
   max-width: 800px;
   margin: 20px auto;
-  /* Centra horizontalmente y agrega margen superior */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  /* Ajusta según sea necesario */
+  margin-bottom: 1rem;
 }
 
 .chart-container {
@@ -31,11 +29,12 @@
 .top-right,
 .bottom-left,
 .rectangle33 {
-  background-color: #caece0;
+  background-color: transparent;
   border-radius: 10px;
   height: auto;
   width: auto;
-  margin: 20px 0;
+  margin: 20px;
+  padding: 20px;
 }
 
 .top-right {
@@ -64,20 +63,15 @@
 .rectangle33 {
   background-color: transparent;
   max-width: 500px;
-  /* Ancho máximo para evitar que la barra se estire demasiado en pantallas grandes */
   width: 90%;
-  /* Ancho del contenedor en porcentaje */
   border-radius: 20px;
-  margin: 20px auto;
-  margin-bottom: 150px;
+  margin: 0 auto 20px;  
+  margin-bottom: 5rem;
   font-family: Helvetica LT Std;
   text-transform: uppercase;
   display: flex;
-  /* Utilizamos flexbox para centrar verticalmente */
   flex-direction: column;
-  /* Alineamos los elementos en columna */
   align-items: center;
-  /* Centramos los elementos horizontalmente */
 }
 
 .rectangle33 .progress-text {
@@ -95,13 +89,15 @@
 
 .hora {
   background-color: #CAEDE0;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  width: auto;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   text-align: center;
   align-items: center;
-  font-family: Helvetica LT Std;
+  font-family: 'Helvetica LT Std', sans-serif;
   text-transform: uppercase;
-  margin-top: 20px;
+  margin: 20px auto;
+  padding: 20px; /* Agregado para dar espacio dentro de la tarjeta */
+  width: 100%;
+  max-width: 500px; /* Límite de ancho para la tarjeta de hora */
 }
 
 ion-footer {
@@ -130,6 +126,38 @@ span {
 
 /* Estilos para pantallas de máximo 1600px */
 @media only screen and (max-width: 1600px) {
+
+  .chart-container {
+    flex-direction: column; /* Cambia a columna para alternar entre gráficos circulares y de barras */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 95%;
+  }
+
+  chart-title {
+    text-align: center; /* Centra el título */
+    margin-bottom: 10px; /* Espacio debajo del título */
+    font-size: 1.2em; /* Tamaño del título */
+  }
+  
+  .chart {
+    width: 100%; /* La gráfica usa todo el ancho disponible del contenedor */
+  }
+  
+  .chart-icons {
+    position: absolute; /* Posiciona los íconos de manera absoluta dentro del contenedor */
+    top: 10px; /* Espacio desde la parte superior del contenedor */
+    right: 10px; /* Espacio desde la parte derecha del contenedor */
+    /* Agrega estilos para los íconos específicos si es necesario */
+  }
+  
+  /* Estilos para las etiquetas de las barras de la gráfica, si es necesario */
+  .bar-label {
+    font-size: 0.8em; /* Tamaño de la etiqueta */
+    text-align: center; /* Centra el texto de la etiqueta */
+  }
+
   .content-wrapper {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -137,6 +165,7 @@ span {
 
   .map-container {
     margin-top: 20px;
+    max-width: 90%;
   }
 
   .top-right,
@@ -149,12 +178,12 @@ span {
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 100%;
   }
 
   .hora {
-    width: 100%;
+    max-width: 95%;
     position: relative;
-    display: inline-block;
     align-items: center;
     justify-content: center;
   }
@@ -184,7 +213,5 @@ span {
     margin-bottom: 20px;
   }
 
-  .chart-container {
-    margin-top: 20px;
-  }
+
 }

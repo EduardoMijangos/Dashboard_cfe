@@ -21,9 +21,6 @@ import {
   ApexStroke,
 } from 'ng-apexcharts';
 
-//import * as jsPDF from 'jspdf';
-import { jsPDF } from 'jspdf';
-import domtoimage from 'dom-to-image';
 import { PresentacionesService } from '../services/presentaciones.service';
 import {
   PressAcumuladosItem,
@@ -47,6 +44,7 @@ export type ChartOptionsCircle = {
   plotOptions: ApexPlotOptions;
   fill: ApexFill;
   stroke: ApexStroke;
+  ready: true;
 };
 
 export type ChartOptions = {
@@ -232,6 +230,7 @@ export class HomePage implements OnInit {
 
     //Grafica de Radial de zona con mas ingresos
     this.chartOptionsmascircular = {
+      ready: true,
       series: [90],
       chart: {
         dropShadow: {
@@ -290,6 +289,7 @@ export class HomePage implements OnInit {
 
     //Grafica de Radial de zona con menos ingresos
     this.chartOptionsmenoscircular = {
+      ready: true,
       series: [10],
       chart: {
         dropShadow: {
@@ -404,6 +404,9 @@ export class HomePage implements OnInit {
 
           console.log('mas ingresos', top5);
           console.log('menos ingresos', bottom5);
+          console.log('unica mas', maxIncome);
+          console.log('unica menos', minIncome);
+          
         }
       },
     });

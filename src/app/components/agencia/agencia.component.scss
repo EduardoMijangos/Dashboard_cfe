@@ -10,28 +10,52 @@ h2 {
   font-family: 'Helvetica LT Std', sans-serif;
 }
 
-ion-table {
-  width: 10%;
-  border-collapse: collapse;
+.chart-col {
+  margin-bottom: 16px;
+  padding-right: 16px;
 }
 
+// Asegúrate de que ion-grid no tenga un ancho de 10% a menos que sea específicamente necesario
+ion-grid {
+  width: auto; // Se ajustó al 100% para que ocupe todo el ancho disponible
+  border-collapse: collapse;
+  
+}
 
-ion-col {
+// Los estilos de ion-col deben ser específicos para no aplicarse a todas las columnas
+ion-col.zona-col {
   background-color: #CAEDE0;
 }
 
+// Clase textoTabla para elementos de texto dentro de la tabla
 .textoTabla {
-  color: #000000;
-  font-family: Helvetica LT Std;
+  color: #000;
+  font-family: 'Helvetica LT Std', sans-serif;
   text-transform: capitalize;
   border-radius: 10px;
 }
 
+// Clase para los contenedores de la barra de progreso
+.progress-container {
+  width: 100%;
+  .custom-progress-bar {
+    height: 30px;
+    border-radius: 15px;
+  }
+  .progress-text {
+    font-size: 12px;
+    color: #333;
+    text-align: center;
+    margin-top: 5px;
+  }
+}
+
+// Los estilos de sombra y demás para el contenedor de la barra de progreso
 .rectangle33 {
   background-color: transparent;
   max-width: 500px;
   width: 90%;
-  border-radius: 20px; // Este valor fue sobreescrito más abajo, se deja para mantener el diseño original
+  border-radius: 20px;
   margin: 20px auto;
   margin-bottom: 150px;
   font-family: 'Helvetica LT Std', sans-serif;
@@ -40,30 +64,20 @@ ion-col {
   flex-direction: column;
   align-items: center;
   height: auto;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.progress-text {
-  font-size: 12px;
-  color: #333;
-  text-align: center;
-  margin-top: 5px;
-}
-
-.custom-progress-bar {
-  width: 100%;
-  height: 30px;
-  border-radius: 15px;
-}
-
+// Estilos para etiquetas (si es que las hay en tu HTML)
 label {
   color: #000;
 }
 
+// Estilos para el contenedor principal
 .container {
-  padding: 0; // Cambiado a 0 porque 'auto' no es un valor válido para padding
+  padding: 0; // Ajuste según sea necesario
 }
 
-ion-content{
+// Posicionamiento relativo para el contenido de Ionic
+ion-content {
   position: relative;
 }

@@ -119,12 +119,9 @@
           Ingreso Nacional <br />
           App CFEContigo
         </h3>
-        <h4>
-          01 de enero al <br />
-          18 de febrero 2024
-        </h4>
-        <div class="total-display">
-          Total: {{ totalGeneral1.total.toLocaleString() }}
+        <h4>{{ selectedDate | date: 'mediumDate' }}</h4>
+        <div class="chart-title">
+          Total: {{ totalGeneral1.total.toLocaleString() }}<br />
         </div>
       </div>
 
@@ -174,10 +171,7 @@
       App CFEContigo
     </h3>
 
-    <h4>
-      01 de enero al <br />
-      18 de febrero 2024
-    </h4>
+    <h4>{{ selectedDate | date }}</h4>
 
     <div class="chart-title">
       Total: {{ totalGeneral2.total.toLocaleString() }}<br />
@@ -229,10 +223,7 @@
       App CFEContigo
     </h3>
 
-    <h4>
-      01 de enero al <br />
-      18 de febrero 2024
-    </h4>
+    <h4>{{ selectedDate | date }}</h4>
 
     <div class="chart-title">
       Total, Recuperado APP: {{ totalesAcumulados3.total1.toLocaleString()
@@ -287,7 +278,7 @@
       App CFEContigo
     </h3>
 
-    <h4>01 al 18 Febrero 2024</h4>
+    <h4>{{ selectedDate | date }}</h4>
 
     <div class="chart-title">
       Total: {{ totalGeneral4.total.toLocaleString() }}<br />
@@ -338,7 +329,7 @@
       App CFEContigo
     </h3>
 
-    <h4>01 al 18 Febrero 2024</h4>
+    <h4>{{ selectedDate | date }}</h4>
 
     <div class="chart-title">
       Total, Recuperado APP: {{ totalesAcumulados5.total1.toLocaleString()
@@ -393,10 +384,7 @@
       Div. Sureste
     </h3>
 
-    <h4>
-      18 de febrero 2023 <br />
-      al 18 de febrero 2024
-    </h4>
+    <h4>{{ selectedDate | date }}</h4>
 
     <div class="chart-title">
       Total, Recuperado APP: {{ totalesAcumulados7.total1.toLocaleString()

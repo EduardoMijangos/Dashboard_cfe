@@ -1,32 +1,18 @@
 <ion-content color="light">
   <app-header></app-header>
 
-  <h1>Zona: {{ currentZona }}</h1>
+  <div class="page-title">
+    <h1>Zona: {{ currentZona }}</h1>
+  </div>
+
+  <div class="section-title">
+    <h2>Agencias:</h2>
+  </div>
 
   <ion-grid fixed>
-    <h2>Agencias:</h2>
-
     <ion-row>
-      <!--Grafica-->
-      <ion-col
-        size="12"
-        size-md="9"
-        push-md="3"
-        style="margin-bottom: 16px; padding-right: 16px"
-      >
-        <apx-chart
-          [series]="chartOptions.series"
-          [chart]="chartOptions.chart"
-          [xaxis]="chartOptions.xaxis"
-          [dataLabels]="chartOptions.dataLabels"
-          [grid]="chartOptions.grid"
-          [stroke]="chartOptions.stroke"
-          [title]="chartOptions.title"
-        ></apx-chart>
-      </ion-col>
-
       <!-- Tabla -->
-      <ion-col size="12" size-md="3" pull-md="10">
+      <ion-col size="12" size-md="3" class="table-col">
         <ion-grid>
           <ion-row class="textoTabla">
             <ion-col>Zona</ion-col>
@@ -37,9 +23,9 @@
             <ion-col>
               <div class="progress-container">
                 <ion-progress-bar
-                  color="secondary"
                   class="custom-progress-bar"
-                  [value]="zona.progress ? zona.progress / 100 : undefined"
+                  color="secondary"
+                  [value]="zona.progress ? zona.progress / 100 : 0"
                 ></ion-progress-bar>
                 <div *ngIf="zona.progress < 100" class="progress-text">
                   En proceso - {{ zona.progress }}%
@@ -48,6 +34,19 @@
             </ion-col>
           </ion-row>
         </ion-grid>
+      </ion-col>
+
+      <!-- Gráfica -->
+      <ion-col size="12" size-md="9" class="chart-col">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [dataLabels]="chartOptions.dataLabels"
+          [grid]="chartOptions.grid"
+          [stroke]="chartOptions.stroke"
+          [title]="chartOptions.title"
+        ></apx-chart>
       </ion-col>
     </ion-row>
   </ion-grid>

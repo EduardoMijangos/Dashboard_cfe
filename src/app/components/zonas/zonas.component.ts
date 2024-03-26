@@ -156,8 +156,18 @@ export class ZonasComponent implements OnInit {
   ngOnInit() {
     this.presentacionesService.getPressData(this.selectedDate).subscribe({
       next: (data) => {
-        console.log('datos recibidos', data);
         this.pressData = data;
+
+      console.log(this.pressData.pressGeneral2);
+
+      if (this.pressData && this.pressData.pressGeneral2.length > 0) {
+        this.zonas = this.pressData.pressGeneral2.map(zona => {
+          return {
+            name: zona.descripcion,
+            progress: parseFloat(zona.total)
+          };
+        });
+      }
 
         if (this.pressData && this.pressData.pressGeneral2.length > 0) {
           const sorted = [...this.pressData.pressGeneral2].sort(
@@ -172,6 +182,7 @@ export class ZonasComponent implements OnInit {
           // Actualiza la gráfica circular de la zona con menos ingresos
           this.chartOptionsZonamenos.series = [parseFloat(minIncome.total)];
           this.chartOptionsZonamenos.labels = [minIncome.descripcion];
+          console.log('datos recibidos', maxIncome, minIncome);
           error: (error: any) => {
             console.error(
               'Hubo un error al recuperar los datos de la API',

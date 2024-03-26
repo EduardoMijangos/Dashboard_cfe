@@ -1,31 +1,60 @@
-/* Estilos para la tabla */
-ion-table {
-  width: 10%;
-  border-collapse: collapse;
-}
-
-/* Estilos para las celdas */
-ion-col {
-  padding: 8px;
-  text-align: left;
-  cursor: pointer;
-  width: auto;
-}
-
-/* Estilo para la primera columna */
-ion-col {
-  background-color: #CAEDE0;
-  /* Color de fondo para la primera columna */
-}
-
-/* Estilos para el texto en la tabla */
-.textoTabla {
-  color: #000000;
-  font-family: Helvetica LT Std;
-  text-transform: capitalize;
-  border-radius: 10px;
-}
-
 ion-content {
+  --background: color(light); // Asegúrate de que 'light' está definido en tus variables de tema
   position: relative;
+}
+
+// Estilos para la tabla
+ion-grid {
+  // 45rem es extremadamente grande para un margen y puede causar que el contenido no sea visible
+  // Si buscas separar ligeramente la tabla del resto del contenido, podrías usar un margen más pequeño
+  padding: 0 1rem; // Añade padding horizontalmente si es necesario
+
+  ion-row {
+    --ion-grid-column-padding: 0; // Elimina el padding por defecto de las columnas
+    align-items: center;
+
+    &.header-row {
+      border-radius: 10px;
+      font-family: 'Helvetica LT Std', sans-serif;
+      text-transform: capitalize;
+      background-color: #CAEDE0; // Fondo para las filas del encabezado
+
+      ion-col {
+        padding: 8px;
+        text-align: left;
+      }
+    }
+
+    &.data-row {
+      cursor: pointer; // Estilos para las filas de datos
+
+      ion-col {
+        padding: 8px;
+        text-align: left;
+        // Fondo para las filas de datos si se necesita distinguir
+
+      }
+    }
+  }
+}
+
+// Estilos para la gráfica
+apx-chart {
+  width: 100%; // La gráfica utiliza todo el ancho disponible
+  // Si necesitas añadir un margen horizontal
+  margin: 0 1rem;
+}
+
+// Media query para tamaños más grandes donde la tabla y la gráfica se muestran lado a lado
+@media screen and (min-width: 768px) {
+  .table-col {
+    width: 20%; // 25% del ancho para la tabla
+    margin-right: auto; // Margen a la derecha de la tabla
+    background-color: #CAEDE0; // Fondo para la columna de la tabla
+  }
+
+  .chart-col {
+    width: calc(75% - 1rem); // 75% del ancho para la gráfica menos el margen de la tabla
+    // No se necesita padding-right aquí ya que el margen de .table-col ya maneja el espacio
+  }
 }

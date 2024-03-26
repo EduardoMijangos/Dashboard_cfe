@@ -18,12 +18,12 @@
             <ion-col>
               <div class="progress-container">
                 <ion-progress-bar
-                  color="secondary"
+                  color="primary"
                   class="custom-progress-bar"
                   [value]="zona.progress ? zona.progress / 100 : undefined"
                 ></ion-progress-bar>
                 <div *ngIf="zona.progress < 100" class="progress-text">
-                  En proceso - {{ zona.progress }}%
+                  En proceso - {{ zona.progress }}
                 </div>
               </div>
             </ion-col>
@@ -54,7 +54,7 @@
         ></apx-chart>
 
         <!-- Espacio entre gráficas -->
-        <div style="margin-top: 20px"></div>
+        <div style="margin-top: 1rem;"></div>
 
         <!-- Gráfica de menos ingresos -->
         <apx-chart
@@ -77,6 +77,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-content>
 
-<app-footer></app-footer>
+</ion-content>

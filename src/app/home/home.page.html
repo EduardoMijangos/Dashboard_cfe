@@ -49,14 +49,11 @@
   </apx-chart>
 
   <!--Grafica de barras de zonas con mas ingresos-->
-  <ion-card
+  <div
     *ngIf="chartOptions"
-    class="chart-container top-right"
-    mode="ios"
-    id="chart"
-  >
-    <h3>Zonas con más Ingresos</h3>
-    <apx-chart
+    class="chart-container top-right">
+      Zonas con mas Ingresos
+      <apx-chart
       *ngIf="chartOptions.series && chartOptions.chart && chartOptions.plotOptions && chartOptions.dataLabels && chartOptions.yaxis && chartOptions.xaxis && chartOptions.fill"
       [series]="chartOptions.series"
       [chart]="chartOptions.chart"
@@ -68,7 +65,7 @@
       [height]="chartOptions.chart.height"
     >
     </apx-chart>
-  </ion-card>
+  </div>
 
   <!--Grafica circular de zona con menos ingresos-->
   <apx-chart
@@ -87,13 +84,14 @@
   </apx-chart>
 
   <!--Grafica de barras de zonas con menos ingresos-->
-  <ion-card
+  <div
     *ngIf="chartOptionsmenos"
     class="chart-container bottom-left"
     mode="ios"
     id="chart"
   >
-    <h3>Zonas con menos Ingresos</h3>
+        Zonas con menos Ingresos
+
     <apx-chart
       id="chartSection"
       *ngIf="chartOptionsmenos.series && chartOptionsmenos.chart && chartOptionsmenos.plotOptions && chartOptionsmenos.dataLabels
@@ -109,5 +107,5 @@
       [stroke]="chartOptionsmenoscircular.stroke"
     >
     </apx-chart>
-  </ion-card>
+  </div>
 </ion-content>
