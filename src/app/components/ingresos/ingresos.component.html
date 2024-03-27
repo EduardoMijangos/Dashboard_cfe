@@ -3,20 +3,20 @@
 
   <ion-grid fixed>
     <ion-row>
-      <!-- Tabla -->
-      <ion-col size="12" size-lg="3" class="table-col">
-        <ion-grid>
-          <ion-row class="header-row">
-            <ion-col>Mes</ion-col>
-            <ion-col>Total</ion-col>
-          </ion-row>
-          <!-- Repite esta fila para cada mes -->
-          <ion-row *ngFor="let month of months" (click)="verIngresosFecha(month)" class="data-row">
-            <ion-col>{{ month }}</ion-col>
-            <ion-col> {{ 'total' }} </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-col>
+        <!-- Tabla -->
+        <ion-col size="12" size-lg="3" class="table-col">
+          <ion-grid>
+            <ion-row class="header-row">
+              <ion-col>Mes</ion-col>
+              <ion-col>Total</ion-col>
+            </ion-row>
+            <!-- Repite esta fila para cada mes -->
+            <ion-row *ngFor="let month of months" (click)="verIngresosFecha(month)" class="data-row">
+              <ion-col>{{ month }}</ion-col>
+              <ion-col> {{ 'total' }} </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
 
       <!-- Gráfica -->
       <ion-col size="12" size-lg="9" class="chart-col">

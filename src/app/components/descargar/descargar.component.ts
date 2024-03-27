@@ -57,7 +57,7 @@ export type ChartOptions = {
 export class DescargarComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
 
-  ajustarSize!: () => void;
+  resizeListener!: () => void;
 
   public chartOptionsGeneral1: Partial<ChartOptions> =
     this.initEmptyChartOptions();
@@ -75,7 +75,7 @@ export class DescargarComponent implements OnInit {
   generandoPDF: boolean = false;
   porcentajeDescarga: number = 0;
 
-  fechaSeleccionada: string;
+  selectedDate: string;
 
   totalGeneral1: { total: number } = { total: 0 };
   totalGeneral2: { total: number } = { total: 0 };
@@ -165,14 +165,14 @@ export class DescargarComponent implements OnInit {
     private modalController: ModalController,
     private presentacionService: PresentacionesService
   ) {
-    const ayer = new Date();
-    ayer.setDate(ayer.getDate() - 1); // Obtener fecha de ayer
-    this.fechaSeleccionada = ayer.toISOString(); // Convertir a formato ISO (YYYY-MM-DDTHH:MM:SS)
-    this.fechaSeleccionada = this.fechaSeleccionada.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1); // Obtener fecha de ayer
+    this.selectedDate = yesterday.toISOString(); // Convertir a formato ISO (YYYY-MM-DDTHH:MM:SS)
+    this.selectedDate = this.selectedDate.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
   }
 
   ngOnInit() {
-    this.presentacionService.obtenerInfo(this.fechaSeleccionada).subscribe({
+    this.presentacionService.obtenerInfo(this.selectedDate).subscribe({
       next: (data) => {
         console.log(data);
         this.pressData = data;
@@ -268,7 +268,7 @@ export class DescargarComponent implements OnInit {
             ),
             labels: {
               formatter: function (val) {
-                return val + 'K';
+                return `${parseFloat(val).toFixed(3)}`;
               },
             },
           },
@@ -345,23 +345,27 @@ export class DescargarComponent implements OnInit {
             categories: this.pressData.pressGeneral2.map(
               (item) => item.descripcion
             ),
-            labels: {
+            labels:{
               formatter: function (val) {
-                return val + 'K';
+                return val; // Asegúrate de que 'val' es una cadena
               },
-            },
+            }
           },
           yaxis: {
-            labels: {
+            labels:{
               formatter: function (val) {
-                return val.toLocaleString();
+                // Convertir a número, redondear a 3 dígitos decimales, y asegurar devolver una cadena
+                const numVal = Number(val);
+                return isNaN(numVal) ? `${val}` : `${numVal.toFixed(3)}K`;
               },
-            },
+            }
           },
           tooltip: {
             y: {
               formatter: function (val) {
-                return val + 'K';
+                // Convertir a número, redondear a 3 dígitos decimales, y asegurar devolver una cadena
+                const numVal = Number(val);
+                return isNaN(numVal) ? `${val}` : `${numVal.toFixed(3)}K`;
               },
             },
           },
@@ -433,7 +437,7 @@ export class DescargarComponent implements OnInit {
             ),
             labels: {
               formatter: function (val) {
-                return val + 'K';
+                return `${parseFloat(val).toFixed(3)}`;
               },
             },
           },
@@ -512,7 +516,7 @@ export class DescargarComponent implements OnInit {
             ),
             labels: {
               formatter: function (val) {
-                return val + 'K';
+                return `${parseFloat(val).toFixed(3)}`;
               },
             },
           },
@@ -599,7 +603,7 @@ export class DescargarComponent implements OnInit {
             ),
             labels: {
               formatter: function (val) {
-                return val + 'K';
+                return `${parseFloat(val).toFixed(3)}`;
               },
             },
           },
@@ -691,7 +695,7 @@ export class DescargarComponent implements OnInit {
             ),
             labels: {
               formatter: function (val) {
-                return val + 'K';
+                return `${parseFloat(val).toFixed(3)}`;
               },
             },
           },
@@ -734,19 +738,19 @@ export class DescargarComponent implements OnInit {
       },
     });
 
-    this.ajustarGrafica();
-    this.ajustarSize = () => this.ajustarGrafica();
-    window.addEventListener('resize', this.ajustarSize);
+    this.adjustChartOptionsForScreenSize();
+    this.resizeListener = () => this.adjustChartOptionsForScreenSize();
+    window.addEventListener('resize', this.resizeListener);
   }
 
   actualizarGraficas(
     chartOptions: Partial<ChartOptions>,
     data: PressItem[] | PressAcumuladosItem[],
-    esAcumulado = false
+    isAccumulated = false
   ) {
     let sortedData: (PressItem | PressAcumuladosItem)[];
 
-    if (esAcumulado) {
+    if (isAccumulated) {
       sortedData = (data as PressAcumuladosItem[]).sort((a, b) => {
         return (
           parseFloat(b.totaluno) +
@@ -778,10 +782,10 @@ export class DescargarComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    window.removeEventListener('resize', this.ajustarSize);
+    window.removeEventListener('resize', this.resizeListener);
   }
 
-  ajustarGrafica() {
+  adjustChartOptionsForScreenSize() {
     const isMobile = window.innerWidth < 768;
 
     // Suponiendo que tienes una referencia a las opciones de la gráfica en 'this.chartOptions...'
@@ -823,14 +827,14 @@ export class DescargarComponent implements OnInit {
     const modal = await this.modalController.create({
       component: CalendarioModalComponent,
       componentProps: {
-        fechaSeleccionada: this.fechaSeleccionada,
+        selectedDate: this.selectedDate,
       },
     });
 
     modal.onDidDismiss().then((data) => {
-      if (data.data?.fechaSeleccionada) {
-        this.fechaSeleccionada = data.data.fechaSeleccionada;
-        this.presentacionService.obtenerInfo(this.fechaSeleccionada).subscribe({
+      if (data.data?.selectedDate) {
+        this.selectedDate = data.data.selectedDate;
+        this.presentacionService.obtenerInfo(this.selectedDate).subscribe({
           next: (data) => {
             console.log(data);
             this.pressData = data;
@@ -1071,8 +1075,8 @@ export class DescargarComponent implements OnInit {
     }
   }
 
-  logfechaSeleccionada() {
-    console.log('Fecha seleccionada:', this.fechaSeleccionada);
+  logSelectedDate() {
+    console.log('Fecha seleccionada:', this.selectedDate);
   }
 
   sumarTotales(datos: PressItem[]): { total: number } {

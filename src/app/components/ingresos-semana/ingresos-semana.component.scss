@@ -13,8 +13,13 @@ ion-col {
   background-color: #CAEDE0
 }
 
+h1 {
+  text-align: center;
+  font-family: 'Helvetica LT Std', sans-serif;
+}
+
 #chart {
-  max-width: 650px;
+  max-width: 100%;
   margin: 35px auto;
 }
 

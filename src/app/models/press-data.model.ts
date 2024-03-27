@@ -11,6 +11,7 @@ export interface PressGeneralItem {
   }
   
   export interface PressData {
+    totalIngresos: any;
     pressGeneral1: PressGeneralItem[];
     pressGeneral2: PressGeneralItem[];
     pressGeneral4: PressGeneralItem[];

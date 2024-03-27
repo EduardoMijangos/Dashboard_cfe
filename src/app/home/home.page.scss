@@ -14,29 +14,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
 }
 
 .chart-container {
   width: auto;
   max-width: 800px;
-  margin: auto;
-  margin-top: 20px;
-  position: absolute;
-  flex: 2;
+  margin: 20px auto;
+  display: block; /* Cambiado de absolute a block para mejorar el flujo del documento */
 }
 
+/* Ajustar elementos flotantes para pantallas pequeñas y medianas */
 .top-right,
 .bottom-left,
-.rectangle33 {
+.top-left,
+.bottom-right {
+  position: absolute;
   background-color: transparent;
   border-radius: 10px;
-  height: auto;
-  width: auto;
-  margin: 20px;
-  padding: 20px;
+  padding: 10px;
+  margin: 10px;
 }
 
+/* Establecer márgenes y posiciones específicos para cada elemento flotante */
 .top-right {
   margin-top: 6.5rem;
   top: 50px;
@@ -50,7 +49,6 @@
 
 .top-left {
   margin-top: 6.5rem;
-  background-color: transparent;
   top: 30px;
   left: 10px;
 }
@@ -60,13 +58,13 @@
   right: 10px;
 }
 
+/* Estilos para contenedores de widgets que podrían ser gráficos o tarjetas de información */
 .rectangle33 {
   background-color: transparent;
   max-width: 500px;
-  width: 90%;
+  width: 90%; /* Asegúrese de que se ajusten bien en pantallas más pequeñas */
   border-radius: 20px;
-  margin: 0 auto 20px;  
-  margin-bottom: 5rem;
+  margin: 1rem auto; /* Ajustar margen superior e inferior */
   font-family: Helvetica LT Std;
   text-transform: uppercase;
   display: flex;
@@ -74,19 +72,22 @@
   align-items: center;
 }
 
+/* Simplificar y mejorar la legibilidad del texto de progreso */
 .rectangle33 .progress-text {
-  font-size: 12px;
+  font-size: 1rem; /* Aumentar el tamaño de fuente para mejor legibilidad */
   color: #333;
   text-align: center;
-  margin-top: 5px;
+  margin-top: 0.5rem;
 }
 
+/* Barra de progreso debe ser flexible y adaptarse al contenedor padre */
 .custom-progress-bar {
   width: 100%;
-  height: 30px;
+  height: 20px; /* Reducir la altura para pantallas más pequeñas */
   border-radius: 15px;
 }
 
+/* Ajustes para la tarjeta de la hora */
 .hora {
   background-color: #CAEDE0;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -95,44 +96,73 @@
   font-family: 'Helvetica LT Std', sans-serif;
   text-transform: uppercase;
   margin: 20px auto;
-  padding: 20px; /* Agregado para dar espacio dentro de la tarjeta */
-  width: 100%;
-  max-width: 500px; /* Límite de ancho para la tarjeta de hora */
+  padding: 10px; /* Ajuste de padding para pantallas pequeñas */
+  width: 80%; /* Permitir que crezca hasta un 80% en pantallas más pequeñas */
+  max-width: 500px;
 }
 
+/* Estilos para el footer */
 ion-footer {
   color: #008e5a;
-  height: 78px;
-  width: 1920px;
-}
-
-h3 {
-  text-align: center;
-  font-family: Helvetica LT Std;
+  height: auto; /* Cambiar de altura fija a auto para ajustar contenido */
+  width: 100%; /* Full width */
 }
 
 .fixed-footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  z-index: 9999999999999999999999999;
+  z-index: 10; /* Reducción del z-index a un valor razonable */
 }
 
-span {
+/* Estilos de texto general */
+h3, span {
   text-align: center;
 }
 
 
+@media only screen and (max-width: 1500px) {
+  .map-container{
+    width: 40%;
+    height: 60%;
+    margin: 20px auto;
+  }
+  .chart-container {
+    width: 30%;
+    height: 30%; /* Permite que ocupen el ancho disponible */
+    margin: 40px auto; /* Reduce el margen en dispositivos más pequeños */
+  }
 
-/* Estilos para pantallas de máximo 1600px */
-@media only screen and (max-width: 1600px) {
+  .top-left, 
+  .top-right{
+    margin: 5em;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    padding: auto;
+  }
 
+  .bottom-left,
+  .bottom-right{
+    margin: 5em;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    padding: auto;
+  }
+}
+
+
+@media only screen and (max-width: 1000px) {
+
+  .map-container{
+    width: 90%;
+  }
+  
   .chart-container {
     flex-direction: column; /* Cambia a columna para alternar entre gráficos circulares y de barras */
     align-items: center;
     justify-content: center;
     text-align: center;
-    max-width: 95%;
+    width: 100%;
   }
 
   chart-title {
@@ -182,11 +212,11 @@ span {
   }
 
   .hora {
-    max-width: 95%;
+    width: 95%; /* Aumenta el ancho para pantallas muy pequeñas */
+    margin: 10px auto; /* Reduce el margen */
     position: relative;
-    align-items: center;
-    justify-content: center;
   }
+
 
   .top-right {
     top: 30px;
