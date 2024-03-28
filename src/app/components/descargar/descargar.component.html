@@ -121,7 +121,7 @@
         </h3>
         <h4>{{ selectedDate | date: 'mediumDate' }}</h4>
         <div class="chart-title">
-          Total: {{ totalGeneral1.total.toLocaleString() }}<br />
+          Total: ${{ transformValue(totalGeneral1.total) }} 
         </div>
       </div>
 
@@ -174,7 +174,7 @@
     <h4>{{ selectedDate | date }}</h4>
 
     <div class="chart-title">
-      Total: {{ totalGeneral2.total.toLocaleString() }}<br />
+      Total: {{ transformValue(totalGeneral2.total) }} 
     </div>
     <br />
     <apx-chart
@@ -226,9 +226,9 @@
     <h4>{{ selectedDate | date }}</h4>
 
     <div class="chart-title">
-      Total, Recuperado APP: {{ totalesAcumulados3.total1.toLocaleString()
+      Total, Recuperado APP: {{ transformValue(totalesAcumulados3.total1)
       }}<br />
-      Total, Facturado: {{ totalesAcumulados3.total2.toLocaleString() }}
+      Total, Facturado: {{ transformValue(totalesAcumulados3.total2) }}
     </div>
     <br />
 
@@ -281,7 +281,7 @@
     <h4>{{ selectedDate | date }}</h4>
 
     <div class="chart-title">
-      Total: {{ totalGeneral4.total.toLocaleString() }}<br />
+      Total: {{ transformValue(totalGeneral4.total) }} 
     </div>
     <br />
 
@@ -331,10 +331,10 @@
 
     <h4>{{ selectedDate | date }}</h4>
 
-    <div class="chart-title">
-      Total, Recuperado APP: {{ totalesAcumulados5.total1.toLocaleString()
+    <div class="chart-title" >
+      Total, Recuperado APP: {{ transformValue(totalesAcumulados5.total1) 
       }}<br />
-      Total, Facturado: {{ totalesAcumulados5.total2.toLocaleString() }}
+      Total, Facturado: {{ transformValue(totalesAcumulados5.total2) }}
     </div>
     <br />
     <apx-chart
@@ -387,9 +387,9 @@
     <h4>{{ selectedDate | date }}</h4>
 
     <div class="chart-title">
-      Total, Recuperado APP: {{ totalesAcumulados7.total1.toLocaleString()
+      Total, Recuperado APP: {{ transformValue(totalesAcumulados7.total1)
       }}<br />
-      Total, Facturado: {{ totalesAcumulados7.total2.toLocaleString() }}
+      Total, Facturado: {{ transformValue(totalesAcumulados7.total2) }}
     </div>
     <br />
     <apx-chart

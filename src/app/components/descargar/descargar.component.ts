@@ -134,7 +134,7 @@ export class DescargarComponent implements OnInit {
       tooltip: {
         y: {
           formatter: function (val) {
-            return val + 'K';
+            return '$' + val;
           },
         },
       },
@@ -235,13 +235,13 @@ export class DescargarComponent implements OnInit {
             {
               name: 'Total',
               data: this.pressData.pressGeneral1.map((item) =>
-                parseFloat(item.total)
+                parseFloat(  parseFloat(item.total).toFixed(3))
               ),
             },
           ],
           chart: {
             type: 'bar',
-            height: 600,
+            height: 700,
             toolbar: {
               show: false,
             },
@@ -268,7 +268,7 @@ export class DescargarComponent implements OnInit {
             ),
             labels: {
               formatter: function (val) {
-                return `${parseFloat(val).toFixed(3)}`;
+                return '$' +`${parseFloat(val).toFixed(3)}`;
               },
             },
           },
@@ -282,7 +282,7 @@ export class DescargarComponent implements OnInit {
           tooltip: {
             y: {
               formatter: function (val) {
-                return val + 'K';
+                return '$' + val;
               },
             },
           },
@@ -312,7 +312,7 @@ export class DescargarComponent implements OnInit {
             {
               name: 'Total',
               data: this.pressData.pressGeneral2.map((item) =>
-                parseFloat(item.total)
+              parseFloat(parseFloat(item.total).toFixed(3))
               ),
             },
           ],
@@ -345,27 +345,23 @@ export class DescargarComponent implements OnInit {
             categories: this.pressData.pressGeneral2.map(
               (item) => item.descripcion
             ),
-            labels:{
+            labels: {
               formatter: function (val) {
-                return val; // Asegúrate de que 'val' es una cadena
+                return '$' +`${parseFloat(val).toFixed(3)}`;
               },
-            }
+            },
           },
           yaxis: {
-            labels:{
+            labels: {
               formatter: function (val) {
-                // Convertir a número, redondear a 3 dígitos decimales, y asegurar devolver una cadena
-                const numVal = Number(val);
-                return isNaN(numVal) ? `${val}` : `${numVal.toFixed(3)}K`;
+                return val.toLocaleString();
               },
-            }
+            },
           },
           tooltip: {
             y: {
               formatter: function (val) {
-                // Convertir a número, redondear a 3 dígitos decimales, y asegurar devolver una cadena
-                const numVal = Number(val);
-                return isNaN(numVal) ? `${val}` : `${numVal.toFixed(3)}K`;
+                return '$' + val;
               },
             },
           },
@@ -389,19 +385,19 @@ export class DescargarComponent implements OnInit {
             {
               name: 'Recuperado APP',
               data: this.pressData.pressAcumulados3.map((item) =>
-                parseFloat(item.totaluno)
+              parseFloat(parseFloat(item.totaluno).toFixed(3))
               ),
             },
             {
               name: 'Facturado',
               data: this.pressData.pressAcumulados3.map((item) =>
-                parseFloat(item.totaldos)
+              parseFloat(parseFloat(item.totaldos).toFixed(3))
               ),
             },
             {
               name: 'Avance',
               data: this.pressData.pressAcumulados3.map((item) =>
-                parseFloat(item.avance)
+              parseFloat(parseFloat(item.avance).toFixed(3))
               ),
             },
           ],
@@ -409,6 +405,7 @@ export class DescargarComponent implements OnInit {
             type: 'bar',
             height: 600,
             stacked: true,
+            stackType: '100%',
             toolbar: {
               show: false,
             },
@@ -451,7 +448,7 @@ export class DescargarComponent implements OnInit {
           tooltip: {
             y: {
               formatter: function (val) {
-                return val + 'K';
+                return '$' + val;
               },
             },
           },
@@ -481,7 +478,7 @@ export class DescargarComponent implements OnInit {
             {
               name: 'Total',
               data: this.pressData.pressGeneral4.map((item) =>
-                parseFloat(item.total)
+              parseFloat(parseFloat(item.total).toFixed(3))
               ),
             },
           ],
@@ -530,7 +527,7 @@ export class DescargarComponent implements OnInit {
           tooltip: {
             y: {
               formatter: function (val) {
-                return val + 'K';
+                return '$' + val;
               },
             },
           },
@@ -555,19 +552,19 @@ export class DescargarComponent implements OnInit {
             {
               name: 'Recuperado APP',
               data: this.pressData.pressAcumulados5.map((item) =>
-                parseFloat(item.totaluno)
+              parseFloat(parseFloat(item.totaluno).toFixed(3))
               ),
             },
             {
               name: 'Facturado',
               data: this.pressData.pressAcumulados5.map((item) =>
-                parseFloat(item.totaldos)
+              parseFloat(parseFloat(item.totaldos).toFixed(3))
               ),
             },
             {
               name: 'Avance',
               data: this.pressData.pressAcumulados5.map((item) =>
-                parseFloat(item.avance)
+              parseFloat(parseFloat(item.avance).toFixed(3))
               ),
             },
           ],
@@ -575,6 +572,7 @@ export class DescargarComponent implements OnInit {
             type: 'bar',
             height: 600,
             stacked: true,
+            stackType: '100%',
             toolbar: {
               show: false,
             },
@@ -617,7 +615,7 @@ export class DescargarComponent implements OnInit {
           tooltip: {
             y: {
               formatter: function (val) {
-                return val + 'K';
+                return '$' + val;
               },
             },
           },
@@ -647,19 +645,19 @@ export class DescargarComponent implements OnInit {
             {
               name: 'Total Uno',
               data: this.pressData.pressAcumulados7.map((item) =>
-                parseFloat(item.totaluno)
+              +parseFloat(item.totaluno).toFixed(3)
               ),
             },
             {
               name: 'Total Dos',
               data: this.pressData.pressAcumulados7.map((item) =>
-                parseFloat(item.totaldos)
+              +parseFloat(item.totaldos).toFixed(3)
               ),
             },
             {
               name: 'Avance',
               data: this.pressData.pressAcumulados7.map((item) =>
-                parseFloat(item.avance)
+              +parseFloat(item.avance).toFixed(3)
               ),
             },
           ],
@@ -667,6 +665,7 @@ export class DescargarComponent implements OnInit {
             type: 'bar',
             height: 600,
             stacked: true,
+            stackType: '100%',
             toolbar: {
               show: false,
             },
@@ -709,7 +708,7 @@ export class DescargarComponent implements OnInit {
           tooltip: {
             y: {
               formatter: function (val) {
-                return val + 'K';
+                return '$' + val;
               },
             },
           },
@@ -748,6 +747,13 @@ export class DescargarComponent implements OnInit {
     data: PressItem[] | PressAcumuladosItem[],
     isAccumulated = false
   ) {
+
+     const seriesData = data.map((item) => {
+    const total = 'total' in item ? parseFloat(item.total) * 1000 : ('totaluno' in item && 'totaldos' in item) ? (parseFloat(item.totaluno) + parseFloat(item.totaldos)) * 1000 : 0;
+    return total;
+  });
+
+
     let sortedData: (PressItem | PressAcumuladosItem)[];
 
     if (isAccumulated) {
@@ -767,15 +773,6 @@ export class DescargarComponent implements OnInit {
     const categories = sortedData.map((item) =>
       'descripcion' in item ? item.descripcion : ''
     );
-    const seriesData = sortedData.map((item) => {
-      if ('totaluno' in item && 'totaldos' in item) {
-        return parseFloat(item.totaluno) + parseFloat(item.totaldos);
-      } else if ('total' in item) {
-        return parseFloat(item.total);
-      } else {
-        return 0; // O manejar el caso de que no sea ninguno de los tipos esperados
-      }
-    });
 
     chartOptions.series = [{ name: 'Total', data: seriesData }];
     chartOptions.xaxis = { ...chartOptions.xaxis, categories: categories };
@@ -930,6 +927,31 @@ export class DescargarComponent implements OnInit {
     });
   }
 
+  transformValue(value: number): string {
+    let newValue: string;
+  
+    if (value >= 1e6) {
+      newValue = (value / 1e6).toFixed(2) + ' M';
+    } else if (value >= 1e3) {
+      newValue = (value / 1e3).toFixed(2) + ' mil';
+    } else {
+      newValue = value.toFixed(2);
+    }
+  
+    return newValue;
+  }
+
+  formatTotalAsFullNumber(totalString: string): string {
+    // Convertir el valor de cadena, que representa miles con un punto decimal, a un número completo.
+    const totalNumber = parseFloat(totalString) * 1000;
+  
+    // Formatear el número para no perder los ceros significativos al final si los hay.
+    // Esto creará una cadena que representa el número sin decimales.
+    return totalNumber.toFixed(0);
+  }
+  
+  
+
   async generarPDF(): Promise<void> {
     // Crear una alerta para confirmar la descarga del PDF
     const alert = await this.alertController.create({
@@ -1082,7 +1104,7 @@ export class DescargarComponent implements OnInit {
   sumarTotales(datos: PressItem[]): { total: number } {
     return datos.reduce(
       (acumulado, item) => {
-        acumulado.total += parseFloat(item.total);
+        acumulado.total += parseFloat(item.total) * 1000;
         return acumulado;
       },
       { total: 0 }
@@ -1095,8 +1117,8 @@ export class DescargarComponent implements OnInit {
   } {
     return datos.reduce(
       (acumulados, item) => {
-        acumulados.total1 += parseFloat(item.totaluno);
-        acumulados.total2 += parseFloat(item.totaldos);
+        acumulados.total1 += parseFloat(item.totaluno) * 1000;
+        acumulados.total2 += parseFloat(item.totaldos) * 1000;
         return acumulados;
       },
       { total1: 0, total2: 0 }
