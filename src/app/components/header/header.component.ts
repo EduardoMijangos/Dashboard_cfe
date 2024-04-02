@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
-import { PressAcumuladosItem, PressData, PressGeneralItem } from 'src/app/models/press-data.model';
+import {
+  PressAcumuladosItem,
+  PressData,
+  PressGeneralItem,
+} from 'src/app/models/press-data.model';
 import { PresentacionesService } from 'src/app/services/presentaciones.service';
 import { DetallesComponent } from '../detalles/detalles.component';
 import { SeleccionComponent } from '../seleccion/seleccion.component';
 
+// Interfaces para estructurar la información manipulada por el componente.
 export interface ItemBuscable {
   descripcion: string;
   total: number;
@@ -27,6 +32,7 @@ export interface ConsolidatedItem {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  // Estado de los botones y variables para la gestión del menú y navegación.
   isBtnInicioActive: boolean = false;
   isBtnIngresosActive: boolean = false;
   isBtnZonasActive: boolean = false;
@@ -35,11 +41,11 @@ export class HeaderComponent implements OnInit {
 
   paginaActual: string = '';
 
-  searchText = ''; // Asegúrate de que searchText esté inicializado, incluso si es solo una cadena vacía.
-  items: any[] = []; // Inicializa como arreglo vacío
-  filteredItems: any[] = []; // Inicializa como arreglo vacío
+  searchText = '';
+  items: any[] = [];
+  filteredItems: any[] = [];
 
-  pressData: PressData = { // Inicialización aquí, asegurándote de que todos los campos estén presentes
+  pressData: PressData = {
     totalIngresos: '',
     pressGeneral1: [],
     pressGeneral2: [],
@@ -47,10 +53,9 @@ export class HeaderComponent implements OnInit {
     pressAcumulados3: [],
     pressAcumulados5: [],
     pressAcumulados7: [],
-  }
-  
-  fechaSeleccionada: string = new Date().toISOString().split('T')[0];
+  };
 
+  fechaSeleccionada: string = new Date().toISOString().split('T')[0];
 
   constructor(
     private router: Router,
@@ -58,20 +63,19 @@ export class HeaderComponent implements OnInit {
     private presentacionesService: PresentacionesService,
     private modalController: ModalController
   ) {
-    this.fechaSeleccionada = new Date().toISOString().split('T')[0]; 
+    this.fechaSeleccionada = new Date().toISOString().split('T')[0];
     this.checkScreenSize();
     window.addEventListener('resize', () => this.checkScreenSize());
 
     const ayer = new Date();
-    ayer.setDate(ayer.getDate() - 1); 
+    ayer.setDate(ayer.getDate() - 1);
     this.fechaSeleccionada = ayer.toISOString(); // Convertir formato de fecha(YYYY-MM-DDTHH:MM:SS)
     this.fechaSeleccionada = this.fechaSeleccionada.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
   }
 
   ngOnInit() {
-    this.loadItems()
+    this.loadItems();
   }
-  
 
   // Función para establecer la página actual y mostrar la alerta si corresponde
   async establecerPaginaActual(pagina: string) {
@@ -88,6 +92,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  // Función para redirigir al usuario a la página especificada.
   redirigirAPagina(pagina: string) {
     switch (pagina) {
       case 'Inicio':
@@ -104,6 +109,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  // Funciones para manejar la activación de botones y el cambio de página.
   btnInicio() {
     this.establecerPaginaActual('Inicio');
     this.isBtnInicioActive = !this.isBtnInicioActive;
@@ -119,25 +125,31 @@ export class HeaderComponent implements OnInit {
     this.isBtnZonasActive = !this.isBtnZonasActive;
   }
 
+  // Utilidad para determinar si la pantalla es grande basada en el ancho de la ventana.
   get isLargeScreen() {
     return window.innerWidth >= 768;
   }
 
+  // Función para alternar la apertura del menú.
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
 
+  //Verificar tamano de la pantalla
   checkScreenSize() {
     if (this.isLargeScreen && this.menuOpen) {
       this.toggleMenu();
     }
   }
 
+  // Prepara los datos para la búsqueda agrupando items por descripción.
   prepareSearchData(pressData: PressData): Map<string, ConsolidatedItem> {
     let itemsMap = new Map<string, ConsolidatedItem>();
-  
-    // Agregar ítems de pressGeneral1 y pressGeneral2 al mapa.
-    [...pressData.pressGeneral1, ...pressData.pressGeneral2, ...pressData.pressGeneral4].forEach(item => {
+    [
+      ...pressData.pressGeneral1,
+      ...pressData.pressGeneral2,
+      ...pressData.pressGeneral4,
+    ].forEach((item) => {
       let existingItem = itemsMap.get(item.descripcion);
       if (existingItem) {
         existingItem.items.push(item);
@@ -148,9 +160,11 @@ export class HeaderComponent implements OnInit {
         });
       }
     });
-  
-    // Agregar ítems de pressAcumulados3, pressAcumulados5 y pressAcumulados7 al mapa.
-    [...pressData.pressAcumulados3, ...pressData.pressAcumulados5, ...pressData.pressAcumulados7].forEach(item => {
+    [
+      ...pressData.pressAcumulados3,
+      ...pressData.pressAcumulados5,
+      ...pressData.pressAcumulados7,
+    ].forEach((item) => {
       let existingItem = itemsMap.get(item.descripcion);
       if (existingItem) {
         existingItem.items.push(item);
@@ -161,13 +175,13 @@ export class HeaderComponent implements OnInit {
         });
       }
     });
-  
+
     return itemsMap;
   }
 
-  
+  // Manejador para cambios en la búsqueda, filtra items basado en el texto de búsqueda y posiblemente muestra un modal con los resultados.
   async onSearchChange(searchValue: string) {
-    this.filteredItems = this.items.filter(item => {
+    this.filteredItems = this.items.filter((item) => {
       // Cambia esta lógica de filtrado según tus necesidades
       return item.descripcion.toLowerCase().includes(searchValue.toLowerCase());
     });
@@ -177,40 +191,38 @@ export class HeaderComponent implements OnInit {
       const modal = await this.modalController.create({
         component: SeleccionComponent,
         componentProps: {
-          items: this.filteredItems
-        }
+          items: this.filteredItems,
+        },
       });
       await modal.present();
     }
   }
 
+  // Selecciona un item y muestra sus detalles en un modal.
+  onItemSelect(item: ConsolidatedItem): void {
+    this.showItemDetails(item);
+  }
 
-    onItemSelect(item: ConsolidatedItem): void {
-      // Aquí puedes hacer cosas como abrir un modal o navegar a una nueva página con los detalles del ítem.
-      // Por ejemplo, asumamos que vas a mostrar una alerta con la descripción del ítem:
-      this.showItemDetails(item);
-    }
-
+  // Muestra los detalles de un item consolidado en un modal.
   async showItemDetails(consolidatedItem: ConsolidatedItem) {
     const modal = await this.modalController.create({
       component: DetallesComponent,
       componentProps: {
-        'consolidatedItem': consolidatedItem
-      }
+        consolidatedItem: consolidatedItem,
+      },
     });
     return await modal.present();
   }
-  
-  
 
+  // Carga los items utilizando un servicio y prepara los datos para la búsqueda.
   loadItems() {
     this.presentacionesService.obtenerInfo(this.fechaSeleccionada).subscribe(
       (data) => {
-        console.log("Respuesta completa del servicio: ", data);
+        console.log('Respuesta completa del servicio: ', data);
         this.pressData = data;
         const itemsMap = this.prepareSearchData(this.pressData);
         this.items = Array.from(itemsMap.values());
-        console.log("Items after loading: ", this.items);
+        console.log('Items after loading: ', this.items);
         this.filteredItems = [];
       },
       (error) => {
@@ -218,5 +230,4 @@ export class HeaderComponent implements OnInit {
       }
     );
   }
-  
 }

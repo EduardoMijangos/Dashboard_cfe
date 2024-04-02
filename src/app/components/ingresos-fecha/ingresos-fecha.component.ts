@@ -9,6 +9,7 @@ import {
 } from 'ng-apexcharts';
 import { ActivatedRoute, Router } from '@angular/router';
 
+// Definiciones de tipos para la data del gráfico de barras de rango y las opciones de configuración del gráfico.
 export type RangeBarChartData = {
   x: string;
   y: [number, number];
@@ -28,11 +29,18 @@ export type RangeBarChartOptions = {
   styleUrls: ['./ingresos-fecha.component.scss'],
 })
 export class IngresosFechaComponent implements OnInit {
+  // Propiedad de entrada para el progreso, con valor predeterminado.
   @Input() progress: number = 14;
 
   @ViewChild('chart') chart!: ChartComponent;
+
+  // Opciones de configuración del gráfico de barras de rango.
   public chartOptions: RangeBarChartOptions;
+
+  // Almacena el mes actual seleccionado.
   currentMonth: string = '';
+
+  // Almacena los días totales del mes actual.
   diasPorMes: number = 0;
 
   constructor(private router: Router, private route: ActivatedRoute) {
@@ -43,6 +51,7 @@ export class IngresosFechaComponent implements OnInit {
       currentDate.getMonth() + 1
     );
 
+    // Configuración inicial del gráfico y cálculo del mes y días actuales.
     this.chartOptions = {
       series: [
         {
@@ -98,6 +107,7 @@ export class IngresosFechaComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Suscripción a cambios en los parámetros de ruta para actualizar el mes seleccionado.
     this.route.params.subscribe((params) => {
       const mesNumero = +params['mes'];
 
@@ -111,10 +121,12 @@ export class IngresosFechaComponent implements OnInit {
     });
   }
 
+  // Función para navegar a una vista detallada de ingresos basada en la semana seleccionada.
   verIngresosSemana(semana: number) {
     this.router.navigate(['/ingresosemana', semana]);
   }
 
+  // Función para obtener el nombre del mes basado en su número.
   obtenerNombreMes(numeroMes: number): string {
     const meses = [
       'Enero',
@@ -134,6 +146,7 @@ export class IngresosFechaComponent implements OnInit {
     return meses[numeroMes - 1] || '';
   }
 
+  // Función para obtener el número de días en un mes específico.
   obtenerDiasMes(year: number, month: number): number {
     if (month < 1 || month > 12) {
       console.error('El mes debe estar entre 1 y 12.');
@@ -144,6 +157,7 @@ export class IngresosFechaComponent implements OnInit {
     return lastDay;
   }
 
+  // Función para calcular y obtener un arreglo de semanas, donde cada semana es un arreglo de días.
   obtenerSemanas(): number[][] {
     const weeks: number[][] = [];
     const daysPerPeriod = 8;

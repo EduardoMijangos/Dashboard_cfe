@@ -8,31 +8,32 @@ import { DetallesComponent } from '../detalles/detalles.component';
   templateUrl: './seleccion.component.html',
   styleUrls: ['./seleccion.component.scss'],
 })
-export class SeleccionComponent  implements OnInit {
+export class SeleccionComponent implements OnInit {
+  // Propiedad de entrada que espera recibir un arreglo de ítems.
   @Input() items!: any[];
 
-  constructor( private modalController: ModalController) { }
+  constructor(private modalController: ModalController) {}
 
   ngOnInit() {}
 
+  // Método para cerrar el modal actual.
   cerrarModal() {
     this.modalController.dismiss();
   }
 
+  // Método que se activa al seleccionar un ítem, llamando a `showItemDetails` para mostrar detalles.
   onItemSelect(item: ConsolidatedItem): void {
-    // Aquí puedes hacer cosas como abrir un modal o navegar a una nueva página con los detalles del ítem.
-    // Por ejemplo, asumamos que vas a mostrar una alerta con la descripción del ítem:
     this.showItemDetails(item);
   }
 
+  // Método asíncrono para mostrar los detalles de un ítem consolidado en un nuevo modal.
   async showItemDetails(consolidatedItem: ConsolidatedItem) {
     const modal = await this.modalController.create({
       component: DetallesComponent,
       componentProps: {
-        'consolidatedItem': consolidatedItem
-      }
+        consolidatedItem: consolidatedItem,
+      },
     });
     return await modal.present();
   }
-
 }

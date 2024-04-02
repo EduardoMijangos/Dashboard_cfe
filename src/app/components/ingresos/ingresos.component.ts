@@ -10,6 +10,7 @@ import {
   ApexGrid,
 } from 'ng-apexcharts';
 
+// Definición del tipo para las opciones de configuración del gráfico.
 export type ChartOptions = {
   series: {
     name: string;
@@ -30,6 +31,7 @@ export type ChartOptions = {
 })
 export class IngresosComponent {
   @ViewChild('chart') chart?: ChartComponent;
+  // Opciones de configuración inicial para el gráfico de ingresos por mes.
   public chartOptions: ChartOptions = {
     series: [],
     chart: {
@@ -73,6 +75,7 @@ export class IngresosComponent {
   };
 
   constructor(private router: Router) {
+    // Inicializa la serie del gráfico con datos de ingresos mensuales.
     this.chartOptions.series = [
       {
         name: 'Ingresos Mes:',
@@ -81,11 +84,13 @@ export class IngresosComponent {
     ];
   }
 
+  // Función para navegar a una vista detallada de ingresos basada en el mes seleccionado.
   verIngresosFecha(month: string) {
     const url = `/ingresos-fecha/${month.toLowerCase()}`;
     this.router.navigate([url]);
   }
 
+  // Array que contiene los nombres de los meses, usado para la generación de la vista y posiblemente para la navegación.
   months: string[] = [
     'Enero',
     'Febrero',

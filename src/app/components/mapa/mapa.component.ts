@@ -9,6 +9,7 @@ import * as L from 'leaflet';
 export class MapaComponent implements OnInit {
   @ViewChild('map') mapContainer!: ElementRef;
 
+  // Variable para almacenar la instancia del mapa de Leaflet.
   map: any;
 
   constructor() {}
@@ -16,17 +17,20 @@ export class MapaComponent implements OnInit {
   ngOnInit() {
     // Espera a que el ciclo de vida del componente esté completo
     setTimeout(() => {
+      // Carga el mapa después de que el DOM esté listo.
       this.loadMap();
     });
   }
 
   loadMap() {
     if (this.mapContainer) {
+      // Inicializa el mapa de Leaflet en el contenedor y configura la vista inicial centrada en México.
       this.map = L.map(this.mapContainer.nativeElement).setView(
         [23.6345, -102.5528], // Centrado en México
         5
       );
 
+      // Crea y configura un icono personalizado para los marcadores.
       const customIcon = L.divIcon({
         className: 'custom-icon',
         html: `
@@ -39,17 +43,15 @@ export class MapaComponent implements OnInit {
         `, // Asegúrate de que la clase 'st0' se aplique a los elementos que desees colorear.
         iconSize: [48, 48], // Tamaño del icono ajustado aquí
         iconAnchor: [24, 48], // Ajusta para centrar el icono en la ubicación del marcador
-        popupAnchor: [0, -48] // Ajusta para que el popup se abra arriba del icono
+        popupAnchor: [0, -48], // Ajusta para que el popup se abra arriba del icono
       });
-      
-      
 
+      // Añade la capa base del mapa utilizando OpenStreetMap.
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors',
       }).addTo(this.map);
 
       // Añade marcadores para cada división regional de la CFE
-      // NOTA: Las coordenadas son ejemplos y deben ser reemplazadas por las reales
       const divisiones: { descripcion: string; coords: [number, number] }[] = [
         { descripcion: 'Golfo Norte', coords: [25.8403, -97.5253] },
         { descripcion: 'Baja California', coords: [30.8406, -115.2838] },
@@ -69,6 +71,7 @@ export class MapaComponent implements OnInit {
         { descripcion: 'Centro Sur', coords: [18.8333, -99.1833] },
       ];
 
+      // Itera sobre cada división, creando un marcador personalizado en el mapa para cada una.
       divisiones.forEach((div) => {
         L.marker(div.coords, { icon: customIcon })
           .addTo(this.map)

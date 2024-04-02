@@ -16,7 +16,8 @@ export class CalendarioModalComponent {
     this.modalController.dismiss();
   }
 
-  saveDate() {
+  //Almacena la fecha que selecciona en el calendario y lo muestra en un log
+  guardarFechaSeleccionada() {
     console.log('Fecha seleccionada:', this.selectedDate); // Mostrar la fecha seleccionada en la consola
     this.modalController.dismiss({
       selectedDate: this.selectedDate

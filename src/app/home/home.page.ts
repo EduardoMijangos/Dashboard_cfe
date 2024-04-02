@@ -29,6 +29,7 @@ import {
   PressItemAcumulado,
 } from 'src/app/models/press-data.model';
 
+// Tipo para las opciones de gráficos de barras específicas.
 interface ApexPlotOptionsBar {
   bar: {
     dataLabels: {
@@ -37,6 +38,7 @@ interface ApexPlotOptionsBar {
   };
 }
 
+// Tipo para las opciones de configuración de gráficos circulares/radiales.
 export type ChartOptionsCircle = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -47,6 +49,7 @@ export type ChartOptionsCircle = {
   ready: true;
 };
 
+// Tipo para las opciones de configuración de gráficos generales.
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -69,12 +72,14 @@ export class HomePage implements OnInit {
 
   fechaSeleccionada: string;
 
+  // Almacena los datos obtenidos del servicio
   pressData: PressData | null = null;
 
   totalGeneral2: { total: number } = { total: 0 };
 
-
   @ViewChild('chart') chart!: ChartComponent;
+
+  // Configuraciones de los gráficos a mostrar en la página.
   public chartOptions: Partial<ChartOptions>;
   public chartOptionsmenos: Partial<ChartOptions>;
   public chartOptionsmascircular: Partial<ChartOptionsCircle>;
@@ -113,8 +118,11 @@ export class HomePage implements OnInit {
         formatter: function (val) {
           // Convierte val a número antes de formatearlo
           const numberVal = Number(val);
-          return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(numberVal);
-        },        
+          return new Intl.NumberFormat('es-MX', {
+            style: 'currency',
+            currency: 'MXN',
+          }).format(numberVal);
+        },
         offsetY: -20,
         style: {
           fontSize: '12px',
@@ -156,7 +164,10 @@ export class HomePage implements OnInit {
         labels: {
           show: false,
           formatter: function (val) {
-            return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
+            return new Intl.NumberFormat('es-MX', {
+              style: 'currency',
+              currency: 'MXN',
+            }).format(val);
           },
         },
       },
@@ -187,8 +198,11 @@ export class HomePage implements OnInit {
         formatter: function (val) {
           // Convierte val a número antes de formatearlo
           const numberVal = Number(val);
-          return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(numberVal);
-        },        
+          return new Intl.NumberFormat('es-MX', {
+            style: 'currency',
+            currency: 'MXN',
+          }).format(numberVal);
+        },
         offsetY: -20,
         style: {
           fontSize: '12px',
@@ -229,7 +243,10 @@ export class HomePage implements OnInit {
         labels: {
           show: false,
           formatter: function (val) {
-            return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);          
+            return new Intl.NumberFormat('es-MX', {
+              style: 'currency',
+              currency: 'MXN',
+            }).format(val);
           },
         },
       },
@@ -275,7 +292,10 @@ export class HomePage implements OnInit {
             show: true,
             value: {
               formatter: function (val) {
-                return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);              
+                return new Intl.NumberFormat('es-MX', {
+                  style: 'currency',
+                  currency: 'MXN',
+                }).format(val);
               },
             },
             name: {
@@ -334,7 +354,10 @@ export class HomePage implements OnInit {
             show: true,
             value: {
               formatter: function (val) {
-                return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);              
+                return new Intl.NumberFormat('es-MX', {
+                  style: 'currency',
+                  currency: 'MXN',
+                }).format(val);
               },
             },
             name: {
@@ -354,11 +377,13 @@ export class HomePage implements OnInit {
     };
 
     const ayer = new Date();
-    ayer.setDate(ayer.getDate() - 1); 
+    ayer.setDate(ayer.getDate() - 1);
     this.fechaSeleccionada = ayer.toISOString(); // Convertir formato de fecha(YYYY-MM-DDTHH:MM:SS)
     this.fechaSeleccionada = this.fechaSeleccionada.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
   }
   ngOnInit() {
+
+        // Al inicializar, se suscribe a los datos del servicio y actualiza la configuración de los gráficos.
     this.presentacionesService.obtenerInfo(this.fechaSeleccionada).subscribe({
       next: (data) => {
         console.log('datos recibidos', data);
@@ -368,9 +393,9 @@ export class HomePage implements OnInit {
         console.log('Total General 2:', this.totalGeneral2);
 
         const metaTotal = 1000;
-      this.totalGeneral2 = this.sumarTotales(data.pressGeneral2);
-      // Convertir el total actual en un porcentaje de la meta total
-      this.progress = (this.totalGeneral2.total / metaTotal) * 100;
+        this.totalGeneral2 = this.sumarTotales(data.pressGeneral2);
+        // Convertir el total actual en un porcentaje de la meta total
+        this.progress = (this.totalGeneral2.total / metaTotal) * 100;
 
         if (this.pressData && this.pressData.pressGeneral2.length > 0) {
           // Ordenar y tomar las 5 zonas con más y menos ingresos
@@ -402,9 +427,7 @@ export class HomePage implements OnInit {
             (this.chartOptionsmenos.xaxis = {
               categories: menores.map((item) => item.descripcion),
             }),
-            (this.chartOptionsmascircular.series = [
-              parseFloat(maximo.total),
-            ]);
+            (this.chartOptionsmascircular.series = [parseFloat(maximo.total)]);
           this.chartOptionsmascircular.labels = [maximo.descripcion];
 
           // Actualiza la gráfica circular de la zona con menos ingresos
@@ -421,13 +444,12 @@ export class HomePage implements OnInit {
           console.log('menos ingresos', menores);
           console.log('unica mas', maximo);
           console.log('unica menos', minimo);
-          
         }
       },
     });
   }
 
-
+    // Función para sumar totales de ingresos de un conjunto de datos.
   sumarTotales(datos: PressItem[]): { total: number } {
     return datos.reduce(
       (acumulado, item) => {

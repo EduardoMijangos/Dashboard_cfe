@@ -11,6 +11,7 @@ import {
 import { PressData } from 'src/app/models/press-data.model';
 import { PresentacionesService } from 'src/app/services/presentaciones.service';
 
+// Definición de tipos para configurar los gráficos de ApexCharts.
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -26,10 +27,16 @@ export type ChartOptions = {
   styleUrls: ['./zonas.component.scss'],
 })
 export class ZonasComponent implements OnInit {
+  // La fecha seleccionada para filtrar datos, inicializada al día anterior.
   selectedDate: string;
+
+  // Almacena los datos obtenidos del servicio.
   pressData: PressData | null = null;
 
+  // Progreso de carga o algún indicador, recibido como entrada.
   @Input() progress: number | undefined = 0;
+
+  // Array de zonas inicializado con datos estáticos.
   zonas = [
     { name: 'Villahermosa', progress: 90 },
     { name: 'Tuxtla', progress: 75 },
@@ -51,6 +58,7 @@ export class ZonasComponent implements OnInit {
     private router: Router,
     private presentacionesService: PresentacionesService
   ) {
+    // Configuración inicial de los gráficos y preparación de la fecha seleccionada.
     this.chartOptionsZonamas = {
       series: [90],
       chart: {
@@ -91,9 +99,9 @@ export class ZonasComponent implements OnInit {
             value: {
               formatter: function (val) {
                 return '$' + val;
-              }
-            }
-            }
+              },
+            },
+          },
         },
       },
       labels: ['Zona con mas ingresos'],
@@ -138,7 +146,7 @@ export class ZonasComponent implements OnInit {
                 return '$' + val;
               },
             },
-          }
+          },
         },
       },
       stroke: {
@@ -149,6 +157,7 @@ export class ZonasComponent implements OnInit {
       },
     };
 
+    // Configuración de la fecha seleccionada al día anterior.
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1); // Obtener fecha de ayer
     this.selectedDate = yesterday.toISOString(); // Convertir a formato ISO (YYYY-MM-DDTHH:MM:SS)
@@ -156,30 +165,31 @@ export class ZonasComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Al inicializarse, se suscribe a los datos del servicio.
     this.presentacionesService.obtenerInfo(this.selectedDate).subscribe({
       next: (data) => {
         this.pressData = data;
-        
+
         if (this.pressData && this.pressData.pressGeneral2.length > 0) {
           // Actualiza la lista de zonas con los datos ordenados
           this.zonas = this.pressData.pressGeneral2
             .sort((a, b) => parseFloat(b.total) - parseFloat(a.total))
-            .map(zona => ({
+            .map((zona) => ({
               name: zona.descripcion,
               progress: parseFloat(zona.total),
             }));
         }
 
-      console.log(this.pressData.pressGeneral2);
+        console.log(this.pressData.pressGeneral2);
 
-      if (this.pressData && this.pressData.pressGeneral2.length > 0) {
-        this.zonas = this.pressData.pressGeneral2.map(zona => {
-          return {
-            name: zona.descripcion,
-            progress: parseFloat(zona.total)
-          };
-        });
-      }
+        if (this.pressData && this.pressData.pressGeneral2.length > 0) {
+          this.zonas = this.pressData.pressGeneral2.map((zona) => {
+            return {
+              name: zona.descripcion,
+              progress: parseFloat(zona.total),
+            };
+          });
+        }
 
         if (this.pressData && this.pressData.pressGeneral2.length > 0) {
           const sorted = [...this.pressData.pressGeneral2].sort(
@@ -206,6 +216,7 @@ export class ZonasComponent implements OnInit {
     });
   }
 
+  // Navegación a la vista detallada de una agencia específica.
   verAgencia(ag: string) {
     const url = `/agencia/${ag.toLowerCase()}`;
     this.router.navigate([url]);

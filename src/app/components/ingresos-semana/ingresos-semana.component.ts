@@ -8,11 +8,15 @@ import {
   ApexFill,
 } from 'ng-apexcharts';
 
+// Definiciones de tipos para la estructura de datos del gráfico de barras de rango y las opciones de configuración del gráfico.
 export type RangeBarChartData = {
+  // Representa la etiqueta de cada barra en el gráfico, en este caso, el número de semana.
   x: string;
+  // Representa el rango de tiempo (inicio y fin) para cada semana.
   y: [number, number];
 };
 
+//Importaciones de elementos para las graficas
 export type RangeBarChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -26,12 +30,16 @@ export type RangeBarChartOptions = {
   styleUrls: ['./ingresos-semana.component.scss'],
 })
 export class IngresosSemanaComponent {
+  // Propiedad de entrada para el progreso, con valor predeterminado.
   @Input() progress: number = 14;
 
   @ViewChild('chart') chart!: ChartComponent;
+
+  // Opciones de configuración del gráfico de barras de rango.
   public chartOptions: RangeBarChartOptions;
 
   constructor() {
+    // Configuración inicial del gráfico, incluyendo la serie de datos y opciones visuales.
     this.chartOptions = {
       series: [
         {
