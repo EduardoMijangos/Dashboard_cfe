@@ -27,6 +27,23 @@ export class MapaComponent implements OnInit {
         5
       );
 
+      const customIcon = L.divIcon({
+        className: 'custom-icon',
+        html: `
+          <svg viewBox="0 0 24 24" width="48" height="48" xmlns="http://www.w3.org/2000/svg"> <!-- Tamaño ajustado aquí -->
+            <style>
+              .st0{fill:#008E5A;} /* Color del marcador */
+            </style>
+            <path class="st0" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+          </svg>
+        `, // Asegúrate de que la clase 'st0' se aplique a los elementos que desees colorear.
+        iconSize: [48, 48], // Tamaño del icono ajustado aquí
+        iconAnchor: [24, 48], // Ajusta para centrar el icono en la ubicación del marcador
+        popupAnchor: [0, -48] // Ajusta para que el popup se abra arriba del icono
+      });
+      
+      
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors',
       }).addTo(this.map);
@@ -53,7 +70,7 @@ export class MapaComponent implements OnInit {
       ];
 
       divisiones.forEach((div) => {
-        L.marker(div.coords)
+        L.marker(div.coords, { icon: customIcon })
           .addTo(this.map)
           .bindPopup(div.descripcion);
       });

@@ -13,6 +13,8 @@ import { AgenciaComponent } from './agencia/agencia.component';
 import { IngresosSemanaComponent } from './ingresos-semana/ingresos-semana.component';
 import { DescargarComponent } from './descargar/descargar.component';
 import { CalendarioModalComponent } from '../calendario-modal/calendario-modal.component';
+import { DetallesComponent } from './detalles/detalles.component';
+import { SeleccionComponent } from './seleccion/seleccion.component';
 
 
 
@@ -28,7 +30,9 @@ import { CalendarioModalComponent } from '../calendario-modal/calendario-modal.c
     IngresosFechaComponent,
     IngresosSemanaComponent,
     DescargarComponent,
-    CalendarioModalComponent
+    CalendarioModalComponent,
+    DetallesComponent,
+    SeleccionComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,9 @@ import { CalendarioModalComponent } from '../calendario-modal/calendario-modal.c
     IngresosFechaComponent,
     IngresosSemanaComponent,
     DescargarComponent,
-    CalendarioModalComponent
+    CalendarioModalComponent,
+    DetallesComponent,
+    SeleccionComponent  
   ]
 })
 export class ComponentsmoduleModule { }

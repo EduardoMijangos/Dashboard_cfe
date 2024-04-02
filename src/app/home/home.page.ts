@@ -111,8 +111,10 @@ export class HomePage implements OnInit {
       dataLabels: {
         enabled: true,
         formatter: function (val) {
-          return '$' + val;
-        },
+          // Convierte val a número antes de formatearlo
+          const numberVal = Number(val);
+          return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(numberVal);
+        },        
         offsetY: -20,
         style: {
           fontSize: '12px',
@@ -154,7 +156,7 @@ export class HomePage implements OnInit {
         labels: {
           show: false,
           formatter: function (val) {
-            return '$' + val;
+            return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
           },
         },
       },
@@ -183,8 +185,10 @@ export class HomePage implements OnInit {
       dataLabels: {
         enabled: true,
         formatter: function (val) {
-          return '$' + val;
-        },
+          // Convierte val a número antes de formatearlo
+          const numberVal = Number(val);
+          return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(numberVal);
+        },        
         offsetY: -20,
         style: {
           fontSize: '12px',
@@ -225,7 +229,7 @@ export class HomePage implements OnInit {
         labels: {
           show: false,
           formatter: function (val) {
-            return val.toString();
+            return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);          
           },
         },
       },
@@ -271,7 +275,7 @@ export class HomePage implements OnInit {
             show: true,
             value: {
               formatter: function (val) {
-                return '$' + val;
+                return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);              
               },
             },
             name: {
@@ -330,7 +334,7 @@ export class HomePage implements OnInit {
             show: true,
             value: {
               formatter: function (val) {
-                return '$' + val;
+                return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);              
               },
             },
             name: {

@@ -1,53 +1,24 @@
 <ion-header mode="ios">
   <div class="contenedorHorizontal">
-    <img src="../../../assets/cfe.png" alt="" class="imagen" />
-    <label class="etiqueta"
-      >Dashboard Ingresos RealTime para CFE Division Sureste</label
-    >
+    <img src="../../../assets/cfe.png" alt="Logo CFE" class="imagen" />
+    <label class="etiqueta">Dashboard Ingresos RealTime para CFE Division Sureste</label>
   </div>
 
   <div class="contenedorPrincipal">
+    <!-- Menú de botones que se muestra solo si el menú está abierto o si la pantalla es grande -->
     <div *ngIf="menuOpen || isLargeScreen" class="contenedorBotones">
-      <ion-button
-        (click)="btnInicio()"
-        expand="block"
-        fill="clear"
-        shape="round"
-      >
-        Inicio
-      </ion-button>
-      <ion-button
-        (click)="btnIngresos()"
-        expand="block"
-        fill="clear"
-        shape="round"
-      >
-        Ingresos
-      </ion-button>
-      <ion-button
-        (click)="btnZonas()"
-        expand="block"
-        fill="clear"
-        shape="round"
-      >
-        Zonas
-      </ion-button>
+      <ion-button (click)="btnInicio()" expand="block" fill="clear" shape="round">Inicio</ion-button>
+      <ion-button (click)="btnIngresos()" expand="block" fill="clear" shape="round">Ingresos</ion-button>
+      <ion-button (click)="btnZonas()" expand="block" fill="clear" shape="round">Zonas</ion-button>
     </div>
 
-    <ion-button
-      class="menu-hamburguesa"
-      (click)="toggleMenu()"
-      *ngIf="!isLargeScreen"
-    >
-      <ion-icon name="menu"></ion-icon>
+    <!-- Botón de menú de hamburguesa que se muestra solo en pantallas pequeñas -->
+    <ion-button class="menu-hamburguesa" (click)="toggleMenu()" *ngIf="!isLargeScreen">
+      <ion-icon slot="icon-only" name="menu"></ion-icon>
     </ion-button>
 
-    <ion-searchbar
-      class="searchbar"
-      placeholder="¿Estas buscando algo?"
-      animated="true"
-      mode="ios"
-      color="light"
-    ></ion-searchbar>
+  <!-- Solo muestra la lista si hay texto de búsqueda -->
+  <ion-searchbar [(ngModel)]="searchText" (ionChange)="onSearchChange($event.detail.value ?? '')" class="searchbar" placeholder="¿Estás buscando algo?" animated="true" mode="ios"></ion-searchbar> 
+    
   </div>
 </ion-header>

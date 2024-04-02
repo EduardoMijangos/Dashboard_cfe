@@ -4,6 +4,7 @@ import {
   ViewChild,
   ElementRef,
   Renderer2,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
@@ -163,7 +164,8 @@ export class DescargarComponent implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private modalController: ModalController,
-    private presentacionService: PresentacionesService
+    private presentacionService: PresentacionesService,
+    private cdr: ChangeDetectorRef
   ) {
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1); // Obtener fecha de ayer
@@ -172,6 +174,9 @@ export class DescargarComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.cargarDatos(this.selectedDate);
+
     this.presentacionService.obtenerInfo(this.selectedDate).subscribe({
       next: (data) => {
         console.log(data);
@@ -831,41 +836,9 @@ export class DescargarComponent implements OnInit {
     modal.onDidDismiss().then((data) => {
       if (data.data?.selectedDate) {
         this.selectedDate = data.data.selectedDate;
-        this.presentacionService.obtenerInfo(this.selectedDate).subscribe({
-          next: (data) => {
-            console.log(data);
-            this.pressData = data;
-            this.actualizarGraficas(
-              this.chartOptionsGeneral1,
-              this.pressData.pressGeneral1
-            );
-            this.actualizarGraficas(
-              this.chartOptionsGeneral2,
-              this.pressData.pressGeneral2
-            );
-            this.actualizarGraficas(
-              this.chartOptionsAcumulados3,
-              this.pressData.pressAcumulados3,
-              true
-            );
-            this.actualizarGraficas(
-              this.chartOptionsGeneral4,
-              this.pressData.pressGeneral4
-            );
-            this.actualizarGraficas(
-              this.chartOptionsAcumulados5,
-              this.pressData.pressAcumulados5,
-              true
-            );
-            this.actualizarGraficas(
-              this.chartOptionsAcumulados7,
-              this.pressData.pressAcumulados7,
-              true
-            );
-          },
-        });
-      }
-    });
+        this.cargarDatos(this.selectedDate)
+        this.cdr.detectChanges();
+      }});
 
     await modal.present();
   }
@@ -950,6 +923,33 @@ export class DescargarComponent implements OnInit {
     return totalNumber.toFixed(0);
   }
   
+
+  cargarDatos(fecha: string): void {
+    this.presentacionService.obtenerInfo(fecha).subscribe({
+      next: (data) => {
+        this.pressData = data;
+  
+        // Llamadas para actualizar las gráficas
+        this.actualizarGraficas(this.chartOptionsGeneral1, this.pressData.pressGeneral1);
+        this.actualizarGraficas(this.chartOptionsGeneral2, this.pressData.pressGeneral2);
+        this.actualizarGraficas(this.chartOptionsAcumulados3, this.pressData.pressAcumulados3, true);
+        this.actualizarGraficas(this.chartOptionsGeneral4, this.pressData.pressGeneral4);
+        this.actualizarGraficas(this.chartOptionsAcumulados5, this.pressData.pressAcumulados5, true);
+        this.actualizarGraficas(this.chartOptionsAcumulados7, this.pressData.pressAcumulados7, true);
+  
+        // Recalcular totales
+        this.totalGeneral1 = this.sumarTotales(this.pressData.pressGeneral1);
+        this.totalGeneral2 = this.sumarTotales(this.pressData.pressGeneral2);
+        this.totalesAcumulados3 = this.sumarTotalesSeparados(this.pressData.pressAcumulados3);
+        this.totalGeneral4 = this.sumarTotales(this.pressData.pressGeneral4);
+        this.totalesAcumulados5 = this.sumarTotalesSeparados(this.pressData.pressAcumulados5);
+        this.totalesAcumulados7 = this.sumarTotalesSeparados(this.pressData.pressAcumulados7);
+      },
+      error: (error) => {
+        console.error('Hubo un error al recuperar los datos de la API', error);
+      }
+    });
+  }
   
 
   async generarPDF(): Promise<void> {

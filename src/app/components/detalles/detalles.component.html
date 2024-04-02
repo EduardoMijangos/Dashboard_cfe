@@ -1,0 +1,29 @@
+<ion-header>
+  <div class="contenedorHorizontal">
+    <img src="../../../assets/cfe.png" alt="" class="imagen">
+    <label class="etiqueta">Dashboard Ingresos RealTime para CFE Division Sureste</label>
+  
+  </div>
+</ion-header>
+
+<ion-content color="primary">
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ consolidatedItem.descripcion }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item *ngFor="let item of consolidatedItem.items; let i = index">
+        <ion-label>
+          <h2>Item {{ i + 1 }}: {{ item.descripcion }}</h2>
+          <p *ngIf="isPressGeneralItem(item)">Total: {{ item.total | currency:"MXM"}}</p>
+          <p *ngIf="isPressAcumuladosItem(item)">Total Uno: {{ item.totaluno }}, Total Dos: {{ item.totaldos }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    
+  </ion-card-content>
+</ion-card>
+
+</ion-content>

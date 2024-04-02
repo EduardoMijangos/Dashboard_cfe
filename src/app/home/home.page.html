@@ -10,12 +10,12 @@
     class="custom-progress-bar"
   ></ion-progress-bar>
   <div *ngIf="progress < 100" class="progress-text">
-    En proceso - ${{ totalGeneral2.total.toLocaleString() }}
+    En proceso - {{ totalGeneral2.total | currency:'MXN':'symbol':'1.0-2' }}  
   </div>
   <!-- Si ya se alcanzó la meta, puedes mostrar un mensaje diferente -->
   <div *ngIf="progress >= 100" class="progress-text">
-    Meta alcanzada - ${{ totalGeneral2.total.toLocaleString() }}
-  </div>
+    Meta alcanzada - {{ totalGeneral2.total | currency:'MXN':'symbol':'1.0-2' }}
+    </div>
 </div>
 
 
