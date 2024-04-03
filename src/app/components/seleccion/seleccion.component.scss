@@ -1,0 +1,69 @@
+.contenedorHorizontal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Se mantiene para asegurar el espaciado entre elementos */
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0.5rem;
+}
+
+.imagen {
+  width: 100%; /* Hacer que la imagen sea responsiva */
+  max-width: 120px; /* Máximo ancho para la imagen */
+  height: auto; /* Mantener la proporción */
+  margin: 0 10px;
+}
+
+.etiqueta {
+  flex-grow: 1;
+  text-align: right;
+  margin-right: 10px;
+  font-size: 1.2rem;
+  font-family: 'Helvetica LT Std', sans-serif;
+}
+
+.colorTexto {
+  color: #ffffff;
+}
+
+ion-title {
+  color: #ffffff;
+  text-align: center;
+  font-family: 'Helvetica LT Std', sans-serif;
+}
+
+ion-item {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+ion-list {
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+/* Media queries para ajustes específicos de pantalla */
+@media only screen and (max-width: 900px) {
+  .contenedorHorizontal {
+    flex-direction: column; /* Cambiar a layout vertical en pantallas pequeñas */
+    width: 90%; /* Ajustar ancho para centrar y dar espacio */
+    margin: auto; /* Centrar el contenedor horizontalmente */
+    justify-content: center;
+  }
+  
+  .imagen, .etiqueta {
+    text-align: center; /* Centrar contenido para pantallas pequeñas */
+    margin: 10px 0; /* Añadir margen vertical para separación */
+  }
+
+  .etiqueta {
+    text-align: center; /* Asegurar que el texto esté centrado */
+    margin: 10px; /* Ajustar margen para mantener consistencia */
+  }
+
+  ion-title, ion-item, ion-list {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+}

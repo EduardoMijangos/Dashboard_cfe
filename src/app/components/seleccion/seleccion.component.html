@@ -1,14 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Resultados</ion-title>
+  <div class="contenedorHorizontal">
+    <img src="../../../assets/cfe.png" alt="" class="imagen" />
+    <label class="etiqueta"
+      >Dashboard Ingresos RealTime para CFE Division Sureste</label
+    >
+
     <ion-buttons slot="end">
       <ion-button (click)="cerrarModal()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
-  </ion-toolbar>
+  </div>
 </ion-header>
-<ion-content>
+
+<ion-content color="primary">
+  <ion-title>Resultados</ion-title>
   <ion-list>
     <ion-item *ngFor="let item of items" (click)="onItemSelect(item)">
       {{ item.descripcion }}

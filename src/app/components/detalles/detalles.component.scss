@@ -1,25 +1,69 @@
 .contenedorHorizontal {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #ffffff; /* Color de fondo ajustado para coincidir con la imagen */
-    color: #000000; // Color del texto ajustado para el contraste
-    padding: 0.5rem; // Añadido padding para espacio interior
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Se mantiene para asegurar el espaciado entre elementos */
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0.5rem;
+}
 
-  .imagen {
-    width: auto; /* Ajusta el ancho de la imagen a un valor fijo para control */
-    height: auto; /* Mantiene la proporción de la imagen */
-    margin:0 10px; /* Ajusta según sea necesario */
+.imagen {
+  width: 100%; /* Hacer que la imagen sea responsiva */
+  max-width: 120px; /* Máximo ancho para la imagen */
+  height: auto; /* Mantener la proporción */
+  margin: 0 10px;
+}
+
+.etiqueta {
+  flex-grow: 1;
+  text-align: right;
+  margin-right: 10px;
+  font-size: 1.2rem;
+  font-family: 'Helvetica LT Std', sans-serif;
+}
+
+.colorTexto {
+  color: #ffffff;
+}
+
+ion-title {
+  color: #ffffff;
+  text-align: center;
+  font-family: 'Helvetica LT Std', sans-serif;
+}
+
+ion-item {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+ion-list {
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+/* Media queries para ajustes específicos de pantalla */
+@media only screen and (max-width: 900px) {
+  .contenedorHorizontal {
+    flex-direction: column; /* Cambiar a layout vertical en pantallas pequeñas */
+    width: 90%; /* Ajustar ancho para centrar y dar espacio */
+    margin: auto; /* Centrar el contenedor horizontalmente */
+    justify-content: center;
   }
   
-  .etiqueta {
-    flex-grow: 1; /* Permite que la etiqueta ocupe todo el espacio restante */
-    text-align: right; /* Alinea el texto a la derecha */
-    margin-right: 10px; /* Añade un margen a la derecha */
-    font-size: 1.2rem; /* Ajusta el tamaño del texto según sea necesario */
+  .imagen, .etiqueta {
+    text-align: center; /* Centrar contenido para pantallas pequeñas */
+    margin: 10px 0; /* Añadir margen vertical para separación */
   }
 
-.colorTexto{
-  color: #ffffff;
+  .etiqueta {
+    text-align: center; /* Asegurar que el texto esté centrado */
+    margin: 10px; /* Ajustar margen para mantener consistencia */
+  }
+
+  ion-title, ion-item, ion-list {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
 }

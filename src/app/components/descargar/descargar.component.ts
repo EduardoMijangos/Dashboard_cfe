@@ -760,9 +760,9 @@ export class DescargarComponent implements OnInit {
     const seriesData = data.map((item) => {
       const total =
         'total' in item
-          ? parseFloat(item.total) * 1000
+          ? parseFloat(item.total) * 10000
           : 'totaluno' in item && 'totaldos' in item
-          ? (parseFloat(item.totaluno) + parseFloat(item.totaldos)) * 1000
+          ? (parseFloat(item.totaluno) + parseFloat(item.totaldos)) * 10000
           : 0;
       return total;
     });
@@ -928,7 +928,7 @@ export class DescargarComponent implements OnInit {
 
   formatTotalAsFullNumber(totalString: string): string {
     // Convertir el valor de cadena, que representa miles con un punto decimal, a un número completo.
-    const totalNumber = parseFloat(totalString) * 1000;
+    const totalNumber = parseFloat(totalString) * 10000;
 
     // Formatear el número para no perder los ceros significativos al final si los hay.
     // Esto creará una cadena que representa el número sin decimales.
@@ -1143,7 +1143,7 @@ export class DescargarComponent implements OnInit {
   sumarTotales(datos: PressItem[]): { total: number } {
     return datos.reduce(
       (acumulado, item) => {
-        acumulado.total += parseFloat(item.total) * 1000;
+        acumulado.total += parseFloat(item.total) * 10000;
         return acumulado;
       },
       { total: 0 }
@@ -1157,8 +1157,8 @@ export class DescargarComponent implements OnInit {
   } {
     return datos.reduce(
       (acumulados, item) => {
-        acumulados.total1 += parseFloat(item.totaluno) * 1000;
-        acumulados.total2 += parseFloat(item.totaldos) * 1000;
+        acumulados.total1 += parseFloat(item.totaluno) * 10000;
+        acumulados.total2 += parseFloat(item.totaldos) * 10000;
         return acumulados;
       },
       { total1: 0, total2: 0 }

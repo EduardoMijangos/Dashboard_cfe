@@ -98,7 +98,7 @@ export class HomePage implements OnInit {
       series: [
         {
           name: 'Mas Ingresos',
-          data: [2.3, 3.1, 4.0, 10.1, 4.0],
+          data: [2.3, 3.1, 4.0, 10.1, 4.0]
         },
       ],
       chart: {
@@ -115,13 +115,8 @@ export class HomePage implements OnInit {
       } as ApexPlotOptionsBar,
       dataLabels: {
         enabled: true,
-        formatter: function (val) {
-          // Convierte val a número antes de formatearlo
-          const numberVal = Number(val);
-          return new Intl.NumberFormat('es-MX', {
-            style: 'currency',
-            currency: 'MXN',
-          }).format(numberVal);
+        formatter:(val) => {
+          return '$' + this.formatTotalAsFullNumber(val.toString());
         },
         offsetY: -20,
         style: {
@@ -163,11 +158,9 @@ export class HomePage implements OnInit {
         },
         labels: {
           show: false,
-          formatter: function (val) {
-            return new Intl.NumberFormat('es-MX', {
-              style: 'currency',
-              currency: 'MXN',
-            }).format(val);
+          formatter:(val) => {
+            return '$' + this.formatTotalAsFullNumber(val.toString());
+
           },
         },
       },
@@ -195,13 +188,8 @@ export class HomePage implements OnInit {
       } as ApexPlotOptionsBar,
       dataLabels: {
         enabled: true,
-        formatter: function (val) {
-          // Convierte val a número antes de formatearlo
-          const numberVal = Number(val);
-          return new Intl.NumberFormat('es-MX', {
-            style: 'currency',
-            currency: 'MXN',
-          }).format(numberVal);
+        formatter:(val) =>{
+          return '$' + this.formatTotalAsFullNumber(val.toString());
         },
         offsetY: -20,
         style: {
@@ -242,11 +230,8 @@ export class HomePage implements OnInit {
         },
         labels: {
           show: false,
-          formatter: function (val) {
-            return new Intl.NumberFormat('es-MX', {
-              style: 'currency',
-              currency: 'MXN',
-            }).format(val);
+          formatter: (val) => {
+            return '$' + this.formatTotalAsFullNumber(val.toString());
           },
         },
       },
@@ -291,11 +276,8 @@ export class HomePage implements OnInit {
           dataLabels: {
             show: true,
             value: {
-              formatter: function (val) {
-                return new Intl.NumberFormat('es-MX', {
-                  style: 'currency',
-                  currency: 'MXN',
-                }).format(val);
+              formatter:(val) => {
+                return '$' + this.formatTotalAsFullNumber(val.toString());
               },
             },
             name: {
@@ -353,11 +335,8 @@ export class HomePage implements OnInit {
           dataLabels: {
             show: true,
             value: {
-              formatter: function (val) {
-                return new Intl.NumberFormat('es-MX', {
-                  style: 'currency',
-                  currency: 'MXN',
-                }).format(val);
+              formatter:(val) => {
+                return '$' + this.formatTotalAsFullNumber(val.toString());
               },
             },
             name: {
@@ -382,8 +361,7 @@ export class HomePage implements OnInit {
     this.fechaSeleccionada = this.fechaSeleccionada.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
   }
   ngOnInit() {
-
-        // Al inicializar, se suscribe a los datos del servicio y actualiza la configuración de los gráficos.
+    // Al inicializar, se suscribe a los datos del servicio y actualiza la configuración de los gráficos.
     this.presentacionesService.obtenerInfo(this.fechaSeleccionada).subscribe({
       next: (data) => {
         console.log('datos recibidos', data);
@@ -449,17 +427,25 @@ export class HomePage implements OnInit {
     });
   }
 
-    // Función para sumar totales de ingresos de un conjunto de datos.
+  // Función para sumar totales de ingresos de un conjunto de datos.
   sumarTotales(datos: PressItem[]): { total: number } {
     return datos.reduce(
       (acumulado, item) => {
-        acumulado.total += parseFloat(item.total);
+        // Usa la función para formatear cada total antes de sumarlo
+        const formattedTotal = this.formatTotalAsFullNumber(item.total);
+        acumulado.total += parseFloat(formattedTotal);
         return acumulado;
       },
       { total: 0 }
     );
   }
   private chartSectionVisible = false;
+
+  // Agregar la función formatTotalAsFullNumber aquí
+  formatTotalAsFullNumber(totalString: string): string {
+    const totalNumber = parseFloat(totalString) * 10000; // Corrige el multiplicador según sea necesario
+    return totalNumber.toFixed(0);
+  }
 
   /*   generarPDF(): void {
     const pdf = new jsPDF();

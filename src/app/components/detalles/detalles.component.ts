@@ -4,6 +4,7 @@ import {
   PressGeneralItem,
   PressAcumuladosItem,
 } from 'src/app/models/press-data.model';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-detalles',
@@ -14,7 +15,9 @@ export class DetallesComponent implements OnInit {
   // Propiedad de entrada para recibir el ítem consolidado que se mostrará en los detalles.
   @Input() consolidatedItem!: ConsolidatedItem;
 
-  constructor() {}
+  constructor(
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {}
 
@@ -33,4 +36,9 @@ export class DetallesComponent implements OnInit {
     // Devuelve true si el ítem tiene la propiedad 'totaluno', característica de PressAcumuladosItem.
     return (item as PressAcumuladosItem).totaluno !== undefined;
   }
+
+    // Método para cerrar el modal actual.
+    cerrarModal() {
+      this.modalController.dismiss();
+    }
 }

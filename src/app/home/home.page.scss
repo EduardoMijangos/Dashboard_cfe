@@ -11,6 +11,7 @@
   width: 100%;
   max-width: 800px;
   margin: 20px auto;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,6 +21,7 @@
   width: auto;
   max-width: 800px;
   margin: 20px auto;
+  height: auto;
   display: block; /* Cambiado de absolute a block para mejorar el flujo del documento */
 }
 
@@ -38,22 +40,26 @@
 /* Establecer márgenes y posiciones específicos para cada elemento flotante */
 .top-right {
   margin-top: 6.5rem;
-  top: 50px;
+  top: 4rem;
+  bottom: 2rem;
   right: 10px;
 }
 
 .bottom-left {
+  top: 35rem;
   bottom: 10px;
   left: 10px;
 }
 
 .top-left {
   margin-top: 6.5rem;
-  top: 30px;
-  left: 10px;
+  top: 4rem;
+  left: 1rem;
+  bottom: 2rem;
 }
 
 .bottom-right {
+  top: 35rem;
   bottom: 10px;
   right: 10px;
 }
@@ -121,44 +127,38 @@ h3, span {
 }
 
 
-@media only screen and (max-width: 1500px) {
-  .map-container{
-    width: 40%;
+@media only screen and (max-width: 1700px) {
+  .map-container {
+    width: 39%;
     height: 60%;
-    margin: 20px auto;
+    margin: 10px auto; /* Centra el mapa horizontalmente y añade margen vertical */
   }
+
   .chart-container {
     width: 30%;
-    height: 30%; /* Permite que ocupen el ancho disponible */
-    margin: 40px auto; /* Reduce el margen en dispositivos más pequeños */
+    height: 30%; /* Establece el alto de los contenedores de gráficos */
+    margin: 10px auto; /* Centra los gráficos horizontalmente y aumenta el margen vertical */
   }
 
-  .top-left, 
-  .top-right{
-    margin: 5em;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-    padding: auto;
-  }
-
-  .bottom-left,
-  .bottom-right{
-    margin: 5em;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-    padding: auto;
+  .top-left, .top-right, .bottom-left, .bottom-right {
+    margin-top: 5em; /* Espaciado superior uniforme */
+    margin-bottom: 5em; /* Espaciado inferior uniforme */
+    margin-left: 1.5rem; /* Reduce el margen izquierdo */
+    margin-right: 1.5rem; /* Reduce el margen derecho */
+    padding: 0; /* Establece el relleno a 0; 'auto' no es un valor válido para padding */
   }
 }
 
 
-@media only screen and (max-width: 1000px) {
+
+@media only screen and (max-width: 1100px) {
 
   .map-container{
     width: 90%;
   }
   
   .chart-container {
-    flex-direction: column; /* Cambia a columna para alternar entre gráficos circulares y de barras */
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
     text-align: center;

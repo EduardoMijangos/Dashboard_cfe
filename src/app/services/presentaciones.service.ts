@@ -7,8 +7,8 @@ import { PressData } from '../models/press-data.model';
   providedIn: 'root'
 })
 export class PresentacionesService {
-  private apiUrl = 'http://192.168.110.4:3000/press-data';
-  //private apiUrl = '../../assets/info/responsePressData.json';
+  //private apiUrl = 'http://192.168.110.4:3000/press-data';
+  private apiUrl = '../../assets/info/responsePressData.json';
 
   constructor(private http: HttpClient) { }
 
