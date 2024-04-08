@@ -447,6 +447,10 @@ export class HomePage implements OnInit {
     return totalNumber.toFixed(0);
   }
 
+  iraDescargas(){
+    this.router.navigate(['/descargar'])
+  }
+
   /*   generarPDF(): void {
     const pdf = new jsPDF();
     const chartElements = document.querySelectorAll('.chart-container');

@@ -39,6 +39,7 @@
 
   <!--Grafica circular de zona con mas ingresos-->
   <apx-chart
+  (click)="iraDescargas()"
     class="chart-container top-left"
     id="chart"
     *ngIf="chartOptionsmascircular.series && chartOptionsmascircular.chart && chartOptionsmascircular.plotOptions && chartOptionsmascircular.labels 
