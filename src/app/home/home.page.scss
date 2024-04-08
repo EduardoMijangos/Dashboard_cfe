@@ -22,8 +22,22 @@
   max-width: 800px;
   margin: 20px auto;
   height: auto;
-  display: block; /* Cambiado de absolute a block para mejorar el flujo del documento */
+  display: block;
+  padding: 16px; 
+  box-sizing: border-box; 
+  display: block; 
+  position: relative;
 }
+
+.chart-container-title {
+  font-size: 1.2rem; 
+  font-family: Helvetica LT Std;
+  font-weight: 600; 
+  color: #323232;
+  text-align: center;
+  margin-bottom: 12px; 
+}
+
 
 /* Ajustar elementos flotantes para pantallas pequeñas y medianas */
 .top-right,
@@ -39,9 +53,9 @@
 
 /* Establecer márgenes y posiciones específicos para cada elemento flotante */
 .top-right {
-  margin-top: 6.5rem;
+  margin-top:5rem;
   top: 4rem;
-  bottom: 2rem;
+  bottom: 1rem;
   right: 10px;
 }
 
@@ -52,10 +66,10 @@
 }
 
 .top-left {
-  margin-top: 6.5rem;
+  margin-top: 5rem;
   top: 4rem;
   left: 1rem;
-  bottom: 2rem;
+  bottom: 1rem;
 }
 
 .bottom-right {
@@ -149,99 +163,70 @@ h3, span {
   }
 }
 
-
-
 @media only screen and (max-width: 1100px) {
-
-  .map-container{
-    width: 90%;
-  }
-  
-  .chart-container {
-    flex-direction: column; 
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-  }
-
-  chart-title {
-    text-align: center; /* Centra el título */
-    margin-bottom: 10px; /* Espacio debajo del título */
-    font-size: 1.2em; /* Tamaño del título */
-  }
-  
-  .chart {
-    width: 100%; /* La gráfica usa todo el ancho disponible del contenedor */
-  }
-  
-  .chart-icons {
-    position: absolute; /* Posiciona los íconos de manera absoluta dentro del contenedor */
-    top: 10px; /* Espacio desde la parte superior del contenedor */
-    right: 10px; /* Espacio desde la parte derecha del contenedor */
-    /* Agrega estilos para los íconos específicos si es necesario */
-  }
-  
-  /* Estilos para las etiquetas de las barras de la gráfica, si es necesario */
-  .bar-label {
-    font-size: 0.8em; /* Tamaño de la etiqueta */
-    text-align: center; /* Centra el texto de la etiqueta */
-  }
-
-  .content-wrapper {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-
   .map-container {
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
+    width: 90%;
     margin-top: 20px;
-    max-width: 90%;
+    margin-bottom: 20px;
+    padding: 0 10px;
   }
 
-  .top-right,
-  .bottom-left,
-  .rectangle33,
-  .top-left,
-  .bottom-right {
-    width: auto;
-    position: relative;
-    display: flex;
-    align-items: center;
+  .chart-container {
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
+    width: 90%; /* Cambiado de 50% a 90% para mantener consistencia y evitar sobreposición */
+    margin: 20px auto; /* Centra el contenedor */
+  }
+
+  /* Para los elementos flotantes, considera ocultarlos o reposicionarlos en pantallas pequeñas */
+  .top-right, .bottom-left, .top-left, .bottom-right {
+    position: relative; /* O considera ocultarlos con 'display: none;' si no son esenciales */
+    width: 100%;
     justify-content: center;
-    max-width: 100%;
+    align-items: center;
+    margin: 10px auto;
   }
 
-  .hora {
-    width: 95%; /* Aumenta el ancho para pantallas muy pequeñas */
-    margin: 10px auto; /* Reduce el margen */
-    position: relative;
+  .top-left{
+    top: 65rem;
+    bottom: 3rem;
+    position: absolute;
   }
 
-
-  .top-right {
-    top: 30px;
-    right: 10px;
+  .top-right{
+    top: 85rem;
+    bottom: 3rem;
+    position: absolute;
   }
 
-  .bottom-left {
-    bottom: 10px;
-    left: 10px;
+  .bottom-right{
+    top: 110rem;
+    bottom: 3rem;
+    position: absolute;
   }
 
-  .top-left {
-    top: 30px;
-    left: 10px;
+  .bottom-left{
+    top: 130rem;
+    bottom: 3rem;
+    position: absolute;
   }
 
-  .bottom-right {
-    bottom: 10px;
-    right: 10px;
+  /* Ajusta el tamaño del texto para mejorar la legibilidad en dispositivos más pequeños */
+  h3, span, .progress-text {
+    font-size: 1.2rem; /* O el tamaño que sea adecuado para tu diseño */
   }
 
+  /* Asegúrate de que los contenedores de widgets sean visibles y legibles */
   .rectangle33 {
     width: 90%;
-    margin-bottom: 20px;
+    /* Puedes aumentar el tamaño de la fuente para los textos dentro de estos contenedores si es necesario */
   }
 
-
+  /* Si la tarjeta de hora es importante, asegúrate de que sea claramente visible */
+  .hora {
+    width: 95%;
+    padding: 15px; /* Un poco más de padding para evitar que el texto toque los bordes */
+    margin: 10px auto;
+    font-size: 1.2rem;
+  }
 }

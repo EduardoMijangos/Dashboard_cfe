@@ -277,7 +277,7 @@ export class HomePage implements OnInit {
             show: true,
             value: {
               formatter:(val) => {
-                return '$' + this.formatTotalAsFullNumber(val.toString());
+                return '$' + this.formatTotalAsFullNumber(val.toString());  
               },
             },
             name: {
@@ -406,7 +406,7 @@ export class HomePage implements OnInit {
               categories: menores.map((item) => item.descripcion),
             }),
             (this.chartOptionsmascircular.series = [parseFloat(maximo.total)]);
-          this.chartOptionsmascircular.labels = [maximo.descripcion];
+          this.chartOptionsmascircular.labels =  [maximo.descripcion];
 
           // Actualiza la gráfica circular de la zona con menos ingresos
           this.chartOptionsmenoscircular.series = [parseFloat(minimo.total)];

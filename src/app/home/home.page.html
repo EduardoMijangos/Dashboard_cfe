@@ -57,7 +57,7 @@
   <div
     *ngIf="chartOptions"
     class="chart-container top-right">
-      Zonas con mas Ingresos
+    <div class="chart-container-title">Zonas con más Ingresos</div>
       <apx-chart
       *ngIf="chartOptions.series && chartOptions.chart && chartOptions.plotOptions && chartOptions.dataLabels && chartOptions.yaxis && chartOptions.xaxis && chartOptions.fill"
       [series]="chartOptions.series"
@@ -95,8 +95,7 @@
     mode="ios"
     id="chart"
   >
-        Zonas con menos Ingresos
-
+  <div class="chart-container-title">Zonas con menos Ingresos</div>
     <apx-chart
       id="chartSection"
       *ngIf="chartOptionsmenos.series && chartOptionsmenos.chart && chartOptionsmenos.plotOptions && chartOptionsmenos.dataLabels

@@ -5,6 +5,23 @@
   /* Ajusta el espacio entre las gráficas según sea necesario */
 }
 
+::webkit-scrollbar {
+  width: 5px; /* Ancho de la barra de desplazamiento */
+}
+
+::webkit-scrollbar-track {
+  background: transparent; /* Color de la pista de la barra de desplazamiento */
+}
+
+::webkit-scrollbar-thumb {
+  background: #8f4e4e; /* Color de la barra de desplazamiento */
+  border-radius: 10px; /* Redondeo de la barra de desplazamiento */
+}
+
+::webkit-scrollbar-thumb:hover {
+  background: #b3b3b3; /* Color de la barra al pasar el mouse */
+}
+
 .contenedorHorizontal {
   display: flex;
   align-items: center;
