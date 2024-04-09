@@ -1039,29 +1039,37 @@ export class DescargarComponent implements OnInit {
     for (const [index, chartId] of chartIds.entries()) {
       const chartElement = document.getElementById(chartId);
       if (chartElement) {
-        const canvas = await html2canvas(chartElement);
-        const imageData = canvas.toDataURL('image/png');
-        const imgProps = pdf.getImageProperties(imageData);
-        const pdfWidth = pdf.internal.pageSize.getWidth() - 20;
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        console.log(`Procesando: ${chartId}`); // Agregar esto para depuración
+        await html2canvas(chartElement, {
+          scale: window.devicePixelRatio,
+          useCORS: true,
+        }).then(canvas => {
+          const imageData = canvas.toDataURL('image/png');
+          const imgProps = pdf.getImageProperties(imageData);
+          const pdfWidth = pdf.internal.pageSize.getWidth() - 20;
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-        if (currentHeight + pdfHeight > pdf.internal.pageSize.getHeight()) {
-          pdf.addPage();
-          currentHeight = 0;
-        }
+          if (currentHeight + pdfHeight > pdf.internal.pageSize.getHeight()) {
+            pdf.addPage();
+            currentHeight = 0;
+          }
 
-        pdf.addImage(
-          imageData,
-          'PNG',
-          10,
-          currentHeight + 10,
-          pdfWidth,
-          pdfHeight
-        );
-        currentHeight += pdfHeight + 10;
+          pdf.addImage(
+            imageData,
+            'PNG',
+            10,
+            currentHeight + 10,
+            pdfWidth,
+            pdfHeight
+          );
+          currentHeight += pdfHeight + 10;
 
-        // Actualizar la barra de progreso
-        this.porcentajeDescarga = ((index + 1) / chartIds.length) * 100;
+          // Actualizar la barra de progreso
+          this.porcentajeDescarga = ((index + 1) / chartIds.length) * 100;
+        });
+      }
+      else {
+        console.log(`Elemento no encontrado: ${chartId}`); // Para elementos no encontrados
       }
     }
 

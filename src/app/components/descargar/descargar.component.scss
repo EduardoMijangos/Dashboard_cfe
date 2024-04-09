@@ -1,8 +1,13 @@
+
+.pdf-export {
+  
+  
 .chart-container {
   height: 300px;
   /* Ajusta la altura de las gráficas según tus necesidades */
   margin-bottom: 20px;
   /* Ajusta el espacio entre las gráficas según sea necesario */
+}
 }
 
 ::webkit-scrollbar {
@@ -174,6 +179,7 @@ ion-card {
   border-radius: 1rem;
   /* Define el radio de las esquinas para hacerlas redondeadas */
 }
+
 
 
 @media (max-width: 767px) {

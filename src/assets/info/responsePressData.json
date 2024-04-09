@@ -1,1 +1,340 @@
-{"pressGeneral1":[{"descripcion":"Baja California","total":"457.702656"},{"descripcion":"Noroeste","total":"359.436767"},{"descripcion":"Norte","total":"333.149409"},{"descripcion":"Golfo Norte","total":"714.660351"},{"descripcion":"Centro Occidente","total":"141.776354"},{"descripcion":"Centro Sur","total":"123.523865"},{"descripcion":"Oriente","total":"219.670109"},{"descripcion":"Sureste","total":"243.716928"},{"descripcion":"Valle de México Norte","total":"171.118143"},{"descripcion":"Valle de México Centro","total":"178.505987"},{"descripcion":"Valle de México Sur","total":"215.85307"},{"descripcion":"Bajío","total":"357.610712"},{"descripcion":"Golfo Centro","total":"169.859912"},{"descripcion":"Centro Oriente","total":"195.239767"},{"descripcion":"Peninsular","total":"452.584414"},{"descripcion":"Jalisco","total":"356.528366"}],"pressGeneral2":[{"descripcion":"SAN CRISTOBAL","total":"8.748005"},{"descripcion":"TUXTLA","total":"34.730728"},{"descripcion":"OAXACA","total":"30.898502"},{"descripcion":"HUATULCO","total":"18.25615"},{"descripcion":"HUAJUAPAN","total":"4.715762"},{"descripcion":"TAPACHULA","total":"23.609159"},{"descripcion":"TEHUANTEPEC","total":"19.105982"},{"descripcion":"VILLAHERMOSA","total":"72.851277"},{"descripcion":"CHONTALPA","total":"22.266309"},{"descripcion":"LOS RIOS","total":"8.535054"}],"pressGeneral4":[{"descripcion":"SAN CRISTOBAL","total":"0.695619"},{"descripcion":"TUXTLA","total":"2.805555"},{"descripcion":"OAXACA","total":"2.544313"},{"descripcion":"HUATULCO","total":"1.333177"},{"descripcion":"HUAJUAPAN","total":"0.333042"},{"descripcion":"TAPACHULA","total":"1.867673"},{"descripcion":"TEHUANTEPEC","total":"1.586821"},{"descripcion":"VILLAHERMOSA","total":"5.857265"},{"descripcion":"CHONTALPA","total":"1.854163"},{"descripcion":"LOS RIOS","total":"0.707383"}],"pressAcumulados3":[{"descripcion":"SAN CRISTOBAL","totaluno":"8.748005","totaldos":"270.04254475","avance":"3.23949139499434"},{"descripcion":"TUXTLA","totaluno":"34.730728","totaldos":"574.18234357","avance":"6.048727967506"},{"descripcion":"OAXACA","totaluno":"30.898502","totaldos":"465.17189871","avance":"6.64238361897757"},{"descripcion":"HUATULCO","totaluno":"18.25615","totaldos":"257.23711224","avance":"7.09701249599131"},{"descripcion":"HUAJUAPAN","totaluno":"4.715762","totaldos":"130.5756205","avance":"3.61151797092168"},{"descripcion":"TAPACHULA","totaluno":"23.609159","totaldos":"467.30225149","avance":"5.05222453448958"},{"descripcion":"TEHUANTEPEC","totaluno":"19.105982","totaldos":"355.36668391","avance":"5.37641339637758"},{"descripcion":"VILLAHERMOSA","totaluno":"72.851277","totaldos":"752.6712882","avance":"9.67902962981656"},{"descripcion":"CHONTALPA","totaluno":"22.266309","totaldos":"545.94325798","avance":"4.07850242209891"},{"descripcion":"LOS RIOS","totaluno":"8.535054","totaldos":"253.94181279","avance":"3.36102743625689"}],"pressAcumulados5":[{"descripcion":"SAN CRISTOBAL","totaluno":"0.695619","totaldos":"12.75159203","avance":"5.45515413576167"},{"descripcion":"TUXTLA","totaluno":"2.805555","totaldos":"10.1452025","avance":"27.65400690622"},{"descripcion":"OAXACA","totaluno":"2.544313","totaldos":"15.280813","avance":"16.6503771756123"},{"descripcion":"HUATULCO","totaluno":"1.333177","totaldos":"18.32688838","avance":"7.27443182037867"},{"descripcion":"HUAJUAPAN","totaluno":"0.333042","totaldos":"6.80677508","avance":"4.89280159966737"},{"descripcion":"TAPACHULA","totaluno":"1.867673","totaldos":"18.234292","avance":"10.242640624599"},{"descripcion":"TEHUANTEPEC","totaluno":"1.586821","totaldos":"8.30134222","avance":"19.1152341145141"},{"descripcion":"VILLAHERMOSA","totaluno":"5.857265","totaldos":"17.66549707","avance":"33.1565252695151"},{"descripcion":"CHONTALPA","totaluno":"1.854163","totaldos":"19.46691231","avance":"9.52468974264363"},{"descripcion":"LOS RIOS","totaluno":"0.707383","totaldos":"8.970012","avance":"7.88608755484385"}],"pressAcumulados7":[{"descripcion":"SAN CRISTOBAL","totaluno":"25165","totaldos":"556907","avance":"4.51870779142658"},{"descripcion":"TUXTLA","totaluno":"72697","totaldos":"591808","avance":"12.2838826105764"},{"descripcion":"OAXACA","totaluno":"91150","totaldos":"697633","avance":"13.0656089949873"},{"descripcion":"HUATULCO","totaluno":"24173","totaldos":"256552","avance":"9.4222613739125"},{"descripcion":"HUAJUAPAN","totaluno":"16914","totaldos":"316418","avance":"5.34546075128469"},{"descripcion":"TAPACHULA","totaluno":"30207","totaldos":"411837","avance":"7.33469795088834"},{"descripcion":"TEHUANTEPEC","totaluno":"31517","totaldos":"276791","avance":"11.3865696500247"},{"descripcion":"VILLAHERMOSA","totaluno":"83529","totaldos":"440379","avance":"18.9675256994543"},{"descripcion":"CHONTALPA","totaluno":"27038","totaldos":"319025","avance":"8.4751978685056"},{"descripcion":"LOS RIOS","totaluno":"16223","totaldos":"217108","avance":"7.47231792471949"}]}
+
+
+{
+    "pressGeneral1": [
+        {
+            "descripcion": "Baja California",
+            "total": "457.702656"
+        },
+        {
+            "descripcion": "Noroeste",
+            "total": "359.436767"
+        },
+        {
+            "descripcion": "Norte",
+            "total": "333.149409"
+        },
+        {
+            "descripcion": "Golfo Norte",
+            "total": "714.660351"
+        },
+        {
+            "descripcion": "Centro Occidente",
+            "total": "141.776354"
+        },
+        {
+            "descripcion": "Centro Sur",
+            "total": "123.523865"
+        },
+        {
+            "descripcion": "Oriente",
+            "total": "219.670109"
+        },
+        {
+            "descripcion": "Sureste",
+            "total": "243.716928"
+        },
+        {
+            "descripcion": "Valle de México Norte",
+            "total": "171.118143"
+        },
+        {
+            "descripcion": "Valle de México Centro",
+            "total": "178.505987"
+        },
+        {
+            "descripcion": "Valle de México Sur",
+            "total": "215.85307"
+        },
+        {
+            "descripcion": "Bajío",
+            "total": "357.610712"
+        },
+        {
+            "descripcion": "Golfo Centro",
+            "total": "169.859912"
+        },
+        {
+            "descripcion": "Centro Oriente",
+            "total": "195.239767"
+        },
+        {
+            "descripcion": "Peninsular",
+            "total": "452.584414"
+        },
+        {
+            "descripcion": "Jalisco",
+            "total": "356.528366"
+        }
+    ],
+    "pressGeneral2": [
+        {
+            "descripcion": "SAN CRISTOBAL",
+            "total": "8.748005"
+        },
+        {
+            "descripcion": "TUXTLA",
+            "total": "34.730728"
+        },
+        {
+            "descripcion": "OAXACA",
+            "total": "30.898502"
+        },
+        {
+            "descripcion": "HUATULCO",
+            "total": "18.25615"
+        },
+        {
+            "descripcion": "HUAJUAPAN",
+            "total": "4.715762"
+        },
+        {
+            "descripcion": "TAPACHULA",
+            "total": "23.609159"
+        },
+        {
+            "descripcion": "TEHUANTEPEC",
+            "total": "19.105982"
+        },
+        {
+            "descripcion": "VILLAHERMOSA",
+            "total": "72.851277"
+        },
+        {
+            "descripcion": "CHONTALPA",
+            "total": "22.266309"
+        },
+        {
+            "descripcion": "LOS RIOS",
+            "total": "8.535054"
+        }
+    ],
+    "pressGeneral4": [
+        {
+            "descripcion": "SAN CRISTOBAL",
+            "total": "0.695619"
+        },
+        {
+            "descripcion": "TUXTLA",
+            "total": "2.805555"
+        },
+        {
+            "descripcion": "OAXACA",
+            "total": "2.544313"
+        },
+        {
+            "descripcion": "HUATULCO",
+            "total": "1.333177"
+        },
+        {
+            "descripcion": "HUAJUAPAN",
+            "total": "0.333042"
+        },
+        {
+            "descripcion": "TAPACHULA",
+            "total": "1.867673"
+        },
+        {
+            "descripcion": "TEHUANTEPEC",
+            "total": "1.586821"
+        },
+        {
+            "descripcion": "VILLAHERMOSA",
+            "total": "5.857265"
+        },
+        {
+            "descripcion": "CHONTALPA",
+            "total": "1.854163"
+        },
+        {
+            "descripcion": "LOS RIOS",
+            "total": "0.707383"
+        }
+    ],
+    "pressAcumulados3": [
+        {
+            "descripcion": "SAN CRISTOBAL",
+            "totaluno": "8.748005",
+            "totaldos": "270.04254475",
+            "avance": "3.23949139499434"
+        },
+        {
+            "descripcion": "TUXTLA",
+            "totaluno": "34.730728",
+            "totaldos": "574.18234357",
+            "avance": "6.048727967506"
+        },
+        {
+            "descripcion": "OAXACA",
+            "totaluno": "30.898502",
+            "totaldos": "465.17189871",
+            "avance": "6.64238361897757"
+        },
+        {
+            "descripcion": "HUATULCO",
+            "totaluno": "18.25615",
+            "totaldos": "257.23711224",
+            "avance": "7.09701249599131"
+        },
+        {
+            "descripcion": "HUAJUAPAN",
+            "totaluno": "4.715762",
+            "totaldos": "130.5756205",
+            "avance": "3.61151797092168"
+        },
+        {
+            "descripcion": "TAPACHULA",
+            "totaluno": "23.609159",
+            "totaldos": "467.30225149",
+            "avance": "5.05222453448958"
+        },
+        {
+            "descripcion": "TEHUANTEPEC",
+            "totaluno": "19.105982",
+            "totaldos": "355.36668391",
+            "avance": "5.37641339637758"
+        },
+        {
+            "descripcion": "VILLAHERMOSA",
+            "totaluno": "72.851277",
+            "totaldos": "752.6712882",
+            "avance": "9.67902962981656"
+        },
+        {
+            "descripcion": "CHONTALPA",
+            "totaluno": "22.266309",
+            "totaldos": "545.94325798",
+            "avance": "4.07850242209891"
+        },
+        {
+            "descripcion": "LOS RIOS",
+            "totaluno": "8.535054",
+            "totaldos": "253.94181279",
+            "avance": "3.36102743625689"
+        }
+    ],
+    "pressAcumulados5": [
+        {
+            "descripcion": "SAN CRISTOBAL",
+            "totaluno": "0.695619",
+            "totaldos": "12.75159203",
+            "avance": "5.45515413576167"
+        },
+        {
+            "descripcion": "TUXTLA",
+            "totaluno": "2.805555",
+            "totaldos": "10.1452025",
+            "avance": "27.65400690622"
+        },
+        {
+            "descripcion": "OAXACA",
+            "totaluno": "2.544313",
+            "totaldos": "15.280813",
+            "avance": "16.6503771756123"
+        },
+        {
+            "descripcion": "HUATULCO",
+            "totaluno": "1.333177",
+            "totaldos": "18.32688838",
+            "avance": "7.27443182037867"
+        },
+        {
+            "descripcion": "HUAJUAPAN",
+            "totaluno": "0.333042",
+            "totaldos": "6.80677508",
+            "avance": "4.89280159966737"
+        },
+        {
+            "descripcion": "TAPACHULA",
+            "totaluno": "1.867673",
+            "totaldos": "18.234292",
+            "avance": "10.242640624599"
+        },
+        {
+            "descripcion": "TEHUANTEPEC",
+            "totaluno": "1.586821",
+            "totaldos": "8.30134222",
+            "avance": "19.1152341145141"
+        },
+        {
+            "descripcion": "VILLAHERMOSA",
+            "totaluno": "5.857265",
+            "totaldos": "17.66549707",
+            "avance": "33.1565252695151"
+        },
+        {
+            "descripcion": "CHONTALPA",
+            "totaluno": "1.854163",
+            "totaldos": "19.46691231",
+            "avance": "9.52468974264363"
+        },
+        {
+            "descripcion": "LOS RIOS",
+            "totaluno": "0.707383",
+            "totaldos": "8.970012",
+            "avance": "7.88608755484385"
+        }
+    ],
+    "pressAcumulados7": [
+        {
+            "descripcion": "SAN CRISTOBAL",
+            "totaluno": "25165",
+            "totaldos": "556907",
+            "avance": "4.51870779142658"
+        },
+        {
+            "descripcion": "TUXTLA",
+            "totaluno": "72697",
+            "totaldos": "591808",
+            "avance": "12.2838826105764"
+        },
+        {
+            "descripcion": "OAXACA",
+            "totaluno": "91150",
+            "totaldos": "697633",
+            "avance": "13.0656089949873"
+        },
+        {
+            "descripcion": "HUATULCO",
+            "totaluno": "24173",
+            "totaldos": "256552",
+            "avance": "9.4222613739125"
+        },
+        {
+            "descripcion": "HUAJUAPAN",
+            "totaluno": "16914",
+            "totaldos": "316418",
+            "avance": "5.34546075128469"
+        },
+        {
+            "descripcion": "TAPACHULA",
+            "totaluno": "30207",
+            "totaldos": "411837",
+            "avance": "7.33469795088834"
+        },
+        {
+            "descripcion": "TEHUANTEPEC",
+            "totaluno": "31517",
+            "totaldos": "276791",
+            "avance": "11.3865696500247"
+        },
+        {
+            "descripcion": "VILLAHERMOSA",
+            "totaluno": "83529",
+            "totaldos": "440379",
+            "avance": "18.9675256994543"
+        },
+        {
+            "descripcion": "CHONTALPA",
+            "totaluno": "27038",
+            "totaldos": "319025",
+            "avance": "8.4751978685056"
+        },
+        {
+            "descripcion": "LOS RIOS",
+            "totaluno": "16223",
+            "totaldos": "217108",
+            "avance": "7.47231792471949"
+        }
+    ]
+}
