@@ -8,8 +8,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PresentacionesService {
-  //private apiUrl = 'http://192.168.110.4:3000/press-data';
-  private apiUrl = '../../assets/info/infomes.json';
+  private apiUrl = 'http://192.168.110.4:3000/press-data';
+  //private apiUrl = '../../assets/info/infomes.json';
   //private apiUrl = '../../assets/info/responsePressData.json';
 
   constructor(private http: HttpClient) { }
