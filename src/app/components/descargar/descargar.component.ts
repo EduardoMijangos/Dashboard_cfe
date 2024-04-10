@@ -172,10 +172,7 @@ export class DescargarComponent implements OnInit {
     private presentacionService: PresentacionesService,
     private cdr: ChangeDetectorRef
   ) {
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1); // Obtener fecha de ayer
-    this.selectedDate = yesterday.toISOString(); // Convertir a formato ISO (YYYY-MM-DDTHH:MM:SS)
-    this.selectedDate = this.selectedDate.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
+    this.selectedDate = "2024-03-01"
   }
 
   ngOnInit() {
@@ -186,55 +183,57 @@ export class DescargarComponent implements OnInit {
         console.log(data);
         this.pressData = data;
 
+        if (this.pressData){
+
         this.actualizarGraficas(
           this.chartOptionsGeneral1,
-          this.pressData.pressGeneral1
+          this.pressData?.pressGeneral1 ?? []
         );
         this.actualizarGraficas(
           this.chartOptionsGeneral2,
-          this.pressData.pressGeneral2
+          this.pressData?.pressGeneral2 ?? []
         );
         this.actualizarGraficas(
           this.chartOptionsAcumulados3,
-          this.pressData.pressAcumulados3,
-          true
+          this.pressData?.pressAcumulados3 ?? [], 
+          true 
         ); // Si es acumulado, pasamos true
         this.actualizarGraficas(
           this.chartOptionsGeneral4,
-          this.pressData.pressGeneral4
+          this.pressData?.pressGeneral4 ?? []
         );
         this.actualizarGraficas(
           this.chartOptionsAcumulados5,
-          this.pressData.pressAcumulados5,
+          this.pressData?.pressAcumulados5 ?? [],
           true
         ); // Si es acumulado, pasamos true
         this.actualizarGraficas(
           this.chartOptionsAcumulados7,
-          this.pressData.pressAcumulados7,
+          this.pressData?.pressAcumulados7 ?? [],
           true
         ); // Si es acumulado, pasamos true
 
-        this.totalGeneral1 = this.sumarTotales(this.pressData.pressGeneral1);
+        this.totalGeneral1 = this.sumarTotales(this.pressData?.pressGeneral1 ?? []);
         console.log('Total General 1:', this.totalGeneral1);
 
-        this.totalGeneral2 = this.sumarTotales(this.pressData.pressGeneral2);
+        this.totalGeneral2 = this.sumarTotales(this.pressData?.pressGeneral2 ?? []);
         console.log('Total General 2:', this.totalGeneral2);
 
         this.totalesAcumulados3 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados3
+          this.pressData?.pressAcumulados3 ?? []
         );
         console.log('Totales Acumulados 3:', this.totalesAcumulados3);
 
-        this.totalGeneral4 = this.sumarTotales(this.pressData.pressGeneral4);
+        this.totalGeneral4 = this.sumarTotales(this.pressData?.pressGeneral4 ?? []);
         console.log('Total General 4:', this.totalGeneral4);
 
         this.totalesAcumulados5 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados5
+          this.pressData?.pressAcumulados5 ?? []
         );
         console.log('Totales Acumulados 5:', this.totalesAcumulados5);
 
         this.totalesAcumulados7 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados7
+          this.pressData?.pressAcumulados7 ?? []
         );
         console.log('Totales Acumulados 7:', this.totalesAcumulados7);
 
@@ -243,9 +242,9 @@ export class DescargarComponent implements OnInit {
           series: [
             {
               name: 'Total',
-              data: this.pressData.pressGeneral1.map((item) =>
+              data: this.pressData?.pressGeneral1?.map((item) =>
                 parseFloat(parseFloat(item.total).toFixed(3))
-              ),
+              ) ?? [],
             },
           ],
           chart: {
@@ -272,7 +271,7 @@ export class DescargarComponent implements OnInit {
             enabled: true,
           },
           xaxis: {
-            categories: this.pressData.pressGeneral1.map(
+            categories: this.pressData?.pressGeneral1.map(
               (item) => item.descripcion
             ),
             labels: {
@@ -320,9 +319,9 @@ export class DescargarComponent implements OnInit {
           series: [
             {
               name: 'Total',
-              data: this.pressData.pressGeneral2.map((item) =>
+              data: this.pressData?.pressGeneral2?.map((item) =>
                 parseFloat(parseFloat(item.total).toFixed(3))
-              ),
+              ) ?? [],
             },
           ],
           chart: {
@@ -351,7 +350,7 @@ export class DescargarComponent implements OnInit {
             },
           },
           xaxis: {
-            categories: this.pressData.pressGeneral2.map(
+            categories: this.pressData?.pressGeneral2.map(
               (item) => item.descripcion
             ),
             labels: {
@@ -393,21 +392,21 @@ export class DescargarComponent implements OnInit {
           series: [
             {
               name: 'Recuperado APP',
-              data: this.pressData.pressAcumulados3.map((item) =>
+              data: this.pressData?.pressAcumulados3?.map((item) =>
                 parseFloat(parseFloat(item.totaluno).toFixed(3))
-              ),
+              ) ?? [],
             },
             {
               name: 'Facturado',
-              data: this.pressData.pressAcumulados3.map((item) =>
+              data: this.pressData?.pressAcumulados3?.map((item) =>
                 parseFloat(parseFloat(item.totaldos).toFixed(3))
-              ),
+              ) ?? [],
             },
             {
               name: 'Avance',
-              data: this.pressData.pressAcumulados3.map((item) =>
+              data: this.pressData?.pressAcumulados3?.map((item) =>
                 parseFloat(parseFloat(item.avance).toFixed(3))
-              ),
+              ) ?? [],
             },
           ],
           chart: {
@@ -438,7 +437,7 @@ export class DescargarComponent implements OnInit {
             },
           },
           xaxis: {
-            categories: this.pressData.pressAcumulados3.map(
+            categories: this.pressData?.pressAcumulados3.map(
               (item) => item.descripcion
             ),
             labels: {
@@ -486,9 +485,9 @@ export class DescargarComponent implements OnInit {
           series: [
             {
               name: 'Total',
-              data: this.pressData.pressGeneral4.map((item) =>
+              data: this.pressData?.pressGeneral4?.map((item) =>
                 parseFloat(parseFloat(item.total).toFixed(3))
-              ),
+              ) ?? [],
             },
           ],
           chart: {
@@ -517,7 +516,7 @@ export class DescargarComponent implements OnInit {
             },
           },
           xaxis: {
-            categories: this.pressData.pressGeneral4.map(
+            categories: this.pressData?.pressGeneral4.map(
               (item) => item.descripcion
             ),
             labels: {
@@ -560,21 +559,21 @@ export class DescargarComponent implements OnInit {
           series: [
             {
               name: 'Recuperado APP',
-              data: this.pressData.pressAcumulados5.map((item) =>
+              data: this.pressData?.pressAcumulados5?.map((item) =>
                 parseFloat(parseFloat(item.totaluno).toFixed(3))
-              ),
+              ) ?? [],
             },
             {
               name: 'Facturado',
-              data: this.pressData.pressAcumulados5.map((item) =>
+              data: this.pressData?.pressAcumulados5?.map((item) =>
                 parseFloat(parseFloat(item.totaldos).toFixed(3))
-              ),
+              ) ?? [],
             },
             {
               name: 'Avance',
-              data: this.pressData.pressAcumulados5.map((item) =>
+              data: this.pressData?.pressAcumulados5?.map((item) =>
                 parseFloat(parseFloat(item.avance).toFixed(3))
-              ),
+              ) ?? [],
             },
           ],
           chart: {
@@ -605,7 +604,7 @@ export class DescargarComponent implements OnInit {
             },
           },
           xaxis: {
-            categories: this.pressData.pressAcumulados5.map(
+            categories: this.pressData?.pressAcumulados5.map(
               (item) => item.descripcion
             ),
             labels: {
@@ -653,21 +652,21 @@ export class DescargarComponent implements OnInit {
           series: [
             {
               name: 'Total Uno',
-              data: this.pressData.pressAcumulados7.map(
+              data: this.pressData?.pressAcumulados7?.map(
                 (item) => +parseFloat(item.totaluno).toFixed(3)
-              ),
+              ) ?? [],
             },
             {
               name: 'Total Dos',
-              data: this.pressData.pressAcumulados7.map(
+              data: this.pressData?.pressAcumulados7?.map(
                 (item) => +parseFloat(item.totaldos).toFixed(3)
-              ),
+              ) ?? [],
             },
             {
               name: 'Avance',
-              data: this.pressData.pressAcumulados7.map(
+              data: this.pressData?.pressAcumulados7?.map(
                 (item) => +parseFloat(item.avance).toFixed(3)
-              ),
+              ) ?? [],
             },
           ],
           chart: {
@@ -698,7 +697,7 @@ export class DescargarComponent implements OnInit {
             },
           },
           xaxis: {
-            categories: this.pressData.pressAcumulados7.map(
+            categories: this.pressData?.pressAcumulados7.map(
               (item) => item.descripcion
             ),
             labels: {
@@ -740,7 +739,8 @@ export class DescargarComponent implements OnInit {
             },
           },
         };
-      },
+      }
+    },
       error: (error) => {
         console.error('Hubo un error al recuperar los datos de la API', error);
       },
@@ -864,46 +864,46 @@ export class DescargarComponent implements OnInit {
         this.chartOptionsGeneral1.series = [
           {
             name: 'Total General 1',
-            data: this.pressData.pressGeneral1.map((item) =>
+            data: this.pressData?.pressGeneral1?.map((item) =>
               parseFloat(item.total)
-            ),
+            ) ?? [],
           },
         ];
 
         this.chartOptionsGeneral1.xaxis ??= {};
         this.chartOptionsGeneral1.xaxis.categories =
-          this.pressData.pressGeneral1.map((item) => item.descripcion);
-        this.totalGeneral1 = this.sumarTotales(this.pressData.pressGeneral1);
+          this.pressData?.pressGeneral1.map((item) => item.descripcion);
+        this.totalGeneral1 = this.sumarTotales(this.pressData?.pressGeneral1 ?? []);
 
         this.chartOptionsGeneral2.xaxis ??= {};
         this.chartOptionsGeneral2.xaxis.categories =
-          this.pressData.pressGeneral2.map((item) => item.descripcion);
-        this.totalGeneral2 = this.sumarTotales(this.pressData.pressGeneral2);
+          this.pressData?.pressGeneral2.map((item) => item.descripcion);
+        this.totalGeneral2 = this.sumarTotales(this.pressData?.pressGeneral2 ?? []);
 
         this.chartOptionsAcumulados3.xaxis ??= {};
         this.chartOptionsAcumulados3.xaxis.categories =
-          this.pressData.pressAcumulados3.map((item) => item.descripcion);
+          this.pressData?.pressAcumulados3.map((item) => item.descripcion);
         this.totalesAcumulados3 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados3
+          this.pressData?.pressAcumulados3 ?? []
         );
 
         this.chartOptionsGeneral4.xaxis ??= {};
         this.chartOptionsGeneral4.xaxis.categories =
-          this.pressData.pressGeneral4.map((item) => item.descripcion);
-        this.totalGeneral4 = this.sumarTotales(this.pressData.pressGeneral4);
+          this.pressData?.pressGeneral4.map((item) => item.descripcion);
+        this.totalGeneral4 = this.sumarTotales(this.pressData?.pressGeneral4 ?? []);
 
         this.chartOptionsAcumulados5.xaxis ??= {};
         this.chartOptionsAcumulados5.xaxis.categories =
-          this.pressData.pressAcumulados5.map((item) => item.descripcion);
+          this.pressData?.pressAcumulados5?.map((item) => item.descripcion);
         this.totalesAcumulados5 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados5
+          this.pressData?.pressAcumulados5 ?? []
         );
 
         this.chartOptionsAcumulados7.xaxis ??= {};
         this.chartOptionsAcumulados7.xaxis.categories =
-          this.pressData.pressAcumulados7.map((item) => item.descripcion);
+          this.pressData?.pressAcumulados7?.map((item) => item.descripcion);
         this.totalesAcumulados7 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados7
+          this.pressData?.pressAcumulados7 ?? []
         );
       },
       error: (error) => {
@@ -943,44 +943,44 @@ export class DescargarComponent implements OnInit {
         // Llamadas para actualizar las gráficas
         this.actualizarGraficas(
           this.chartOptionsGeneral1,
-          this.pressData.pressGeneral1
+          this.pressData?.pressGeneral1 ?? []
         );
         this.actualizarGraficas(
           this.chartOptionsGeneral2,
-          this.pressData.pressGeneral2
+          this.pressData?.pressGeneral2 ?? []
         );
         this.actualizarGraficas(
           this.chartOptionsAcumulados3,
-          this.pressData.pressAcumulados3,
+          this.pressData?.pressAcumulados3 ?? [],
           true
         );
         this.actualizarGraficas(
           this.chartOptionsGeneral4,
-          this.pressData.pressGeneral4
+          this.pressData?.pressGeneral4 ?? []
         );
         this.actualizarGraficas(
           this.chartOptionsAcumulados5,
-          this.pressData.pressAcumulados5,
+          this.pressData?.pressAcumulados5 ?? [],
           true
         );
         this.actualizarGraficas(
           this.chartOptionsAcumulados7,
-          this.pressData.pressAcumulados7,
+          this.pressData?.pressAcumulados7 ?? [],
           true
         );
 
         // Recalcular totales
-        this.totalGeneral1 = this.sumarTotales(this.pressData.pressGeneral1);
-        this.totalGeneral2 = this.sumarTotales(this.pressData.pressGeneral2);
+        this.totalGeneral1 = this.sumarTotales(this.pressData?.pressGeneral1 ?? []);
+        this.totalGeneral2 = this.sumarTotales(this.pressData?.pressGeneral2 ?? []);
         this.totalesAcumulados3 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados3
+          this.pressData?.pressAcumulados3 ?? []
         );
-        this.totalGeneral4 = this.sumarTotales(this.pressData.pressGeneral4);
+        this.totalGeneral4 = this.sumarTotales(this.pressData?.pressGeneral4 ?? []);
         this.totalesAcumulados5 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados5
+          this.pressData?.pressAcumulados5 ?? []
         );
         this.totalesAcumulados7 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados7
+          this.pressData?.pressAcumulados7 ?? []
         );
       },
       error: (error) => {
@@ -1148,14 +1148,14 @@ export class DescargarComponent implements OnInit {
   }
 
   // Función para sumar totales de datos de graficas generales.
-  sumarTotales(datos: PressItem[]): { total: number } {
-    return datos.reduce(
+  sumarTotales(datos: PressItem[] | null): { total: number } {
+    return datos?.reduce(
       (acumulado, item) => {
         acumulado.total += parseFloat(item.total) * 10000;
         return acumulado;
       },
       { total: 0 }
-    );
+    ) ?? { total: 0 };
   }
 
   // Función para sumar totales de datos acumulados, separando por categorías si es necesario.

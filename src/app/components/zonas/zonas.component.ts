@@ -158,10 +158,7 @@ export class ZonasComponent implements OnInit {
     };
 
     // Configuración de la fecha seleccionada al día anterior.
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1); // Obtener fecha de ayer
-    this.selectedDate = yesterday.toISOString(); // Convertir a formato ISO (YYYY-MM-DDTHH:MM:SS)
-    this.selectedDate = this.selectedDate.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
+    this.selectedDate = "2024-03-01" 
   }
 
   ngOnInit() {
@@ -180,7 +177,7 @@ export class ZonasComponent implements OnInit {
             }));
         }
 
-        console.log(this.pressData.pressGeneral2);
+        console.log(this.pressData?.pressGeneral2);
 
         if (this.pressData && this.pressData.pressGeneral2.length > 0) {
           this.zonas = this.pressData.pressGeneral2.map((zona) => {

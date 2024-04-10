@@ -63,14 +63,10 @@ export class HeaderComponent implements OnInit {
     private presentacionesService: PresentacionesService,
     private modalController: ModalController
   ) {
-    this.fechaSeleccionada = new Date().toISOString().split('T')[0];
     this.checkScreenSize();
     window.addEventListener('resize', () => this.checkScreenSize());
 
-    const ayer = new Date();
-    ayer.setDate(ayer.getDate() - 1);
-    this.fechaSeleccionada = ayer.toISOString(); // Convertir formato de fecha(YYYY-MM-DDTHH:MM:SS)
-    this.fechaSeleccionada = this.fechaSeleccionada.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
+    this.fechaSeleccionada = "2024-03-01"
   }
 
   ngOnInit() {
@@ -219,7 +215,9 @@ export class HeaderComponent implements OnInit {
     this.presentacionesService.obtenerInfo(this.fechaSeleccionada).subscribe(
       (data) => {
         console.log('Respuesta completa del servicio: ', data);
+        if(data !== null){
         this.pressData = data;
+        } else{}
         const itemsMap = this.prepareSearchData(this.pressData);
         this.items = Array.from(itemsMap.values());
         console.log('Items after loading: ', this.items);

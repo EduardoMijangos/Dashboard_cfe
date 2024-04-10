@@ -367,10 +367,11 @@ export class HomePage implements OnInit {
         console.log('datos recibidos', data);
         this.pressData = data;
 
-        this.totalGeneral2 = this.sumarTotales(this.pressData.pressGeneral2);
+        this.totalGeneral2 = this.sumarTotales(this.pressData?.pressGeneral2 ?? []);
         console.log('Total General 2:', this.totalGeneral2);
 
         const metaTotal = 1000;
+        if(data)
         this.totalGeneral2 = this.sumarTotales(data.pressGeneral2);
         // Convertir el total actual en un porcentaje de la meta total
         this.progress = (this.totalGeneral2.total / metaTotal) * 100;
