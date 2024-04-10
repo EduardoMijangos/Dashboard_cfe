@@ -1,6 +1,7 @@
 <ion-content color="light" class="content-wrapper" scrollY="true">
   <app-header></app-header>
 
+
 <!--Barra de progreso de meta del día-->
 <div class="rectangle33">
   <span>Meta del día:</span>
@@ -21,6 +22,7 @@
 
   <!--Componente del mapa-->
   <app-mapa class="map-container"></app-mapa>
+  
 
   <!--Card de la ultima actualizacion-->
   <ion-grid fixed="">
@@ -29,8 +31,8 @@
         <ion-card mode="ios" class="hora">
           <ion-card-header> Última actualización </ion-card-header>
           <ion-card-content>
-            <div>{{ fechaSeleccionada | date: 'EEEE' }}</div>
-            <div>{{ fechaSeleccionada | date: 'dd MMM yyyy' }}</div>
+            <div>{{ selectedDate | date: 'EEEE' }}</div>
+            <div>{{ selectedDate | date: 'dd MMM yyyy' }}</div>
           </ion-card-content>
         </ion-card>
       </ion-col>

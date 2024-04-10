@@ -1,12 +1,10 @@
 import {
   Component,
-  ElementRef,
   Input,
   ViewChild,
-  ViewEncapsulation,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -23,10 +21,8 @@ import {
 
 import { PresentacionesService } from '../services/presentaciones.service';
 import {
-  PressAcumuladosItem,
   PressData,
   PressItem,
-  PressItemAcumulado,
 } from 'src/app/models/press-data.model';
 
 // Tipo para las opciones de gráficos de barras específicas.
@@ -68,9 +64,7 @@ export type ChartOptions = {
 })
 export class HomePage implements OnInit {
   @Input() progress: number = 14;
-  fcehaActual: string;
-
-  fechaSeleccionada: string;
+  selectedDate: string = '2024-03-04';
 
   // Almacena los datos obtenidos del servicio
   pressData: PressData | null = null;
@@ -86,12 +80,9 @@ export class HomePage implements OnInit {
   public chartOptionsmenoscircular: Partial<ChartOptionsCircle>;
 
   constructor(
-    private el: ElementRef,
     private router: Router,
-    private route: ActivatedRoute,
-    private presentacionesService: PresentacionesService
+    private presentacionesService: PresentacionesService,
   ) {
-    this.fcehaActual = new Date().toISOString();
 
     //Manejo de informacion de la grafica de barras de mas ingresos
     this.chartOptions = {
@@ -355,14 +346,10 @@ export class HomePage implements OnInit {
       },
     };
 
-    const ayer = new Date();
-    ayer.setDate(ayer.getDate() - 1);
-    this.fechaSeleccionada = ayer.toISOString(); // Convertir formato de fecha(YYYY-MM-DDTHH:MM:SS)
-    this.fechaSeleccionada = this.fechaSeleccionada.split('T')[0]; // Obtener solo la fecha (YYYY-MM-DD)
   }
   ngOnInit() {
     // Al inicializar, se suscribe a los datos del servicio y actualiza la configuración de los gráficos.
-    this.presentacionesService.obtenerInfo(this.fechaSeleccionada).subscribe({
+    this.presentacionesService.obtenerInfo(this.selectedDate).subscribe({
       next: (data) => {
         console.log('datos recibidos', data);
         this.pressData = data;

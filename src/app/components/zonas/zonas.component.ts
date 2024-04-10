@@ -158,7 +158,7 @@ export class ZonasComponent implements OnInit {
     };
 
     // Configuración de la fecha seleccionada al día anterior.
-    this.selectedDate = "2024-03-01" 
+    this.selectedDate = "2024-03-04" 
   }
 
   ngOnInit() {
