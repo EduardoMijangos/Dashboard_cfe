@@ -181,571 +181,6 @@ export class DescargarComponent implements OnInit {
   ngOnInit() {
     this.cargarDatos(this.selectedDate);
 
-    this.presentacionService.obtenerInfo(this.selectedDate).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.pressData = data;
-
-        this.actualizarGraficas(
-          this.chartOptionsGeneral1,
-          this.pressData.pressGeneral1
-        );
-        this.actualizarGraficas(
-          this.chartOptionsGeneral2,
-          this.pressData.pressGeneral2
-        );
-        this.actualizarGraficas(
-          this.chartOptionsAcumulados3,
-          this.pressData.pressAcumulados3,
-          true
-        ); // Si es acumulado, pasamos true
-        this.actualizarGraficas(
-          this.chartOptionsGeneral4,
-          this.pressData.pressGeneral4
-        );
-        this.actualizarGraficas(
-          this.chartOptionsAcumulados5,
-          this.pressData.pressAcumulados5,
-          true
-        ); // Si es acumulado, pasamos true
-        this.actualizarGraficas(
-          this.chartOptionsAcumulados7,
-          this.pressData.pressAcumulados7,
-          true
-        ); // Si es acumulado, pasamos true
-
-        this.totalGeneral1 = this.sumarTotales(this.pressData.pressGeneral1);
-        console.log('Total General 1:', this.totalGeneral1);
-
-        this.totalGeneral2 = this.sumarTotales(this.pressData.pressGeneral2);
-        console.log('Total General 2:', this.totalGeneral2);
-
-        this.totalesAcumulados3 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados3
-        );
-        console.log('Totales Acumulados 3:', this.totalesAcumulados3);
-
-        this.totalGeneral4 = this.sumarTotales(this.pressData.pressGeneral4);
-        console.log('Total General 4:', this.totalGeneral4);
-
-        this.totalesAcumulados5 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados5
-        );
-        console.log('Totales Acumulados 5:', this.totalesAcumulados5);
-
-        this.totalesAcumulados7 = this.sumarTotalesSeparados(
-          this.pressData.pressAcumulados7
-        );
-        console.log('Totales Acumulados 7:', this.totalesAcumulados7);
-
-        // Preparar datos para pressGeneral1
-        this.chartOptionsGeneral1 = {
-          series: [
-            {
-              name: 'Total',
-              data: this.pressData.pressGeneral1.map((item) =>
-                parseFloat(parseFloat(item.total).toFixed(3))
-              ),
-            },
-          ],
-          chart: {
-            type: 'bar',
-            height: 700,
-            toolbar: {
-              show: false,
-            },
-          },
-          plotOptions: {
-            bar: {
-              horizontal: true,
-              barHeight: '75%',
-            },
-          },
-          stroke: {
-            width: 1,
-            colors: ['#fff'],
-          },
-          title: {
-            text: '',
-          },
-          dataLabels: {
-            enabled: true,
-          },
-          xaxis: {
-            categories: this.pressData.pressGeneral1.map(
-              (item) => item.descripcion
-            ),
-            labels: {
-              formatter: function (val) {
-                return '$' + `${parseFloat(val).toFixed(3)}`;
-              },
-            },
-          },
-          yaxis: {
-            labels: {
-              formatter: function (val) {
-                return val.toLocaleString();
-              },
-            },
-          },
-          tooltip: {
-            y: {
-              formatter: function (val) {
-                return '$' + val;
-              },
-            },
-          },
-          grid: {
-            borderColor: '#90A4AE',
-            strokeDashArray: 0,
-            position: 'back',
-            xaxis: {
-              lines: {
-                show: false,
-              },
-            },
-          },
-          fill: {
-            colors: ['#4CAF50'],
-          },
-          legend: {
-            position: 'top',
-            horizontalAlign: 'right',
-            offsetX: -10,
-          },
-        };
-
-        //General 2
-        this.chartOptionsGeneral2 = {
-          series: [
-            {
-              name: 'Total',
-              data: this.pressData.pressGeneral2.map((item) =>
-                parseFloat(parseFloat(item.total).toFixed(3))
-              ),
-            },
-          ],
-          chart: {
-            type: 'bar',
-            height: 600,
-            toolbar: {
-              show: false,
-            },
-          },
-          plotOptions: {
-            bar: {
-              horizontal: true,
-            },
-          },
-          stroke: {
-            width: 1,
-            colors: ['#fff'],
-          },
-          title: {
-            text: '',
-          },
-          dataLabels: {
-            enabled: true,
-            style: {
-              colors: ['#fff'],
-            },
-          },
-          xaxis: {
-            categories: this.pressData.pressGeneral2.map(
-              (item) => item.descripcion
-            ),
-            labels: {
-              formatter: function (val) {
-                return '$' + `${parseFloat(val).toFixed(3)}`;
-              },
-            },
-          },
-          yaxis: {
-            labels: {
-              formatter: function (val) {
-                return val.toLocaleString();
-              },
-            },
-          },
-          tooltip: {
-            y: {
-              formatter: function (val) {
-                return '$' + val;
-              },
-            },
-          },
-          grid: {
-            borderColor: '#90A4AE',
-            strokeDashArray: 0,
-          },
-          fill: {
-            colors: ['#4CAF50'],
-          },
-          legend: {
-            position: 'bottom',
-            horizontalAlign: 'center',
-            offsetX: 50,
-          },
-        };
-
-        //Presentacion Acumulados 3
-        this.chartOptionsAcumulados3 = {
-          series: [
-            {
-              name: 'Recuperado APP',
-              data: this.pressData.pressAcumulados3.map((item) =>
-                parseFloat(parseFloat(item.totaluno).toFixed(3))
-              ),
-            },
-            {
-              name: 'Facturado',
-              data: this.pressData.pressAcumulados3.map((item) =>
-                parseFloat(parseFloat(item.totaldos).toFixed(3))
-              ),
-            },
-            {
-              name: 'Avance',
-              data: this.pressData.pressAcumulados3.map((item) =>
-                parseFloat(parseFloat(item.avance).toFixed(3))
-              ),
-            },
-          ],
-          chart: {
-            type: 'bar',
-            height: 600,
-            stacked: true,
-            stackType: '100%',
-            toolbar: {
-              show: false,
-            },
-          },
-          plotOptions: {
-            bar: {
-              horizontal: true,
-            },
-          },
-          stroke: {
-            width: 1,
-            colors: ['#fff'],
-          },
-          title: {
-            text: '',
-          },
-          dataLabels: {
-            enabled: true,
-            style: {
-              colors: ['#fff'],
-            },
-          },
-          xaxis: {
-            categories: this.pressData.pressAcumulados3.map(
-              (item) => item.descripcion
-            ),
-            labels: {
-              formatter: function (val) {
-                return `${parseFloat(val).toFixed(3)}`;
-              },
-            },
-          },
-          yaxis: {
-            labels: {
-              formatter: function (val) {
-                return val.toLocaleString();
-              },
-            },
-          },
-          tooltip: {
-            y: {
-              formatter: function (val) {
-                return '$' + val;
-              },
-            },
-          },
-          grid: {
-            borderColor: '#90A4AE',
-            strokeDashArray: 0,
-          },
-          fill: {
-            colors: ['#4CAF50', '#9ABE26', '#008E5A'],
-          },
-          legend: {
-            show: true,
-            position: 'bottom',
-            horizontalAlign: 'center',
-            offsetX: 50,
-            fontSize: '30px',
-            markers: {
-              height: 35,
-              fillColors: ['#4CAF50', '#9ABE26', '#008E5A'],
-            },
-          },
-        };
-
-        //Presentacion General 4
-        this.chartOptionsGeneral4 = {
-          series: [
-            {
-              name: 'Total',
-              data: this.pressData.pressGeneral4.map((item) =>
-                parseFloat(parseFloat(item.total).toFixed(3))
-              ),
-            },
-          ],
-          chart: {
-            type: 'bar',
-            height: 600,
-            toolbar: {
-              show: false,
-            },
-          },
-          plotOptions: {
-            bar: {
-              horizontal: true,
-            },
-          },
-          stroke: {
-            width: 0.5,
-            colors: ['#fff'],
-          },
-          title: {
-            text: '',
-          },
-          dataLabels: {
-            enabled: true,
-            style: {
-              colors: ['#fff'],
-            },
-          },
-          xaxis: {
-            categories: this.pressData.pressGeneral4.map(
-              (item) => item.descripcion
-            ),
-            labels: {
-              formatter: function (val) {
-                return `${parseFloat(val).toFixed(3)}`;
-              },
-            },
-          },
-          yaxis: {
-            labels: {
-              formatter: function (val) {
-                return val.toLocaleString();
-              },
-            },
-          },
-          tooltip: {
-            y: {
-              formatter: function (val) {
-                return '$' + val;
-              },
-            },
-          },
-
-          grid: {
-            borderColor: '#90A4AE',
-            strokeDashArray: 0,
-          },
-          fill: {
-            colors: ['#4CAF50'],
-          },
-          legend: {
-            position: 'bottom',
-            horizontalAlign: 'center',
-            offsetX: 50,
-          },
-        };
-
-        //Presentacion Acumulados 5
-        this.chartOptionsAcumulados5 = {
-          series: [
-            {
-              name: 'Recuperado APP',
-              data: this.pressData.pressAcumulados5.map((item) =>
-                parseFloat(parseFloat(item.totaluno).toFixed(3))
-              ),
-            },
-            {
-              name: 'Facturado',
-              data: this.pressData.pressAcumulados5.map((item) =>
-                parseFloat(parseFloat(item.totaldos).toFixed(3))
-              ),
-            },
-            {
-              name: 'Avance',
-              data: this.pressData.pressAcumulados5.map((item) =>
-                parseFloat(parseFloat(item.avance).toFixed(3))
-              ),
-            },
-          ],
-          chart: {
-            type: 'bar',
-            height: 600,
-            stacked: true,
-            stackType: '100%',
-            toolbar: {
-              show: false,
-            },
-          },
-          plotOptions: {
-            bar: {
-              horizontal: true,
-            },
-          },
-          stroke: {
-            width: 1,
-            colors: ['#fff'],
-          },
-          title: {
-            text: '',
-          },
-          dataLabels: {
-            enabled: true,
-            style: {
-              colors: ['#fff'],
-            },
-          },
-          xaxis: {
-            categories: this.pressData.pressAcumulados5.map(
-              (item) => item.descripcion
-            ),
-            labels: {
-              formatter: function (val) {
-                return `${parseFloat(val).toFixed(3)}`;
-              },
-            },
-          },
-          yaxis: {
-            labels: {
-              formatter: function (val) {
-                return val.toLocaleString();
-              },
-            },
-          },
-          tooltip: {
-            y: {
-              formatter: function (val) {
-                return '$' + val;
-              },
-            },
-          },
-          grid: {
-            borderColor: '#90A4AE',
-            strokeDashArray: 0,
-          },
-          fill: {
-            colors: ['#4CAF50', '#9ABE26', '#008E5A'],
-          },
-          legend: {
-            show: true,
-            position: 'bottom',
-            horizontalAlign: 'center',
-            offsetX: 50,
-            fontSize: '30px',
-            markers: {
-              height: 35,
-              fillColors: ['#4CAF50', '#9ABE26', '#008E5A'],
-            },
-          },
-        };
-
-        //Presentacion Acumulados 7
-        this.chartOptionsAcumulados7 = {
-          series: [
-            {
-              name: 'Total Uno',
-              data: this.pressData.pressAcumulados7.map(
-                (item) => +parseFloat(item.totaluno).toFixed(3)
-              ),
-            },
-            {
-              name: 'Total Dos',
-              data: this.pressData.pressAcumulados7.map(
-                (item) => +parseFloat(item.totaldos).toFixed(3)
-              ),
-            },
-            {
-              name: 'Avance',
-              data: this.pressData.pressAcumulados7.map(
-                (item) => +parseFloat(item.avance).toFixed(3)
-              ),
-            },
-          ],
-          chart: {
-            type: 'bar',
-            height: 600,
-            stacked: true,
-            stackType: '100%',
-            toolbar: {
-              show: false,
-            },
-          },
-          plotOptions: {
-            bar: {
-              horizontal: true,
-            },
-          },
-          stroke: {
-            width: 1,
-            colors: ['#fff'],
-          },
-          title: {
-            text: '',
-          },
-          dataLabels: {
-            enabled: true,
-            style: {
-              colors: ['#fff'],
-            },
-          },
-          xaxis: {
-            categories: this.pressData.pressAcumulados7.map(
-              (item) => item.descripcion
-            ),
-            labels: {
-              formatter: function (val) {
-                return `${parseFloat(val).toFixed(3)}`;
-              },
-            },
-          },
-          yaxis: {
-            labels: {
-              formatter: function (val) {
-                return val.toLocaleString();
-              },
-            },
-          },
-          tooltip: {
-            y: {
-              formatter: function (val) {
-                return '$' + val;
-              },
-            },
-          },
-          grid: {
-            borderColor: '#90A4AE',
-            strokeDashArray: 0,
-          },
-          fill: {
-            colors: ['#4CAF50', '#9ABE26', '#008E5A'],
-          },
-          legend: {
-            show: true,
-            position: 'bottom',
-            horizontalAlign: 'center',
-            offsetX: 50,
-            fontSize: '30px',
-            markers: {
-              height: 35,
-              fillColors: ['#4CAF50', '#9ABE26', '#008E5A'],
-            },
-          },
-        };
-      },
-      error: (error) => {
-        console.error('Hubo un error al recuperar los datos de la API', error);
-      },
-    });
-
     this.adjustChartOptionsForScreenSize();
     this.resizeListener = () => this.adjustChartOptionsForScreenSize();
     window.addEventListener('resize', this.resizeListener);
@@ -939,6 +374,571 @@ export class DescargarComponent implements OnInit {
     this.presentacionService.obtenerInfo(fecha).subscribe({
       next: (data) => {
         this.pressData = data;
+
+        this.presentacionService.obtenerInfo(this.selectedDate).subscribe({
+          next: (data) => {
+            console.log(data);
+            this.pressData = data;
+    
+            this.actualizarGraficas(
+              this.chartOptionsGeneral1,
+              this.pressData.pressGeneral1
+            );
+            this.actualizarGraficas(
+              this.chartOptionsGeneral2,
+              this.pressData.pressGeneral2
+            );
+            this.actualizarGraficas(
+              this.chartOptionsAcumulados3,
+              this.pressData.pressAcumulados3,
+              true
+            ); // Si es acumulado, pasamos true
+            this.actualizarGraficas(
+              this.chartOptionsGeneral4,
+              this.pressData.pressGeneral4
+            );
+            this.actualizarGraficas(
+              this.chartOptionsAcumulados5,
+              this.pressData.pressAcumulados5,
+              true
+            ); // Si es acumulado, pasamos true
+            this.actualizarGraficas(
+              this.chartOptionsAcumulados7,
+              this.pressData.pressAcumulados7,
+              true
+            ); // Si es acumulado, pasamos true
+    
+            this.totalGeneral1 = this.sumarTotales(this.pressData.pressGeneral1);
+            console.log('Total General 1:', this.totalGeneral1);
+    
+            this.totalGeneral2 = this.sumarTotales(this.pressData.pressGeneral2);
+            console.log('Total General 2:', this.totalGeneral2);
+    
+            this.totalesAcumulados3 = this.sumarTotalesSeparados(
+              this.pressData.pressAcumulados3
+            );
+            console.log('Totales Acumulados 3:', this.totalesAcumulados3);
+    
+            this.totalGeneral4 = this.sumarTotales(this.pressData.pressGeneral4);
+            console.log('Total General 4:', this.totalGeneral4);
+    
+            this.totalesAcumulados5 = this.sumarTotalesSeparados(
+              this.pressData.pressAcumulados5
+            );
+            console.log('Totales Acumulados 5:', this.totalesAcumulados5);
+    
+            this.totalesAcumulados7 = this.sumarTotalesSeparados(
+              this.pressData.pressAcumulados7
+            );
+            console.log('Totales Acumulados 7:', this.totalesAcumulados7);
+    
+            // Preparar datos para pressGeneral1
+            this.chartOptionsGeneral1 = {
+              series: [
+                {
+                  name: 'Total',
+                  data: this.pressData.pressGeneral1.map((item) =>
+                    parseFloat(parseFloat(item.total).toFixed(3))
+                  ),
+                },
+              ],
+              chart: {
+                type: 'bar',
+                height: 700,
+                toolbar: {
+                  show: false,
+                },
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: true,
+                  barHeight: '75%',
+                },
+              },
+              stroke: {
+                width: 1,
+                colors: ['#fff'],
+              },
+              title: {
+                text: '',
+              },
+              dataLabels: {
+                enabled: true,
+              },
+              xaxis: {
+                categories: this.pressData.pressGeneral1.map(
+                  (item) => item.descripcion
+                ),
+                labels: {
+                  formatter: function (val) {
+                    return '$' + `${parseFloat(val).toFixed(3)}`;
+                  },
+                },
+              },
+              yaxis: {
+                labels: {
+                  formatter: function (val) {
+                    return val.toLocaleString();
+                  },
+                },
+              },
+              tooltip: {
+                y: {
+                  formatter: function (val) {
+                    return '$' + val;
+                  },
+                },
+              },
+              grid: {
+                borderColor: '#90A4AE',
+                strokeDashArray: 0,
+                position: 'back',
+                xaxis: {
+                  lines: {
+                    show: false,
+                  },
+                },
+              },
+              fill: {
+                colors: ['#4CAF50'],
+              },
+              legend: {
+                position: 'top',
+                horizontalAlign: 'right',
+                offsetX: -10,
+              },
+            };
+    
+            //General 2
+            this.chartOptionsGeneral2 = {
+              series: [
+                {
+                  name: 'Total',
+                  data: this.pressData.pressGeneral2.map((item) =>
+                    parseFloat(parseFloat(item.total).toFixed(3))
+                  ),
+                },
+              ],
+              chart: {
+                type: 'bar',
+                height: 600,
+                toolbar: {
+                  show: false,
+                },
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: true,
+                },
+              },
+              stroke: {
+                width: 1,
+                colors: ['#fff'],
+              },
+              title: {
+                text: '',
+              },
+              dataLabels: {
+                enabled: true,
+                style: {
+                  colors: ['#fff'],
+                },
+              },
+              xaxis: {
+                categories: this.pressData.pressGeneral2.map(
+                  (item) => item.descripcion
+                ),
+                labels: {
+                  formatter: function (val) {
+                    return '$' + `${parseFloat(val).toFixed(3)}`;
+                  },
+                },
+              },
+              yaxis: {
+                labels: {
+                  formatter: function (val) {
+                    return val.toLocaleString();
+                  },
+                },
+              },
+              tooltip: {
+                y: {
+                  formatter: function (val) {
+                    return '$' + val;
+                  },
+                },
+              },
+              grid: {
+                borderColor: '#90A4AE',
+                strokeDashArray: 0,
+              },
+              fill: {
+                colors: ['#4CAF50'],
+              },
+              legend: {
+                position: 'bottom',
+                horizontalAlign: 'center',
+                offsetX: 50,
+              },
+            };
+    
+            //Presentacion Acumulados 3
+            this.chartOptionsAcumulados3 = {
+              series: [
+                {
+                  name: 'Recuperado APP',
+                  data: this.pressData.pressAcumulados3.map((item) =>
+                    parseFloat(parseFloat(item.totaluno).toFixed(3))
+                  ),
+                },
+                {
+                  name: 'Facturado',
+                  data: this.pressData.pressAcumulados3.map((item) =>
+                    parseFloat(parseFloat(item.totaldos).toFixed(3))
+                  ),
+                },
+                {
+                  name: 'Avance',
+                  data: this.pressData.pressAcumulados3.map((item) =>
+                    parseFloat(parseFloat(item.avance).toFixed(3))
+                  ),
+                },
+              ],
+              chart: {
+                type: 'bar',
+                height: 600,
+                stacked: true,
+                stackType: '100%',
+                toolbar: {
+                  show: false,
+                },
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: true,
+                },
+              },
+              stroke: {
+                width: 1,
+                colors: ['#fff'],
+              },
+              title: {
+                text: '',
+              },
+              dataLabels: {
+                enabled: true,
+                style: {
+                  colors: ['#fff'],
+                },
+              },
+              xaxis: {
+                categories: this.pressData.pressAcumulados3.map(
+                  (item) => item.descripcion
+                ),
+                labels: {
+                  formatter: function (val) {
+                    return `${parseFloat(val).toFixed(3)}`;
+                  },
+                },
+              },
+              yaxis: {
+                labels: {
+                  formatter: function (val) {
+                    return val.toLocaleString();
+                  },
+                },
+              },
+              tooltip: {
+                y: {
+                  formatter: function (val) {
+                    return '$' + val;
+                  },
+                },
+              },
+              grid: {
+                borderColor: '#90A4AE',
+                strokeDashArray: 0,
+              },
+              fill: {
+                colors: ['#4CAF50', '#9ABE26', '#008E5A'],
+              },
+              legend: {
+                show: true,
+                position: 'bottom',
+                horizontalAlign: 'center',
+                offsetX: 50,
+                fontSize: '30px',
+                markers: {
+                  height: 35,
+                  fillColors: ['#4CAF50', '#9ABE26', '#008E5A'],
+                },
+              },
+            };
+    
+            //Presentacion General 4
+            this.chartOptionsGeneral4 = {
+              series: [
+                {
+                  name: 'Total',
+                  data: this.pressData.pressGeneral4.map((item) =>
+                    parseFloat(parseFloat(item.total).toFixed(3))
+                  ),
+                },
+              ],
+              chart: {
+                type: 'bar',
+                height: 600,
+                toolbar: {
+                  show: false,
+                },
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: true,
+                },
+              },
+              stroke: {
+                width: 0.5,
+                colors: ['#fff'],
+              },
+              title: {
+                text: '',
+              },
+              dataLabels: {
+                enabled: true,
+                style: {
+                  colors: ['#fff'],
+                },
+              },
+              xaxis: {
+                categories: this.pressData.pressGeneral4.map(
+                  (item) => item.descripcion
+                ),
+                labels: {
+                  formatter: function (val) {
+                    return `${parseFloat(val).toFixed(3)}`;
+                  },
+                },
+              },
+              yaxis: {
+                labels: {
+                  formatter: function (val) {
+                    return val.toLocaleString();
+                  },
+                },
+              },
+              tooltip: {
+                y: {
+                  formatter: function (val) {
+                    return '$' + val;
+                  },
+                },
+              },
+    
+              grid: {
+                borderColor: '#90A4AE',
+                strokeDashArray: 0,
+              },
+              fill: {
+                colors: ['#4CAF50'],
+              },
+              legend: {
+                position: 'bottom',
+                horizontalAlign: 'center',
+                offsetX: 50,
+              },
+            };
+    
+            //Presentacion Acumulados 5
+            this.chartOptionsAcumulados5 = {
+              series: [
+                {
+                  name: 'Recuperado APP',
+                  data: this.pressData.pressAcumulados5.map((item) =>
+                    parseFloat(parseFloat(item.totaluno).toFixed(3))
+                  ),
+                },
+                {
+                  name: 'Facturado',
+                  data: this.pressData.pressAcumulados5.map((item) =>
+                    parseFloat(parseFloat(item.totaldos).toFixed(3))
+                  ),
+                },
+                {
+                  name: 'Avance',
+                  data: this.pressData.pressAcumulados5.map((item) =>
+                    parseFloat(parseFloat(item.avance).toFixed(3))
+                  ),
+                },
+              ],
+              chart: {
+                type: 'bar',
+                height: 600,
+                stacked: true,
+                stackType: '100%',
+                toolbar: {
+                  show: false,
+                },
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: true,
+                },
+              },
+              stroke: {
+                width: 1,
+                colors: ['#fff'],
+              },
+              title: {
+                text: '',
+              },
+              dataLabels: {
+                enabled: true,
+                style: {
+                  colors: ['#fff'],
+                },
+              },
+              xaxis: {
+                categories: this.pressData.pressAcumulados5.map(
+                  (item) => item.descripcion
+                ),
+                labels: {
+                  formatter: function (val) {
+                    return `${parseFloat(val).toFixed(3)}`;
+                  },
+                },
+              },
+              yaxis: {
+                labels: {
+                  formatter: function (val) {
+                    return val.toLocaleString();
+                  },
+                },
+              },
+              tooltip: {
+                y: {
+                  formatter: function (val) {
+                    return '$' + val;
+                  },
+                },
+              },
+              grid: {
+                borderColor: '#90A4AE',
+                strokeDashArray: 0,
+              },
+              fill: {
+                colors: ['#4CAF50', '#9ABE26', '#008E5A'],
+              },
+              legend: {
+                show: true,
+                position: 'bottom',
+                horizontalAlign: 'center',
+                offsetX: 50,
+                fontSize: '30px',
+                markers: {
+                  height: 35,
+                  fillColors: ['#4CAF50', '#9ABE26', '#008E5A'],
+                },
+              },
+            };
+    
+            //Presentacion Acumulados 7
+            this.chartOptionsAcumulados7 = {
+              series: [
+                {
+                  name: 'Total Uno',
+                  data: this.pressData.pressAcumulados7.map(
+                    (item) => +parseFloat(item.totaluno).toFixed(3)
+                  ),
+                },
+                {
+                  name: 'Total Dos',
+                  data: this.pressData.pressAcumulados7.map(
+                    (item) => +parseFloat(item.totaldos).toFixed(3)
+                  ),
+                },
+                {
+                  name: 'Avance',
+                  data: this.pressData.pressAcumulados7.map(
+                    (item) => +parseFloat(item.avance).toFixed(3)
+                  ),
+                },
+              ],
+              chart: {
+                type: 'bar',
+                height: 600,
+                stacked: true,
+                stackType: '100%',
+                toolbar: {
+                  show: false,
+                },
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: true,
+                },
+              },
+              stroke: {
+                width: 1,
+                colors: ['#fff'],
+              },
+              title: {
+                text: '',
+              },
+              dataLabels: {
+                enabled: true,
+                style: {
+                  colors: ['#fff'],
+                },
+              },
+              xaxis: {
+                categories: this.pressData.pressAcumulados7.map(
+                  (item) => item.descripcion
+                ),
+                labels: {
+                  formatter: function (val) {
+                    return `${parseFloat(val).toFixed(3)}`;
+                  },
+                },
+              },
+              yaxis: {
+                labels: {
+                  formatter: function (val) {
+                    return val.toLocaleString();
+                  },
+                },
+              },
+              tooltip: {
+                y: {
+                  formatter: function (val) {
+                    return '$' + val;
+                  },
+                },
+              },
+              grid: {
+                borderColor: '#90A4AE',
+                strokeDashArray: 0,
+              },
+              fill: {
+                colors: ['#4CAF50', '#9ABE26', '#008E5A'],
+              },
+              legend: {
+                show: true,
+                position: 'bottom',
+                horizontalAlign: 'center',
+                offsetX: 50,
+                fontSize: '30px',
+                markers: {
+                  height: 35,
+                  fillColors: ['#4CAF50', '#9ABE26', '#008E5A'],
+                },
+              },
+            };
+          },
+          error: (error) => {
+            console.error('Hubo un error al recuperar los datos de la API', error);
+          },
+        });
 
         // Llamadas para actualizar las gráficas
         this.actualizarGraficas(
