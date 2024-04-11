@@ -290,62 +290,7 @@ export class DescargarComponent implements OnInit {
   }
 
   // Función para actualizar los datos del gráfico basada en una fecha seleccionada.
-  private updateChartData(data: string) {
-    this.presentacionService.obtenerInfo(data).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.pressData = data;
 
-        this.chartOptionsGeneral1.series = [
-          {
-            name: 'Total General 1',
-            data: this.pressData?.pressGeneral1?.map((item) =>
-              parseFloat(item.total)
-            ) ?? [],
-          },
-        ];
-
-        this.chartOptionsGeneral1.xaxis ??= {};
-        this.chartOptionsGeneral1.xaxis.categories =
-          this.pressData?.pressGeneral1.map((item) => item.descripcion);
-        this.totalGeneral1 = this.sumarTotales(this.pressData?.pressGeneral1 ?? []);
-
-        this.chartOptionsGeneral2.xaxis ??= {};
-        this.chartOptionsGeneral2.xaxis.categories =
-          this.pressData?.pressGeneral2.map((item) => item.descripcion);
-        this.totalGeneral2 = this.sumarTotales(this.pressData?.pressGeneral2 ?? []);
-
-        this.chartOptionsAcumulados3.xaxis ??= {};
-        this.chartOptionsAcumulados3.xaxis.categories =
-          this.pressData?.pressAcumulados3.map((item) => item.descripcion);
-        this.totalesAcumulados3 = this.sumarTotalesSeparados(
-          this.pressData?.pressAcumulados3 ?? []
-        );
-
-        this.chartOptionsGeneral4.xaxis ??= {};
-        this.chartOptionsGeneral4.xaxis.categories =
-          this.pressData?.pressGeneral4.map((item) => item.descripcion);
-        this.totalGeneral4 = this.sumarTotales(this.pressData?.pressGeneral4 ?? []);
-
-        this.chartOptionsAcumulados5.xaxis ??= {};
-        this.chartOptionsAcumulados5.xaxis.categories =
-          this.pressData?.pressAcumulados5?.map((item) => item.descripcion);
-        this.totalesAcumulados5 = this.sumarTotalesSeparados(
-          this.pressData?.pressAcumulados5 ?? []
-        );
-
-        this.chartOptionsAcumulados7.xaxis ??= {};
-        this.chartOptionsAcumulados7.xaxis.categories =
-          this.pressData?.pressAcumulados7?.map((item) => item.descripcion);
-        this.totalesAcumulados7 = this.sumarTotalesSeparados(
-          this.pressData?.pressAcumulados7 ?? []
-        );
-      },
-      error: (error) => {
-        console.error('Hubo un error al recuperar los datos de la API', error);
-      },
-    });
-  }
 
   transformValue(value: number): string {
     let newValue: string;
